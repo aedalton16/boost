@@ -12,9 +12,11 @@ var io = require('socket.io').listen(server);
 app.use(express.static(__dirname + '/public'));
 
 // DB
-var mongo = require('mongodb');
+// var mongo = require('mongodb');
 
-
+var dbConfig = require('./db.js');
+var mongoose = require('mongoose');
+mongoose.connect(dbConfig.url);
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 

@@ -9,7 +9,9 @@
     "express": "4.x",
     "kerberos": "0.0.17",
     "mongodb": "^2.0.48",
+    "mongoose": "^4.2.6",
     "monk": "^1.0.1",
+    "passport": "^0.3.2",
     "socket.io": "*"
   }
 }
