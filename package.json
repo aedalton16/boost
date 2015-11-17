@@ -1,0 +1,15 @@
+{
+  "name": "boost_1",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.x",
+    "kerberos": "0.0.17",
+    "mongodb": "^2.0.48",
+    "monk": "^1.0.1",
+    "socket.io": "*"
+  }
+}
