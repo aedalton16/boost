@@ -1,8 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res){
-	res.render('user', {title:'Hello, world!'});
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+
+/* GET hello world page */ 
+
+router.get('/helloworld', function(req, res){
+	res.render('helloworld', {title:'Hello, world!'});
     }
 );
 

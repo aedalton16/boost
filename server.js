@@ -35,7 +35,7 @@ server.listen(3000, function(){
 var line_history = [];
 
 
-var nsp = io.of('/classroom');
+// var nsp = io.of('/classroom');
 
 // event-handler for new incoming connections
 io.on('connection', function (socket) {
