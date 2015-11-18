@@ -1,43 +1,56 @@
 var express = require('express'); 
+var mongoose = require('mongoose');
+var passport = require('passport');
+var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
+var expressSession = require('express-session');
+
 var app = express(); 
 
-// var socketIo = ;
-
-// start webserver on port 8080
+// PORT --- start webserver on port 3000
 var server =  require('http').Server(app);
 var io = require('socket.io').listen(server);
-// server.listen(3000);
+server.listen(3000, function(){
+	console.log('listening on *:3000');
+});
 
-// add directory with our static files
+// DIR
 app.use(express.static(__dirname + '/public'));
 
-// DB
-// var mongo = require('mongodb');
 
+// ROUTES 
+var classroom = require('./routes/classroom');
+var users = require('./routes/users');
+app.use('/class', classroom);
+app.use('/users', users);
+
+// DB
 var dbConfig = require('./db.js');
-var mongoose = require('mongoose');
+
 mongoose.connect(dbConfig.url);
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 
 });
 
-var classroom = require('./routes/classroom');
-var users = require('./routes/users');
-app.use('/class', classroom);
-app.use('/users', users);
+// USER AUTH
+app.use(expressSession({secret: 'authKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-
-
-server.listen(3000, function(){
-	console.log('listening on *:3000');
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
 });
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 
 // array of all lines drawn
 var line_history = [];
-
-
-// var nsp = io.of('/classroom');
 
 // event-handler for new incoming connections
 io.on('connection', function (socket) {
