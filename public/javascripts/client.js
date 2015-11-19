@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	var settings = {
 		strokeWidth: 2, 
 		backgroundColor: "#fff",
-		redClr : false, 
+		clr : "black",
+		lineW : 1, 
 		undoBtn: "#undo",
 		redoBtn: "#redo",
 
@@ -40,13 +41,18 @@ document.addEventListener("DOMContentLoaded", function() {
 		// var context = canvas.getContext('2d');
 		context.beginPath();
 		context.lineCap = "round";
-		context.moveTo(line[0].x * width, line[0].y * height);
-		context.lineTo(line[1].x * width, line[1].y * height);
+		context.moveTo(line[0].x, line[0].y);
+		context.lineTo(line[1].x, line[1].y);
 		// if (settings.redClr) context.strokeStyle= "magenta";
 		// else context.strokeStyle = "black";
 		// context.strokeStyle = document.getElementsByName('favcolor').value; 
 
-		context.strokeStyle = document.getElementById('favcolor').value; 
+		// if (document.getElementById('favcolor').value) 
+			// context.strokeStyle = document.getElementById('favcolor').value; 
+		// else 
+		context.strokeStyle = settings.clr; 
+		context.lineWidth = settings.lineW; 
+
 		context.stroke();
 
 	};
@@ -71,13 +77,15 @@ document.addEventListener("DOMContentLoaded", function() {
 	};
 
 	canvas.onmousemove = function(e) { // place socket.emit here 
-	    // normalize mouse position to range 0.0 - 1.0
-	    mouse.pos.x = e.clientX / width;
-	    mouse.pos.y = e.clientY / height;
-	    console.log("mouse.down");
-	    //mouse.pos.x = e.clientX - 10; //$("#drawing").offset().left;
-		//mouse.pos.y = e.clientY - 20; //$("#drawing").offset().top;
+		var BB=canvas.getBoundingClientRect();
 
+     // calc mouse position based on the bounding box
+     	mouse.pos.x = e.clientX; //- BB.left; //canvas.offsetLeft; //parseInt(e.clientX-BB.left); //window.pageXOffset + e.clientX - canvas.offsetLeft; 
+     	mouse.pos.y = e.clientY; //- BB.top; //canvas.offsetTop; //parseInt(e.clientY-BB.top);//window.pageYOffset + e.clientY - canvas.offsetTop; //
+
+     	console.log(mouse.pos.x+"/"+mouse.pos.y);
+
+	    console.log("mouse.down");
 	    mouse.move = true;
 
 	};
@@ -117,13 +125,63 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 		return false; 
 	});
+	// Safari Color Button Events
+	$("#greyBtn").click(function(){
+		console.log('black.clicked');
+		settings.clr = "black"; 
+	});
+	$("#blueBtn").click(function(){
+		console.log('blue.clicked');
+		settings.clr = "DarkBlue"; 
+	});
+	$("#greenBtn").click(function(){
+		console.log('green.clicked');
+		settings.clr = "green"; 
+	});
+
+	$("#tealBtn").click(function(){
+		console.log('teal.clicked');
+		settings.clr = "cyan"; 
+	});
+
+	$("#orangeBtn").click(function(){
+		console.log('orange.clicked');
+		settings.clr = "orange"; 
+	})
+	;
 	$("#redBtn").click(function(){
 		console.log('red.clicked');
-		settings.redClr = true; 
+		settings.clr = "red"; 
 	});
+	$('#favcolor').on('input', function() { 
+		settings.clr = document.getElementById('favcolor').value; 
+	 } ); 
+
+	$("#incBtn").click(function(){
+		// var context = canvas.getContext('2d');
+		console.log('plus.clicked');
+		if (settings.lineW < 50)
+			settings.lineW += 3;
+		else 
+			settings.lineW = 1;  
+	});
+	$("#decBtn").click(function(){
+		// var context = canvas.getContext('2d');
+		console.log('plus.clicked');
+		if (1 < settings.lineW < 50)
+			settings.lineW -= 3;
+		else 
+			settings.lineW = 1;  
+	});
+	$("#eraseBtn").click(function(){
+		// var context = canvas.getContext('2d');
+		console.log('erase.clicked');
+		settings.clr = settings.backgroundColor;
+	});
+	
+	// Download Button 
 	$("#dlBtn").click(function(){
-		// console.log('dlBtn.clicked');
-		// window.location = canvas.toDataURL("image/png");
+
 		var dataURL = canvas.toDataURL('image/png');
     	this.setAttribute('download', 'BoostSession.png'); 
     	this.setAttribute('href', dataURL.replace("image/png")); //, "image/octet-stream")); //.href = dataURL;
