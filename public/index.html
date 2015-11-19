@@ -1,76 +1,108 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>BOOST! alpha</title>
-      <meta charset="utf-8">
-      <link rel="stylesheet" href="style.css" />
-      <!-- Latest compiled and minified CSS -->
+<head>
+<title>BOOST! alpha</title>
+<meta charset="utf-8">
+
+<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-   </head>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+   <nav class="navbar navbar-inverse">
+   <!-- <div class="container">
+    --><!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+   <div class="container-fluid">
+     <div class="navbar-header">
+      
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+        <a class="navbar-brand" href="#">
+         <img alt="Brand" width="20" height="20" src="img/rocket.png">
+       </a>
+     </div>
 
-   <body>
-      <div class="bs-example" data-example-id="nav-pills-with-dropdown">
-    <ul class="nav nav-pills">
-      <li role="presentation" id="undo1" class="disabled"><a href="#">home</a></li>
-      <li role="presentation"><a href="#">Help</a></li>
-      <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          Dropdown <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-      <div class="btn-group" role="group" aria-label="First group">
-        <button type="button" class="btn btn-default disabled" id="undo"> Undo</button>
-        <button type="button" class="btn btn-default disabled" id="redo">Redo</button>
-      </div>
-      <div class="btn-group" role="group" aria-label="Second group">
-        <button type="button" class="btn btn-default">c</button>
-      </div>
-    
-    </div>
-      <div>
-      <canvas id="drawing"></canvas>
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+       <ul class="nav navbar-nav">
+         <li class="active"><a href="#">Home</a></li>
+         <li><a href="#">Link</a></li>
+         <li><a href="#">Link</a></li>
+       </ul>
+     </div><!-- /.navbar-collapse -->
    </div>
-      <div class="chat-area">
-         <div class="chat">
-            <div class="chat-head">
-            </div>
-      <ul id="messages"></ul>
-       <form action="">
-         <input id="m" autocomplete="off" /><button>Send</button>
-       </form>
-    </div>
-    </div>
-       
+ </nav>
+<div class="container">
 
-      <script src="socket.io/socket.io.js"></script>
-      <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-      <script src="client.js"></script>
-      <!-- Latest compiled and minified JavaScript -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+ <div class="page-header">
+   <a href="http://boosttutors.com"> <h1> BOOST!Room </a><small>Captain: Ali Boosters: Mike </small></h1>
+</div>
 
-      <script> 
-      var socket = io(); 
-      $('form').submit(function(){
-         socket.emit('chat message', $('#m').val());
-         $('#m').val('');
-         return false;
-      });
-      socket.on('chat message', function(msg){
-         $('#messages').append($('<li>').text(msg));
-      });
+<div class="btn-toolbar navbar-center" role="toolbar" aria-label="Toolbar with button groups">
+<div class="btn-group" role="group" aria-label="First group">
+  <button type="button" class="btn btn-default disabled" id="undo" data-toggle="tooltip" data-placement="left" title="Click to go back a step!"> Undo</button>
+  <button type="button" class="btn btn-default disabled" id="redo" data-toggle="tooltip" data-placement="left" title="Click to redo the last undo!">Redo</button>
 
-      </script>
+</div>
+<textarea style="float: right"> Note: HTML5 color picker only works for Chrome, firefox, opera users! Safari and Internet explorer, please use buttons for now :) </textarea> 
+<div class="btn-group" role="group" aria-label="Second group">
+   <!-- <button class="jscolor {valueElement:'valueSpan',styleElement:'styleSpan',value:'ff6699'}" id="penColor"></button> -->
+   <button type="button" class="btn btn-default" id="redBtn">Red</button>
 
-   </body>
+   <input type="color" name="favcolor" id="favcolor" value="#ff0000" style="margin: 5px">
+</div>
+<a id="dlBtn" data-toggle="popover" title="Popover title" data-content="The BOOST!Room whiteboard has been saved to your downloads!">Download as image</a>
+
+</div>
+<div>
+<canvas id="drawing"></canvas>
+</div>
+
+<div class="chat-area">
+   <div class="chat">
+      <div class="chat-head"> Chat!
+      </div>
+<ul id="messages"></ul>
+ <form action="">
+   <input id="m" autocomplete="off" /><button>Send</button>
+ </form>
+</div>
+</div>
+ 
+</div>
+</div>
+<script src="socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="client.js"></script>
+<!-- <script src="jscolor.js"></script> --> 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+<script> 
+var socket = io(); 
+$('form').submit(function(){
+   socket.emit('chat message', $('#m').val());
+   $('#m').val('');
+   return false;
+});
+socket.on('chat message', function(msg){
+   $('#messages').append($('<li>').text(msg));
+});
+
+</script>
+
+<script> 
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
+$(function () {
+$('[data-toggle="popover"]').popover()
+})
+</script>
+
+</body>
 
 </html>

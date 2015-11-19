@@ -8,8 +8,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	var settings = {
 		strokeWidth: 2, 
 		backgroundColor: "#fff",
+		redClr : false, 
 		undoBtn: "#undo",
 		redoBtn: "#redo",
+
 		downloadCanvasLink: "",
 	};
 	// get canvas element and create context
@@ -40,7 +42,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		context.lineCap = "round";
 		context.moveTo(line[0].x * width, line[0].y * height);
 		context.lineTo(line[1].x * width, line[1].y * height);
-		context.strokeStyle="red";
+		// if (settings.redClr) context.strokeStyle= "magenta";
+		// else context.strokeStyle = "black";
+		// context.strokeStyle = document.getElementsByName('favcolor').value; 
+
+		context.strokeStyle = document.getElementById('favcolor').value; 
 		context.stroke();
 
 	};
@@ -55,8 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	};
 	canvas.onmouseup = function(e){ 
 		mouse.click = false; 
-		recording = false; // 
-		// document.getElementById("undo").removeClass("disabled");
+		recording = false; 
 		if(currentLine != null && currentLine.length > 0) {
 				history.push(currentLine);
 				$("#undo").removeClass("disabled");
@@ -69,16 +74,20 @@ document.addEventListener("DOMContentLoaded", function() {
 	    // normalize mouse position to range 0.0 - 1.0
 	    mouse.pos.x = e.clientX / width;
 	    mouse.pos.y = e.clientY / height;
+	    console.log("mouse.down");
+	    //mouse.pos.x = e.clientX - 10; //$("#drawing").offset().left;
+		//mouse.pos.y = e.clientY - 20; //$("#drawing").offset().top;
+
 	    mouse.move = true;
 
 	};
 
 	$(settings.undoBtn).click(function(){
 		console.log('undo.clicked');
-		// $("#redo").addClass("disabled");
+
 		if (history.length > 0){
 			undoHistory.push(history.pop());
-			
+			context.clearRect(0, 0, canvas.width, canvas.height);
 			for (var i in history){
 				for (var j in history[i]){
 						canvas.drawLine(history[i][j]);
@@ -108,6 +117,17 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 		return false; 
 	});
+	$("#redBtn").click(function(){
+		console.log('red.clicked');
+		settings.redClr = true; 
+	});
+	$("#dlBtn").click(function(){
+		// console.log('dlBtn.clicked');
+		// window.location = canvas.toDataURL("image/png");
+		var dataURL = canvas.toDataURL('image/png');
+    	this.setAttribute('download', 'BoostSession.png'); 
+    	this.setAttribute('href', dataURL.replace("image/png")); //, "image/octet-stream")); //.href = dataURL;
+	});
 
 	// draw line received from server
 	socket.on('draw_line', function (data) {
@@ -119,12 +139,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	});
    
-	// main loop, every 25ms
+	// main loop, runs every 25ms
 	function mainLoop() {
 	    // check if the user is drawing
 	    var red = "red";
 	    if (mouse.click && mouse.move && mouse.pos_prev) {
 		// send line to to the server
+
 		socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ]});
 		mouse.move = false;
 	    }
