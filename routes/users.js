@@ -1,4 +1,5 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
 
 
@@ -12,6 +13,12 @@ router.use(function(req, res, next) {
 });
 
 
+  /* Handle Login POST */
+  router.post('/login', passport.authenticate('login', {
+    successRedirect: '/',
+    failureRedirect: '/user',
+    failureFlash : true 
+  }));
 /* GET users listing.*/ 
 
 router.get('/userlist', function(req, res) {

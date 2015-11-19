@@ -11,12 +11,15 @@
     "cookie-parser": "^1.4.0",
     "express": "4.x",
     "express-session": "^1.12.1",
+    "jade": "^1.11.0",
     "kerberos": "0.0.17",
     "method-override": "^2.3.5",
     "mongodb": "^2.0.48",
     "mongoose": "^4.2.6",
     "monk": "^1.0.1",
     "passport": "^0.3.2",
+    "passport-google": "^0.3.0",
+    "passport-local": "^1.0.0",
     "socket.io": "*"
   }
 }

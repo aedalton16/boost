@@ -1,18 +1,23 @@
 var express = require('express'); 
+var path = require('path');
 var mongo = require('mongodb');
 var monk = require('monk');
 // var morgan = require('morgan');
-var passport = require('passport');
+var passport = require('passport'), 
+GoogleStrategy = require('passport-google').Strategy, 
+LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser'); // pull from HTML POST
 var methodOverride = require('method-override'); // HTML verb simulation, PUT and DELETE
 var cookieParser = require('cookie-parser'); 
 var flash = require('connect-flash');
 var expressSession = require('express-session');
 
+
 //mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
 
 var app = express(); 
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 // PORT --- start webserver on port 3000
 var server =  require('http').Server(app);
 // var server =  require('http').createServer(function(req, res){
@@ -25,7 +30,7 @@ server.listen(3000, function(){
 });
 
 // DIR
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // DB
 // var dbConfig = require('./db.js');
@@ -41,19 +46,39 @@ db.once('open', function () {
 console.log('connected.');
 });
 
-app.get('/', function(req, res){
-	res.sendFile(__dirname + '/index.html');
+// app.get('/', function(req, res){
+// 	res.sendFile(__dirname + '/index.html');
 
-});
+// });
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
     req.db = db;
     next();
 });
-
+var routes = require('./routes/index');
+app.use('/', routes);
 var users = require('./routes/users'); 
 app.use('/users', users);
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google/return',
+passport.authenticate('google', { successRedirect: '/',
+                                    failureRedirect: '/login' }));
+
 
 
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
@@ -61,6 +86,31 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+passport.use(new GoogleStrategy({
+    returnURL: 'localhost:3000/auth/google/return',
+    realm: 'localhost:3000'
+  },
+  function(identifier, profile, done) {
+    User.findOrCreate({ openId: identifier }, function(err, user) {
+      done(err, user);
+    });
+  }
+));
 
 
 // array of all lines drawn

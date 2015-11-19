@@ -1,0 +1,75 @@
+extends layout
+  head
+    title BOOST! alpha
+    meta(charset='utf-8')
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', integrity='sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==', crossorigin='anonymous')
+    link(rel='stylesheet', href='style.css')
+  body
+    nav.navbar.navbar-inverse
+      //
+        <div class="container">
+      // We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns.
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-6', aria-expanded='false')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#')
+            img(alt='Brand', width='20', height='20', src='img/rocket.png')
+        #bs-example-navbar-collapse-6.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='#') Home
+            li
+              a(href='/auth/google') Sign In with Google
+            li
+              a(href='#') Link
+        // /.navbar-collapse
+    .container
+      .page-header
+        a(href='http://boosttutors.com')
+          h1  BOOST!Room 
+        small Captain: Ali Boosters: Mike 
+      .btn-toolbar.navbar-center(role='toolbar', aria-label='Toolbar with button groups')
+        .btn-group(role='group', aria-label='First group')
+          button#undo.btn.btn-default.disabled(type='button', data-toggle='tooltip', data-placement='left', title='Click to go back a step!')  Undo
+          button#redo.btn.btn-default.disabled(type='button', data-toggle='tooltip', data-placement='left', title='Click to redo the last undo!') Redo
+        p(style='float: right')
+          | Note: HTML5 color picker only works for Chrome, firefox, opera users! Safari and Internet explorer, please use buttons for now :)
+        .btn-group(role='group', aria-label='Second group')
+          // <button class="jscolor {valueElement:'valueSpan',styleElement:'styleSpan',value:'ff6699'}" id="penColor"></button>
+          button#redBtn.btn.btn-default(type='button') Red
+          input#favcolor(type='color', name='favcolor', value='#ff0000', style='margin: 5px')
+        a#dlBtn(data-toggle='popover', title='Downloaded!', data-content='The BOOST!Room whiteboard has been saved to your downloads!') Download as image
+      div
+        canvas#drawing
+      .chat-area
+        .chat
+          .chat-head
+            | Chat!
+          ul#messages
+          form(action='')
+            input#m(autocomplete='off')
+            button Send
+    script(src='client.js')
+    // Latest compiled and minified JavaScript
+    script.
+      var socket = io();
+      $('form').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+      });
+      socket.on('chat message', function(msg){
+      $('#messages').append($('<li>').text(msg));
+      });
+    script.
+      $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+      })
+      $(function () {
+      $('[data-toggle="popover"]').popover()
+      })
