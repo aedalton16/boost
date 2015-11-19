@@ -1,8 +1,8 @@
 var express = require('express'); 
 var path = require('path');
 var mongo = require('mongodb');
-var monk = require('monk');
-// var morgan = require('morgan');
+var mongoose = require('mongoose');
+var morgan = require('morgan');
 var passport = require('passport'), 
 GoogleStrategy = require('passport-google-oauth2').Strategy, 
 LocalStrategy = require('passport-local').Strategy;
@@ -10,7 +10,7 @@ var bodyParser = require('body-parser'); // pull from HTML POST
 var methodOverride = require('method-override'); // HTML verb simulation, PUT and DELETE
 var cookieParser = require('cookie-parser'); 
 var flash = require('connect-flash');
-var expressSession = require('express-session');
+var session = require('express-session');
 
 
 //mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
@@ -33,11 +33,15 @@ server.listen(3000, function(){
 app.use(express.static(path.join(__dirname, 'public')));
 
 // DB
-// var dbConfig = require('./db.js');
-// mongoose.connect(dbConfig.url);
+var dbConfig = require('./db.js');
+mongoose.connect(dbConfig.url);
 
-var db = monk('localhost:27017/boost_1');
-// var db = mongoose.connection; 
+// var db = monk('localhost:27017/boost_1');
+var db = mongoose.connection; 
+
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
 
 db.on('error', function (err) {
 console.log('connection error', err);
@@ -64,54 +68,15 @@ require('./routes/users')(app, passport);
 //app.use('/users', users);
 
 
-
-
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
+app.use(function(req, res, next) {
+  res.locals.message = req.flash();
+  next();
 });
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-
-app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
-app.use(bodyParser.json());                                     // parse application/json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
-app.use(methodOverride());
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-
-passport.use(new GoogleStrategy({
-    returnURL: 'http://localhost:3000/auth/google/return',
-    realm: 'http://localhost:3000'
-  },
-  function(identifier, profile, done) {
-    User.findOrCreate({ openId: identifier }, function(err, user) {
-      done(err, user);
-    });
-  }
-));
-
-
 // array of all lines drawn
 var line_history = [];
 

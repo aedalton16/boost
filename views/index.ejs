@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<% include ./head %>
+<% include ./partials/head %>
 </head>
 <body>
    <nav class="navbar navbar-inverse">
@@ -40,6 +40,8 @@
 <div class="btn-group" role="group" aria-label="First group">
   <button type="button" class="btn btn-default disabled" id="undo" data-toggle="tooltip" data-placement="left" title="Click to go back a step!"> Undo</button>
   <button type="button" class="btn btn-default disabled" id="redo" data-toggle="tooltip" data-placement="left" title="Click to redo the last undo!">Redo</button>
+  <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
+
 
 </div>
 <p style="float: right"> Note: HTML5 color picker only works for Chrome, firefox, opera users! Safari and Internet explorer, please use buttons for now :) </p> 
