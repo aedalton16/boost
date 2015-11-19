@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>BOOST! alpha</title>
-<meta charset="utf-8">
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css" />
+<% include ./head %>
 </head>
 <body>
    <nav class="navbar navbar-inverse">
@@ -29,7 +24,7 @@
      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
        <ul class="nav navbar-nav">
          <li class="active"><a href="#">Home</a></li>
-         <li><a href="#">Link</a></li>
+         <!-- <li><a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>/li> -->
          <li><a href="#">Link</a></li>
        </ul>
      </div><!-- /.navbar-collapse -->
@@ -76,7 +71,7 @@
 </div>
 <script src="socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="client.js"></script>
+<script src="/javascripts/client.js"></script>
 <!-- <script src="jscolor.js"></script> --> 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>

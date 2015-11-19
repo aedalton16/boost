@@ -4,7 +4,7 @@ var mongo = require('mongodb');
 var monk = require('monk');
 // var morgan = require('morgan');
 var passport = require('passport'), 
-GoogleStrategy = require('passport-google').Strategy, 
+GoogleStrategy = require('passport-google-oauth2').Strategy, 
 LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser'); // pull from HTML POST
 var methodOverride = require('method-override'); // HTML verb simulation, PUT and DELETE
@@ -17,7 +17,7 @@ var expressSession = require('express-session');
 
 var app = express(); 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 // PORT --- start webserver on port 3000
 var server =  require('http').Server(app);
 // var server =  require('http').createServer(function(req, res){
@@ -58,8 +58,12 @@ app.use(function(req,res,next){
 });
 var routes = require('./routes/index');
 app.use('/', routes);
-var users = require('./routes/users'); 
-app.use('/users', users);
+
+require('./public/javascripts/passport')(passport); // pass passport for configuration
+require('./routes/users')(app, passport); 
+//app.use('/users', users);
+
+
 
 
 app.use(passport.initialize());
@@ -74,11 +78,6 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
-app.get('/auth/google', passport.authenticate('google'));
-app.get('/auth/google/return',
-passport.authenticate('google', { successRedirect: '/',
-                                    failureRedirect: '/login' }));
-
 
 
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
@@ -102,8 +101,8 @@ passport.use(new LocalStrategy(
 ));
 
 passport.use(new GoogleStrategy({
-    returnURL: 'localhost:3000/auth/google/return',
-    realm: 'localhost:3000'
+    returnURL: 'http://localhost:3000/auth/google/return',
+    realm: 'http://localhost:3000'
   },
   function(identifier, profile, done) {
     User.findOrCreate({ openId: identifier }, function(err, user) {

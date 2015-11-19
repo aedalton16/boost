@@ -9,13 +9,12 @@ router.get('/', function(req, res) {
 
 
 router.get('/user', function(req, res) {
-    res.render('users');
+    res.render('user');
 });
 
 
 
- 
-router.post('/login_', function(req, res, next) {
+router.post('/login', function(req, res, next) {
 
 
   passport.authenticate('loginUsers', function(err, user, info) {
@@ -40,4 +39,5 @@ router.post('/login_', function(req, res, next) {
 
 
 module.exports = router;
+
 

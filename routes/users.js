@@ -1,57 +1,50 @@
-var express = require('express');
-var passport = require('passport');
-var router = express.Router();
+module.exports = function(app, passport) {
+
+    // route for home page
+    // app.get('/', function(req, res) {
+    //     res.render('index'); // load the index.ejs file
+    // });
+
+    // route for login form
+    // route for processing the login form
+    // route for signup form
+    // route for processing the signup form
 
 
-router.use(function(req, res, next) {
-
-    // log each request to the console
-    console.log(req.method, req.url);
-
-    // continue doing what we were doing and go to the route
-    next(); 
-});
-
-
-  /* Handle Login POST */
-  router.post('/login', passport.authenticate('login', {
-    successRedirect: '/',
-    failureRedirect: '/user',
-    failureFlash : true 
-  }));
-/* GET users listing.*/ 
-
-router.get('/userlist', function(req, res) {
-    var db = req.db;
-    var collection = db.get('usercollection');
-
-    collection.find({},{},function(e,docs){
-        res.json(docs);
+    // route for logging out
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
     });
-});
 
-/*
- * POST to adduser.
- */
-router.post('/adduser', function(req, res) {
-	var db = req.db;
-	var collection = db.get('usercollection');
-	collection.insert(req.body, function(err, result){
-		res.send(
-			(err === null) ? { msg: '' } : { msg: err }
-		);
-	});
-});
+    // facebook routes
+    // twitter routes
 
-/*
- * DELETE to deleteuser.
- */
-router.delete('/deleteuser/:id', function(req, res) {
-	var db = req.db;
-	var collection = db.get('userlist');
-	var userToDelete = req.params.id;
-	collection.remove({ '_id' : userToDelete }, function(err) {
-		res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
-	});
-});
-module.exports = router;
+    // =====================================
+    // GOOGLE ROUTES =======================
+    // =====================================
+    // send to google to do the authentication
+    // profile gets us their basic information including their name
+    // email gets their emails
+    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+    // the callback after google has authenticated the user
+    app.get('/auth/google/callback',
+            passport.authenticate('google', {
+                    successRedirect : '/profile',
+                    failureRedirect : '/'
+            }));
+
+};
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
