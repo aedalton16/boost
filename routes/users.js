@@ -1,18 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing.
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+
+router.use(function(req, res, next) {
+
+    // log each request to the console
+    console.log(req.method, req.url);
+
+    // continue doing what we were doing and go to the route
+    next(); 
 });
 
-module.exports = router;
-*/
 
+/* GET users listing.*/ 
 
 router.get('/userlist', function(req, res) {
     var db = req.db;
-    var collection = db.get('userlist');
+    var collection = db.get('usercollection');
+
     collection.find({},{},function(e,docs){
         res.json(docs);
     });
@@ -23,7 +28,7 @@ router.get('/userlist', function(req, res) {
  */
 router.post('/adduser', function(req, res) {
 	var db = req.db;
-	var collection = db.get('userlist');
+	var collection = db.get('usercollection');
 	collection.insert(req.body, function(err, result){
 		res.send(
 			(err === null) ? { msg: '' } : { msg: err }

@@ -1,14 +1,24 @@
 var express = require('express'); 
-var mongoose = require('mongoose');
+var mongo = require('mongodb');
+var monk = require('monk');
+// var morgan = require('morgan');
 var passport = require('passport');
-var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser'); // pull from HTML POST
+var methodOverride = require('method-override'); // HTML verb simulation, PUT and DELETE
+var cookieParser = require('cookie-parser'); 
 var flash = require('connect-flash');
 var expressSession = require('express-session');
 
-var app = express(); 
+//mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
 
+var app = express(); 
+app.set('views', path.join(__dirname, 'views'));
 // PORT --- start webserver on port 3000
 var server =  require('http').Server(app);
+// var server =  require('http').createServer(function(req, res){
+// 	require('./router').get(req, res);
+// });
+
 var io = require('socket.io').listen(server);
 server.listen(3000, function(){
 	console.log('listening on *:3000');
@@ -17,36 +27,40 @@ server.listen(3000, function(){
 // DIR
 app.use(express.static(__dirname + '/public'));
 
-
-// ROUTES 
-var classroom = require('./routes/classroom');
-var users = require('./routes/users');
-app.use('/class', classroom);
-app.use('/users', users);
-
 // DB
-var dbConfig = require('./db.js');
+// var dbConfig = require('./db.js');
+// mongoose.connect(dbConfig.url);
 
-mongoose.connect(dbConfig.url);
+var db = monk('localhost:27017/boost_1');
+// var db = mongoose.connection; 
+
+db.on('error', function (err) {
+console.log('connection error', err);
+});
+db.once('open', function () {
+console.log('connected.');
+});
+
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 
 });
 
-// USER AUTH
-app.use(expressSession({secret: 'authKey'}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-  done(null, user._id);
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
+var users = require('./routes/users'); 
+app.use('/users', users);
+
+
+app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
+app.use(bodyParser.json());                                     // parse application/json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
+app.use(methodOverride());
+
 
 
 // array of all lines drawn
