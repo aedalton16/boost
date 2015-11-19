@@ -1,6 +1,5 @@
 var express = require('express'); 
 var path = require('path');
-var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var passport = require('passport'), 
@@ -34,7 +33,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // DB
 var dbConfig = require('./db.js');
-mongoose.connect(dbConfig.url);
+mongoose.connect(process.env.MONGOLAB_URI, function (error) {
+    if (error) console.error(error);
+    else console.log('mongo connected');
+});
 
 // var db = monk('localhost:27017/boost_1');
 var db = mongoose.connection; 
