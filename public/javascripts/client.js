@@ -80,8 +80,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		var BB=canvas.getBoundingClientRect();
 
      // calc mouse position based on the bounding box
-     	mouse.pos.x = e.clientX; //- BB.left; //canvas.offsetLeft; //parseInt(e.clientX-BB.left); //window.pageXOffset + e.clientX - canvas.offsetLeft; 
-     	mouse.pos.y = e.clientY; //- BB.top; //canvas.offsetTop; //parseInt(e.clientY-BB.top);//window.pageYOffset + e.clientY - canvas.offsetTop; //
+     	mouse.pos.x = e.clientX - BB.left; //canvas.offsetLeft; //parseInt(e.clientX-BB.left); //window.pageXOffset + e.clientX - canvas.offsetLeft; 
+     	mouse.pos.y = e.clientY- BB.top; //canvas.offsetTop; //parseInt(e.clientY-BB.top);//window.pageYOffset + e.clientY - canvas.offsetTop; //
 
      	console.log(mouse.pos.x+"/"+mouse.pos.y);
 
@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		console.log('erase.clicked');
 		settings.clr = settings.backgroundColor;
 	});
-	
+
 	// Download Button 
 	$("#dlBtn").click(function(){
 

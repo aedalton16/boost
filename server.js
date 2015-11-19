@@ -25,7 +25,7 @@ var server =  require('http').Server(app);
 // });
 
 var io = require('socket.io').listen(server);
-server.listen(3000, function(){
+server.listen(process.env.PORT, function(){
 	console.log('listening on *:3000');
 });
 
