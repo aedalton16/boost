@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			line: "poop",
 			apple: "poopy"
 		};
-		sockets.emit('draw_line', data);
+		socket.emit('draw_line', data);
 		console.log(data);
 		mouse.move = false;
 	    }

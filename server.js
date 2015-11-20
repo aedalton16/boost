@@ -1,99 +1,55 @@
-var express = require('express'); 
-var path = require('path');
+// get all the tools we need
+var express  = require('express');
+var app      = express();
+var port     = process.env.PORT || 3000;
 var mongoose = require('mongoose');
-var morgan = require('morgan');
-var passport = require('passport'), 
-GoogleStrategy = require('passport-google-oauth2').Strategy, 
-LocalStrategy = require('passport-local').Strategy;
-var bodyParser = require('body-parser'); // pull from HTML POST
-var methodOverride = require('method-override'); // HTML verb simulation, PUT and DELETE
-var cookieParser = require('cookie-parser'); 
-var flash = require('connect-flash');
-var session = require('express-session');
+var passport = require('passport');
+var flash    = require('connect-flash');
 
+var morgan       = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
+var path = require("path");
 
-//mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
+var configDB = require('./db.js');
 
-var app = module.exports = express(); 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-// PORT --- start webserver on port 3000
-var server =  require('http').Server(app);
-// var server =  require('http').createServer(function(req, res){
-// 	require('./router').get(req, res);
-// });
+// configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
 
-var io = require('socket.io').listen(server);
-server.listen(3000, function(){ //process.env.PORT
-	console.log('listening on *:3000');
-});
+require('./public/javascripts/passport')(passport); // pass passport for configuration
 
-// DIR
-app.use(express.static(path.join(__dirname, 'public')));
-
-// DB
-var dbConfig = require('./db.js');
-mongoose.connect(process.env.MONGOLAB_URI, function (error) {
-    if (error) console.error(error);
-    else console.log('mongo connected');
-});
-
-// var db = monk('localhost:27017/boost_1');
-var db = mongoose.connection; 
-
+// set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 
-db.on('error', function (err) {
-console.log('connection error', err);
-});
-db.once('open', function () {
-console.log('connected.');
-});
+app.set('view engine', 'ejs'); // set up ejs for templating
 
-// app.get('/', function(req, res){
-// 	res.sendFile(__dirname + '/index.html');
-
-// });
-
-// Make our db accessible to our router
-app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
-var routes = require('./routes/index');
-app.use('/', routes);
-
-require('./public/javascripts/passport')(passport); // pass passport for configuration
-var users = require('./routes/users');//(app, passport); 
-app.use('/users', users);
-
-
+// required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-app.use(function(req, res, next) {
-  res.locals.message = req.flash();
-  next();
+app.use(express.static(path.join(__dirname, 'public')));
+
+// db.on('error', function (err) {
+// console.log('connection error', err);
+// });
+// db.once('open', function () {
+// console.log('connected.');
+// });
+
+// routes ======================================================================
+require('./routes/index.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+// launch ======================================================================
+var server =  require('http').Server(app);
+var io = require('socket.io').listen(server);
+server.listen(3000, function(){
+  console.log('listening on *:3000');
 });
-
-app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
-
-    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-    // the callback after google has authenticated the user
-    app.get('/auth/google/callback',
-            passport.authenticate('google', {
-                    successRedirect : '/profile',
-                    failureRedirect : '/'
-            }));
 
 
 // array of all lines drawn
@@ -102,25 +58,25 @@ var line_history = [];
 // event-handler for new incoming connections
 io.on('connection', function (socket) {
 
-	// first send the history to the new client
-	for (var i in line_history) {
-	    socket.emit('draw_line', { line: line_history[i] } );
-	}
+  // first send the history to the new client
+  for (var i in line_history) {
+      socket.emit('draw_line', { line: line_history[i] } );
+  }
 
-	// add handler for message type "draw_line".
-	socket.on('draw_line', function (data) {
-		// add received line to history 
-		line_history.push(data.line);
-		// send line to all clients
-		io.emit('draw_line', { line: data.line });
-	    });
-	//console.log('listening on *:3000');
-  	socket.on('chat message', function(msg){
-  		io.emit('chat message', msg);
+  // add handler for message type "draw_line".
+  socket.on('draw_line', function (data) {
+    // add received line to history 
+    line_history.push(data.line);
+    // send line to all clients
+    io.emit('draw_line', { line: data.line });
+      });
+  //console.log('listening on *:3000');
+    socket.on('chat message', function(msg){
+      io.emit('chat message', msg);
     console.log('chat message: ' + msg);
   });
 });
 
 
-
-
+//app.listen(port);
+console.log('The magic happens on port ' + port);
