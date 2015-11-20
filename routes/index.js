@@ -2,21 +2,49 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 var flash = require('connect-flash');
+var user = require('../models/user');
 /* GET home page. */
 router.get('/', function(req, res) {
     res.render('index');
 });
 
 
-router.get('/user', function(req, res) {
-    res.render('user');
+router.get('/signup', function(req, res) {
+    res.render('signup');
 });
 
-  router.get('/signup', function(req, res) {
+router.get('/ping', function(req, res){
+    res.status(200).send("pong!");
+});
 
-        // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', { message: req.flash('signupMessage') });
+router.post('/signup', function(req, res) {
+
+    // Set our internal DB variable
+    var db = req.db;
+
+    // Get our form values. These rely on the "name" attributes
+    var userName = req.body.username;
+    var userEmail = req.body.email;
+
+    // Set our collection
+    var collection = db.get('usercollection');
+
+    // Submit to the DB
+    collection.insert({
+        "username" : userName,
+        "email" : userEmail
+    }, function (err, doc) {
+        if (err) {
+            // If it failed, return error
+            res.send("There was a problem adding the information to the database.");
+        }
+        else {
+            // And forward to success page
+            res.redirect("userlist");
+        }
     });
+});
+
 
  router.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile', {
@@ -24,21 +52,7 @@ router.get('/user', function(req, res) {
         });
     });
 // process the signup form
-    router.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
-
-    router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-    // the callback after google has authenticated the user
-    router.get('/auth/google/callback',
-            passport.authenticate('google', {
-                    successRedirect : '/profile',
-                    failureRedirect : '/'
-            }));
-
+    
 function isLoggedIn(req, res, next) {
 
     // if user is authenticated in the session, carry on 

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var settings = {
 		strokeWidth: 2, 
 		backgroundColor: "#fff",
-		clr : "black",
+		clr : [0,0,225,0.5],
 		lineW : 1, 
 		undoBtn: "#undo",
 		redoBtn: "#redo",
@@ -21,9 +21,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	var width   = window.innerWidth;
 	var height  = window.innerHeight;
 	var socket  = io.connect();
+	// var room = window.location.pathname.split("/")[2];
 
 	// set canvas to full browser width/height
-	canvas.width = width;
+	canvas.width = width; 
 	canvas.height = height;
 
 	var history = []; 
@@ -41,16 +42,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		// var context = canvas.getContext('2d');
 		context.beginPath();
 		context.lineCap = "round";
-		context.moveTo(line[0].x, line[0].y);
+		context.moveTo(line[0].x, line[0].y); //here
 		context.lineTo(line[1].x, line[1].y);
-		// if (settings.redClr) context.strokeStyle= "magenta";
-		// else context.strokeStyle = "black";
-		// context.strokeStyle = document.getElementsByName('favcolor').value; 
-
-		// if (document.getElementById('favcolor').value) 
-			// context.strokeStyle = document.getElementById('favcolor').value; 
-		// else 
-		context.strokeStyle = settings.clr; 
+		
+		console.log(settings.clr[0]);
+		var trial = "#"+(settings.clr[0]).toString(16)+(settings.clr[1]).toString(16)+(settings.clr[2]).toString(16);
+		context.strokeStyle = trial;
+		console.log(trial);
 		context.lineWidth = settings.lineW; 
 
 		context.stroke();
@@ -75,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 
 	};
-
+//"#"+(155).toString(16)+(102).toString(16)+(102).toString(16);
 	canvas.onmousemove = function(e) { // place socket.emit here 
 		var BB=canvas.getBoundingClientRect();
 
@@ -83,9 +81,9 @@ document.addEventListener("DOMContentLoaded", function() {
      	mouse.pos.x = e.clientX - BB.left; //canvas.offsetLeft; //parseInt(e.clientX-BB.left); //window.pageXOffset + e.clientX - canvas.offsetLeft; 
      	mouse.pos.y = e.clientY- BB.top; //canvas.offsetTop; //parseInt(e.clientY-BB.top);//window.pageYOffset + e.clientY - canvas.offsetTop; //
 
-     	console.log(mouse.pos.x+"/"+mouse.pos.y);
+     	// console.log(mouse.pos.x+"/"+mouse.pos.y);
 
-	    console.log("mouse.down");
+	    // console.log("mouse.down");
 	    mouse.move = true;
 
 	};
@@ -98,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			context.clearRect(0, 0, canvas.width, canvas.height);
 			for (var i in history){
 				for (var j in history[i]){
-						canvas.drawLine(history[i][j]);
+						canvas.drawLine(history[i][j], settings.Clr);
 					}	
 			}		
 		}
@@ -128,30 +126,30 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Safari Color Button Events
 	$("#greyBtn").click(function(){
 		console.log('black.clicked');
-		settings.clr = "black"; 
+		settings.clr = "000000"; 
 	});
 	$("#blueBtn").click(function(){
 		console.log('blue.clicked');
-		settings.clr = "DarkBlue"; 
+		settings.clr = "#0000ff"; 
 	});
 	$("#greenBtn").click(function(){
 		console.log('green.clicked');
-		settings.clr = "green"; 
+		settings.clr = "#006600"; 
 	});
 
 	$("#tealBtn").click(function(){
 		console.log('teal.clicked');
-		settings.clr = "cyan"; 
+		settings.clr = "#ff0000"; 
 	});
 
 	$("#orangeBtn").click(function(){
 		console.log('orange.clicked');
-		settings.clr = "orange"; 
+		settings.clr = "#ff6600"; 
 	})
 	;
 	$("#redBtn").click(function(){
 		console.log('red.clicked');
-		settings.clr = "red"; 
+		settings.clr = "#ff0000"; 
 	});
 	$('#favcolor').on('input', function() { 
 		settings.clr = document.getElementById('favcolor').value; 
@@ -186,25 +184,38 @@ document.addEventListener("DOMContentLoaded", function() {
     	this.setAttribute('download', 'BoostSession.png'); 
     	this.setAttribute('href', dataURL.replace("image/png")); //, "image/octet-stream")); //.href = dataURL;
 	});
+	function getColor(){
+		return settings.clr; 
+
+	}getColor(); 
 
 	// draw line received from server
 	socket.on('draw_line', function (data) {
-		canvas.drawLine(data);
 
+		canvas.drawLine(data);
+		console.log(data.apple.toString() + " data listen");
 		if (recording){
 			currentLine.push(data);
 		}
 
 	});
+	// socket.on('connect', function() {
+ //    	socket.emit('join', {room: room});
+	// });
+
    
 	// main loop, runs every 25ms
 	function mainLoop() {
 	    // check if the user is drawing
-	    var red = "red";
 	    if (mouse.click && mouse.move && mouse.pos_prev) {
 		// send line to to the server
 
-		socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ]});
+		var data = {
+			line: "poop",
+			apple: "poopy"
+		};
+		sockets.emit('draw_line', data);
+		console.log(data);
 		mouse.move = false;
 	    }
 	    mouse.pos_prev = {x: mouse.pos.x, y: mouse.pos.y};

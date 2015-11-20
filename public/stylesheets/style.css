@@ -69,6 +69,7 @@ form button {
 }
 #messages li:nth-child(odd) { 
 	background: #eee; 
+	color: #ff0000; 
 }
 #draggable {
 	width: 50px; 

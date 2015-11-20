@@ -14,7 +14,7 @@ var session = require('express-session');
 
 //mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
 
-var app = express(); 
+var app = module.exports = express(); 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 // PORT --- start webserver on port 3000
@@ -24,7 +24,7 @@ var server =  require('http').Server(app);
 // });
 
 var io = require('socket.io').listen(server);
-server.listen(process.env.PORT, function(){
+server.listen(3000, function(){ //process.env.PORT
 	console.log('listening on *:3000');
 });
 
@@ -66,8 +66,8 @@ var routes = require('./routes/index');
 app.use('/', routes);
 
 require('./public/javascripts/passport')(passport); // pass passport for configuration
-require('./routes/users')(app, passport); 
-//app.use('/users', users);
+var users = require('./routes/users');//(app, passport); 
+app.use('/users', users);
 
 
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
@@ -79,6 +79,23 @@ app.use(function(req, res, next) {
   res.locals.message = req.flash();
   next();
 });
+
+app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+
+    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+    // the callback after google has authenticated the user
+    app.get('/auth/google/callback',
+            passport.authenticate('google', {
+                    successRedirect : '/profile',
+                    failureRedirect : '/'
+            }));
+
+
 // array of all lines drawn
 var line_history = [];
 
