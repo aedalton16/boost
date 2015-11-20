@@ -1,9 +1,18 @@
 module.exports = function(app, passport) {
     // home
     app.get('/', function(req, res) {
-        res.render('index.ejs'); // load the index.ejs file
+        // res.render('index.ejs'); // load the index.ejs file
+         res.render('static', {});
     });
 
+    app.get('/demo', isLoggedIn, function(req, res) {
+        // res.render('index.ejs'); // load the index.ejs file
+         res.render('index', {
+
+            user : req.user // get the user out of session and pass to template
+
+        });
+    });
     // show the login form
     app.get('/login', function(req, res) {
 
@@ -53,3 +62,4 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
+
