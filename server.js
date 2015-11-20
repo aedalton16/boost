@@ -14,7 +14,7 @@ var path = require("path");
 
 var configDB = require('./db.js');
 
-// configuration ===============================================================
+// config
 mongoose.connect(configDB.url); // connect to our database
 
 require('./public/javascripts/passport')(passport); // pass passport for configuration
@@ -41,10 +41,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // console.log('connected.');
 // });
 
-// routes ======================================================================
+// routes
 require('./routes/index.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-// launch ======================================================================
+// launch 
 var server =  require('http').Server(app);
 var io = require('socket.io').listen(server);
 server.listen(3000, function(){

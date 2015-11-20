@@ -45,10 +45,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		context.moveTo(line[0].x, line[0].y); //here
 		context.lineTo(line[1].x, line[1].y);
 		
-		console.log(settings.clr[0]);
-		var trial = "#"+(settings.clr[0]).toString(16)+(settings.clr[1]).toString(16)+(settings.clr[2]).toString(16);
-		context.strokeStyle = trial;
-		console.log(trial);
+		// console.log(settings.clr[0]);
+		// var trial = "#"+(settings.clr[0]).toString(16)+(settings.clr[1]).toString(16)+(settings.clr[2]).toString(16);
+		context.strokeStyle = settings.clr;
+		// console.log(trial);
 		context.lineWidth = settings.lineW; 
 
 		context.stroke();
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	socket.on('draw_line', function (data) {
 
 		canvas.drawLine(data);
-		console.log(data.apple.toString() + " data listen");
+		// console.log(data.apple.toString() + " data listen");
 		if (recording){
 			currentLine.push(data);
 		}
@@ -211,8 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		// send line to to the server
 
 		var data = {
-			line: "poop",
-			apple: "poopy"
+			line: [mouse.pos, mouse.pos_prev]
 		};
 		socket.emit('draw_line', data);
 		console.log(data);
