@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 
 	};
-//"#"+(155).toString(16)+(102).toString(16)+(102).toString(16);
+
 	canvas.onmousemove = function(e) { // place socket.emit here 
 		var BB=canvas.getBoundingClientRect();
 
