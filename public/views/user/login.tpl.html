@@ -1,0 +1,33 @@
+<!-- placeholder while i work this out -->
+<div ng-controller="WelcomeController" ng-init="init()">
+    <div class="container">
+    <h1 class="page-header"> <h1> DartModeler</h1> 
+
+    <div style="padding-bottom: 25px;">
+        <div id="info">Click an existing drawing or create a new one. Thanks to socket.io, these files can be shared and interactively viewed --open two browsers with the same drawing-id to see!</div>
+        
+    </div>
+    </div>
+    <div class="container">
+
+        <div class="row" ng-hide="!drawings">
+            <div class="col-md-4">
+                <h3> Existing Models </h3> 
+                <ul class="list-group" ng-repeat="d in drawings">
+                    <li class="list-group-item"><a href="#/drawings/{{d._id}}">{{d.name}}</a></li>
+                </ul>
+             </div>
+         
+            <div class="col-md-8">
+            <h3> Create New Model</h3>
+                <form>
+                <input type="text" class="form-control" ng-model="newDrawing.name" placeholder="Drawing Name">
+                <input type="text" class="form-control" ng-model="newDrawing.description" placeholder="Drawing Description">
+                <input type="button" class="btn btn-primary" ng-click="create()" value="save" style="float:right"/>
+                <input type="button" class="btn btn-success" ng-click="newDrawing = null" value="clear" style="float:right"/>
+                </form>
+            </div>
+        </div>
+    </div> 
+    
+</div>
