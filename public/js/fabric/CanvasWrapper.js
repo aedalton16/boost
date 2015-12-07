@@ -6,6 +6,7 @@ var CanvasWrapper = function(id, context){
     this.activity = false; //
     this.currentColor = context.currentColor;
     this.strokeWidth = context.strokeWidth || '5';
+    this.backgroundColor = this.canvas.backgroundColor || 'white';
 
     // how to handle listeners for multiple pages??? removing these potentially dangerous 
     this.socket.removeAllListeners();
@@ -14,7 +15,9 @@ var CanvasWrapper = function(id, context){
     this.tools = {
         LINE :      new LineTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
         RECTANGLE : new RectangleTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
-        POLYGON : new PolygonTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
+        POLYGON :   new PolygonTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
+        ERASE :     new EraserTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
+        GRID :      new GridTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
         TRIANGLE :  new TriangleTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
         CIRCLE :    new CircleTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
         FREE :      new FreeDrawingTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
@@ -33,7 +36,8 @@ var CanvasWrapper = function(id, context){
     this.canvas.on("mouse:down", function(o){
         self.mouseDown = true;
         // so the polygon gets angry around here 
-        if(self.canvas._hoveredTarget && self.handler.drawingMode !== 'default' && self.handler.drawingMode !== 'fill'){
+        // we also dont want to have a default override on a variety of circumstances so TODO: fix this and optimize for eaze of use 
+        if(self.canvas._hoveredTarget && self.handler.drawingMode !== 'default' && self.handler.drawingMode !== 'fill' && self.handler.drawingMode !== 'free' && self.hander.drawingMode !== 'erase'){
             self.deactivatedTool = self.handler;
             self.handler = self.tools.DEFAULT;
             self.handler.init();
@@ -134,7 +138,7 @@ var CanvasWrapper = function(id, context){
     this.socket.on('changing', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // this is pretty lame, i'm just transferring everything, surely a better way
+        //  transferring everything, TODO: a better way
         if(obj.type === "labeled-line"){
             obj.initialize([o.x1, o.y1, o.x2, o.y2], o);
         }else if(obj.type === "labeled-path"){
@@ -243,13 +247,30 @@ CanvasWrapper.prototype.changeDrawingMode = function(mode){
 // helper 
 CanvasWrapper.prototype.resetDrawingMode = function(){
     this.changeDrawingMode('default');
-};
+}
+
+CanvasWrapper.prototype.updateCurrentBackground = function() { // fix callback 
+    console.log('click');
+    this.canvas.setBackgroundColor(this.currentColor, this.canvas.renderAll.bind(this.canvas));
+}
 
 // change fill of active object
 CanvasWrapper.prototype.updateCurrentColor = function(currentColor) {
     this.currentColor = currentColor;
     if(this.canvas.getActiveObject()){
         this.canvas.getActiveObject().stroke = currentColor;
+        this.canvas.getActiveObject().setCoords();
+        this.socket.emit('changing', this.canvas.getActiveObject());
+        this.activity = true;
+    }
+}
+
+// change fill of active object
+CanvasWrapper.prototype.updateCurrentStrokeWidth = function(currentWidth) {
+    this.strokeWidth = currentWidth;
+
+    if(this.canvas.getActiveObject()){
+        this.canvas.getActiveObject().strokeWidth = currentWidth;
         this.canvas.getActiveObject().setCoords();
         this.socket.emit('changing', this.canvas.getActiveObject());
         this.activity = true;

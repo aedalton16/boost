@@ -51,8 +51,20 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
         $scope.canvas.updateCurrentPoints(points);
     };
 
-     $scope.clearCanvas = function(){
+    $scope.clearCanvas = function(){
         $scope.canvas.clearCurrentCanvas();
+    };
+    $scope.updateBackground = function(){
+        console.log('click');
+        $scope.canvas.updateCurrentBackground();
+    };
+
+     $scope.updateStrokeWidth = function(val){
+        var inc = Number(val); 
+
+        $scope.strokeWidth = $scope.strokeWidth + inc;
+        console.log($scope.strokeWidth);
+        $scope.canvas.updateCurrentStrokeWidth($scope.strokeWidth);
     };
 
 
