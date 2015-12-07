@@ -165,6 +165,7 @@ body {
 
 /*Angular Way??? */
 #redBtn{ border-color: #ff0000; border-width: 3px; background-color: #ff0000;}
+#whiteBtn{ border-color: #fff; border-width: 5px; background-color: #f2f2f2; color: #000;}
 #pinkBtn{ border-color: #ff3399; border-width: 3px; background-color: #ff3399;}
 #orangeBtn{ border-color: #ff9933; border-width: 3px; background-color: #ff9933;}
 #yellowBtn{ border-color: #ffff00; border-width: 3px; background-color: #ffff00;}

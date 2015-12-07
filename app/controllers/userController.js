@@ -13,97 +13,69 @@ exports.init = function(io){
     io.sockets.on('connection', listener);
 };
 
-/**
- * gets all of our drawings
- * @param req
- * @param res
- */
-exports.all = function(req, res){
-    User.find().exec(function(err, users){
-        if(err){
-            console.log("ERRORORERWER 500");
-        } else {
-            res.jsonp(users);
-        }
-    });
-};
-
-/*
- * creates a new drawing
- */
-exports.create = function(req, res){
-
-    var user = new User(req.body);
-    User.save(function(err){
-        if(err){
-            console.log("Error "+err);
-            res.send(500);
-        } else {
-            res.jsonp(drawing);
-            sockets.emit("add-drawing", user);
-        }
-    });
-
-};
-
-/*
- * returns a specific drawing
- */
-exports.findById = function(req, res){
-
-    User.findOne({'_id': req.params.userId}, function(err, user){
-        if(err){
-            //res.render('error', {status:500});
-            console.log('error', {status:500});
-        } else {
-            res.jsonp(user);
-        }
-    });
-
-};
-
-/*
- * deletes a drawing by id
- */
-
 
 /*
 * socket listener
 */
 function listener(socket_io){
 
-    socket_io.on('changing', function(message){
-        sockets.emit('changing', message);
-    });
-    socket_io.on('text-changing', function(message){
-        sockets.emit('text-changing', message);
-    });
-    socket_io.on('sendToBack', function(message){
-        sockets.emit('sendToBack', message);
-    });
-    socket_io.on('sendBackwards', function(message){
-        sockets.emit('sendBackwards', message);
-    });
-    socket_io.on('bringForward', function(message){
-        sockets.emit('bringForward', message);
-    });
-    socket_io.on('bringToFront', function(message){
-        sockets.emit('bringToFront', message);
-    });
-    socket_io.on('removeObject', function(message){
-        sockets.emit('removeObject', message);
-    });
+    // Chatroom
 
-    socket_io.on('saveDrawing', function (message) {
-        var o = new User(message);
-        // TODO: simplify update
-        User.remove({_id: o._id}, function(err){
-            if(err) return console.error(err);
-            o.save(function(err, object){
-                if(err) return console.error(err);
-            });
+    var numUsers = 0;
+    var addedUser = false;
+
+    // when the client emits 'new message', this listens and executes
+    socket.on('new message', function (data) {
+        // we tell the client to execute 'new message'
+        socket.broadcast.emit('new message', {
+            username: socket.username,
+            message: data
         });
     });
 
+    // when the client emits 'add user', this listens and executes
+    socket.on('add user', function (username) {
+        if (addedUser) return;
 
+        // we store the username in the socket session for this client
+        socket.username = username;
+        ++numUsers;
+        addedUser = true;
+        socket.emit('login', {
+            numUsers: numUsers
+        });
+
+        // echo globally (all clients) that a person has connected
+        socket.broadcast.emit('user joined', {
+        username: socket.username,
+        numUsers: numUsers
+        });
+    });
+
+    // when the client emits 'typing', we broadcast it to others
+    socket.on('typing', function () {
+        socket.broadcast.emit('typing', {
+            username: socket.username
+        });
+    });
+
+    // when the client emits 'stop typing', we broadcast it to others
+    socket.on('stop typing', function () {
+        socket.broadcast.emit('stop typing', {
+            username: socket.username
+        });
+    });
+
+    // when the user disconnects.. perform this
+    socket.on('disconnect', function () {
+        if (addedUser) {
+            --numUsers;
+
+            // echo globally that this client has left
+            socket.broadcast.emit('user left', {
+                username: socket.username,
+                numUsers: numUsers
+            });
+        }
+    });
 }
