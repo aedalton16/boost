@@ -5,6 +5,7 @@
         "angular": "~1.2.14",
         "angular-route": "~1.2.14",
         "angular-resource": "~1.2.14",
+        "bootstrap": "~3.3.5",
         "jquery": "~1.9.1",
         "fabric": "~1.4.4"
     },
