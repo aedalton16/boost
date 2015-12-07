@@ -4,54 +4,75 @@
 <!-- TODO: Min like theres no tomorrow. These images, should we jsut use bootstrap? takes a long time  -->
 
 <!-- TODO: insert userID area if logged in -->
+
+<!-- TODO: standardize button/img size -->
     <div class="container">
 
       <div class="btn-toolbar navbar-left" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group">
+            <h5> code! </h5> 
+            <button type="button" class="btn btn-primary btn-sm" ng-click="changeLayerPosition('sendToBack')"> <span class="glyphicon glyphicon-console" aria-hidden="true"></span></button> 
+        </div> 
+        <div class="btn-group">
              <h5> tools </h5> 
-            <img src="img/hand-up.png" class="toolButton-{{ drawingMode === 'default' ? 'on' : 'off'}}" ng-click="changeDrawingMode('default')">
-            <img src="img/pencil.png" class="toolButton-{{ drawingMode === 'free' ? 'on' : 'off'}}" ng-click="changeDrawingMode('free')">
-            <img src="img/fill-tint.png" class="toolButton-{{ drawingMode === 'fill' ? 'on' : 'off'}}" ng-click="changeDrawingMode('fill')">
-            <img src="img/text-resize.png" class="toolButton-{{ drawingMode === 'text' ? 'on' : 'off'}}" ng-click="changeDrawingMode('text')">
+            <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'default' ? 'on' : 'off'}}" ng-click="changeDrawingMode('default)"><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></button> 
+            <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'free' ? 'on' : 'off'}}" ng-click="changeDrawingMode('free)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button> 
+            <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'fill' ? 'on' : 'off'}}" ng-click="changeDrawingMode('fill)"><span class="glyphicon glyphicon-tint" aria-hidden="true"></span></button> 
+            <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'text' ? 'on' : 'off'}}" ng-click="changeDrawingMode('text)"><span class="glyphicon glyphicon-text-width" aria-hidden="true"></span></button> 
+
+            <!-- TODO: Background button -->
+            <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'text' ? 'on' : 'off'}}" ng-click="changeDrawingMode('text)"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button> 
         </div>
         <div class="btn-group">
             <h5> shapes </h5> 
-            <!-- TODO: make btns with active class -->
-            <img src="img/vector-path-line.png" class="toolButton-{{ drawingMode === 'line' ? 'on' : 'off'}}" ng-click="changeDrawingMode('line')">
-            <img src="img/vector-path-circle.png" class="toolButton-{{ drawingMode === 'circle' ? 'on' : 'off'}}" ng-click="changeDrawingMode('circle')">
-            <img src="img/vector-path-square.png" class="toolButton-{{ drawingMode === 'rectangle' ? 'on' : 'off'}}" ng-click="changeDrawingMode('rectangle')">
-
+            <!-- TODO: make line into line not path -->
+            <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'line' ? 'on' : 'off'}}" ng-click="changeDrawingMode('line)"> <img src="img/vector-path-line.png" > </button> 
+            <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'circle' ? 'on' : 'off'}}" ng-click="changeDrawingMode('circle)"> <img src="img/vector-path-circle.png" > </button>
+            <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'rectangle' ? 'on' : 'off'}}" ng-click="changeDrawingMode('rectangle)"> <img src="img/vector-path-square.png" > </button> 
+           <button type="button" class="btn btn-primary" class="toolButton-{{ drawingMode === 'poylgon' ? 'on' : 'off'}}" ng-click="changeDrawingMode('polygon)"> <img src="img/vector-path-polygon.png"> </button> 
             <!-- TODO: Points/drop down fxn for polygon...should be able to do penta to decagon -->
             <!-- feed it in as an input? call a points fxn -->
-            <img src="img/vector-path-polygon.png" class="toolButton-{{ drawingMode === 'polygon' ? 'on' : 'off'}}" ng-click="changeDrawingMode('polygon')">
+            <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'triangle' ? 'on' : 'off'}}" ng-click="changeDrawingMode('triangle)"> 3 </button> 
         </div>
         <div class="btn-group">
-             <h5> undo/redo </h5> 
-            <img src="img/fast-backward.png" class="layer-controls" ng-click="changeLayerPosition('sendToBack')">
-            <img src="img/step-backward.png" class="layer-controls" ng-click="changeLayerPosition('sendBackwards')">
-            <img src="img/step-forward.png" class="layer-controls" ng-click="changeLayerPosition('bringForward')">
-            <img src="img/fast-forward.png" class="layer-controls" ng-click="changeLayerPosition('bringToFront')">
+             <h5> layer controls </h5> 
+            <button type="button" class="btn btn-primary" ng-click="changeLayerPosition('sendToBack')"> <img src="img/fast-backward.png"> </button> 
+            <button type="button" class="btn btn-primary" ng-click="changeLayerPosition('sendBackwards')"> <img src="img/step-backward.png"> </button>
+            <button type="button" class="btn btn-primary" ng-click="changeLayerPosition('sendForwards')"> <img src="img/step-forward.png"> </button>
+            <button type="button" class="btn btn-primary" ng-click="changeLayerPosition('bringToFront')"> <img src="img/fast-forward.png"> </button> 
 
         </div>
+
+        <div class="btn-group">
+            <h5> undo/redo </h5>
+
+        </div>
+
         <div class="btn-group"> 
+
              <h5> colors </h5> 
-            <button type="button" class="btn btn-primary" id="redBtn" ng-click="updateColor('red')"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-primary btn-sm" id="whiteBtn" ng-click="updateColor('white')"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-primary btn-sm" id="blueBtn" ng-click="updateColor('blue')"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-primary btn-sm" id="blackBtn" ng-click="updateColor('black')"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-primary btn-sm" id="pinkBtn" ng-click="updateColor('pink')"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-primary btn-sm" id="yellowBtn" ng-click="updateColor('yellow')"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-primary" id="whiteBtn" ng-click="updateColor('white')"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-primary" id="redBtn" ng-click="updateColor('red')"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-primary" id="blueBtn" ng-click="updateColor('blue')"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-primary" id="blackBtn" ng-click="updateColor('black')"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-primary" id="pinkBtn" ng-click="updateColor('pink')"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-primary" id="yellowBtn" ng-click="updateColor('yellow')"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
             <div style="display: block; float: left; padding-right: 10px">
-                <div class="colorbox" id="currentColorBox" ng-style="{backgroundColor: currentColor}"></div>
-                <div>Color</div>
+            <div class="colorbox" id="currentColorBox" ng-style="{backgroundColor: currentColor}"></div>
+            <div>Color</div>
             </div>
 
              <!-- HTML5 Color Picker -->
-<input type="color" ng-model="test" name="colorpicker" id="" />
-<!-- TODO: make this work -->
-<button type="button" class="btn btn-primary btn-sm" id="colorPickerBtn" ng-click="updateColor({{test}})"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-<div class="colorpicker" style="background-color:{{test}}">{{test}}</div>
-        </div> 
+            <input type="color" ng-model="test" name="colorpicker" id="" />
+            <!-- TODO: make this work -->
+            <button type="button" class="btn btn-primary btn-sm" id="colorPickerBtn" ng-click="updateColor({{test}})"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+            <div class="colorpicker" style="background-color:{{test}}">{{test}}</div>
+            </div>
+
+            <div class="btn-group">
+             <button type="button" class="btn btn-default btn-sm" id="clearBtn" ng-click="clearCanvas()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+            </div> 
+
            <!-- TODO: intelligently add button/pen with HTML5 colorpicker -->
         </div> 
         </div>

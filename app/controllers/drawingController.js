@@ -42,7 +42,6 @@ exports.create = function(req, res){
             sockets.emit("add-drawing", drawing);
         }
     });
-
 };
 
 /*

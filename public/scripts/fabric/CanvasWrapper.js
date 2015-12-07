@@ -86,25 +86,32 @@ var CanvasWrapper = function(id, context){
     
     });
 
-    this.canvas.on("object:modified", function(e){
+    this.canvas.on('object:modified', function(e){
         console.log('modified : saving canvas');
         self.socket.emit('saveDrawing', self.canvas);
     });
 
-    this.canvas.on("object:selected", function(e){
+    this.canvas.on('object:selected', function(e){
         //console.log("selected");
     });
 
-    this.canvas.on("object:moving", function(e){
+    this.canvas.on('object:moving', function(e){
         self.socket.emit('changing', e.target);
     });
 
-    this.canvas.on("object:scaling", function(e){
+    this.canvas.on('object:scaling', function(e){
         console.log("scaling");
         self.socket.emit('changing', e.target);
     });
 
-    this.canvas.on("object:rotating", function(e){
+     this.canvas.on('selection:cleared', function(e){
+        console.log("cleared");
+        self.socket.emit('cleared', e.target); // TODO: come back here 
+        self.socket.emit('saveDrawing', self.canvas);
+        //self.checkAcitvity()
+    });
+
+    this.canvas.on('object:rotating', function(e){
         console.log("rotating");
         self.socket.emit('changing', e.target);
     });
@@ -249,10 +256,9 @@ CanvasWrapper.prototype.updateCurrentColor = function(currentColor) {
     }
 }
 
-CanvasWrapper.prototype.clearCanvas = function(currentColor) {
-    this.forEach(obj){
-        self.canvas.remove(obj);
-    }
+// TODO: parse out 
+CanvasWrapper.prototype.clearCurrentCanvas = function(e) {
+    this.canvas.clear(); 
 }
 
 CanvasWrapper.prototype.updateCurrentPoints = function(currentPoints) {

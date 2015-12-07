@@ -51,6 +51,11 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
         $scope.canvas.updateCurrentPoints(points);
     };
 
+     $scope.clearCanvas = function(){
+        $scope.canvas.clearCurrentCanvas();
+    };
+
+
     // load our whiteboard
     $scope.initCanvas = function(drawing){
 
