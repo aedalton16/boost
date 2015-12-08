@@ -1,0 +1,87 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <title>BOOST!Tutors</title>
+v    <meta content="IE=EDGE" http-equiv="X-UA-Compatible">
+
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-resource/angular-resource.js"></script>
+    <script src="libs/angular-route/angular-route.js"></script>
+    <script src="libs/jquery/jquery.js"></script>Å°
+    <script src="libs/fabric/dist/fabric.js"></script>
+    
+    <!-- TODO: run GRUNT to build/min -->
+    <script src="js/tools/LineTool.js"></script>
+    <script src="js/tools/RectangleTool.js"></script>
+
+    <script src="js/tools/EraserTool.js"></script>
+    <script src="js/tools/PolygonTool.js"></script>
+    <script src="js/tools/GridTool.js"></script>
+
+    <script src="js/tools/TriangleTool.js"></script>
+    <script src="js/tools/CircleTool.js"></script>
+    <script src="js/tools/FreeDrawTool.js"></script>
+    <script src="js/tools/TextTool.js"></script>
+    <script src="js/tools/FillTool.js"></script>
+    <script src="js/tools/DefaultTool.js"></script>
+
+    <script src="js/fabric/LabeledCanvas.js"></script>
+    <script src="js/fabric/LabeledLine.js"></script>
+    <script src="js/fabric/LabeledPath.js"></script>
+    <script src="js/fabric/LabeledRect.js"></script>  
+    <script src="js/fabric/LabeledPolygon.js"></script>
+    <script src="js/fabric/LabeledTriangle.js"></script>
+    <script src="js/fabric/LabeledCircle.js"></script>
+    <script src="js/fabric/LabeledIText.js"></script>
+    <script src="js/fabric/CanvasWrapper.js"></script>
+
+    <script src="js/controllers/welcome.js"></script>
+    <script src="js/controllers/about.js"></script>
+    <script src="js/controllers/drawings.js"></script>
+    <script src="js/controllers/chats.js"></script>
+
+
+    <script src="js/services/drawings.js"></script>
+
+    <script src="js/app.js"></script>
+
+    <!-- run and minify -->
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css"/>
+
+</head>
+
+<body ng-controller="MainController">
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <img alt="Brand" width="20" height="20" src="img/rocket.png">
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+           <li><a href="#/draw"> Launch! </a></li>
+           <li><a href="#/about">Login</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+    <div ng-view/>
+
+</body>
+
+<script type="text/javascript">document.write('<script src="/socket.io/socket.io.js" type="text/javascript"><\/script>')
+</script>
+</html>

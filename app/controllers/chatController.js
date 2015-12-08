@@ -14,7 +14,7 @@ function listener(socket_io){
   socket_io.on('newMessage', function (data) { // and dis is just zee one? 
     // we tell the client to execute 'new message'
      console.log('new message hotdog');
-    sockets.emit('newMessage', data); // i tink dis is all of dem? 
+     //    sockets.emit('newMessage', data); // i tink dis is all of dem? 
 
   });
 }

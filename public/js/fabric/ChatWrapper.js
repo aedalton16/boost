@@ -1,26 +1,26 @@
-var ChatWrapper = function(id, context){
-	var self = this;
+var ChatWrapper = function(context){
 
-	this.socket = context.socket;
+    // this.chat = new fabric.LabeledChat(id, context);
+    this.socket = context.socket;
+    
+    // how to handle listeners for multiple pages??? removing these potentially dangerous 
+    this.socket.removeAllListeners();
 
-	this.socket.removeAllListeners();
-	
-	this.socket.on('newMessage', function(o){
-		console.log('fired away');
-	});
-	this.socket.on('newMessage', function(data){
-	    context.messages.append($('<li>').text(data));
-	});
+    // workaround b/c we lose our reference to 'this' with our listeners 
+    var self = this;
 
+    /**
+     * listens for changing events, these are scaling, moving, color change, etc
+     */
 
-// this.socket.removeAllListeners();
-}; 
+    this.socket.on('newMessage', function(msg){
+        console.log(msg);
+    });
 
-ChatWrapper.prototype.newMessage = function(o) {
-	console.log('newChatWrapMessage : ' + o); //hopefully that didnt write to the DB
-	
-	this.socket.emit('newMessage', o);
+};
 
+var chats = angular.module('chats', []);
+
+ChatWrapper.prototype.newMessage= function(msg){
+	console.log(msg);
 }
-
-//handling multiple sockets 
