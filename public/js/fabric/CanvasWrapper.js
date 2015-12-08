@@ -106,7 +106,7 @@ var CanvasWrapper = function(id, context){
 
      this.canvas.on('selection:cleared', function(e){
         console.log("cleared");
-        self.socket.emit('cleared', e.target); // TODO: come back here 
+        // self.socket.emit('cleared', e.target); // TODO: come back here 
         self.socket.emit('saveDrawing', self.canvas);
         //self.checkAcitvity()
     });
@@ -124,9 +124,9 @@ var CanvasWrapper = function(id, context){
         console.log("removed");
     });
 
-    this.canvas.on("selection:cleared", function(e){
-        console.log("selection cleared ");
-    });
+    // this.canvas.on("selection:cleared", function(e){
+    //     console.log("selection cleared ");
+    // });
 
     /**
      * listens for changing events, these are scaling, moving, color change, etc
