@@ -1,52 +1,31 @@
 var chats = angular.module('chats', []);
 
 // todo: tighten this up 
-chats.controller('ChatsController', ['$scope',
-    function($scope){
-    $scope.messages = {}; 
+chats.controller('ChatsController', ['$scope', "socket",
+    function($scope, socket){
 
-    // on each load 
-    $scope.init = function(){
+        $scope.socket.on('init', function(data){
+           console.log('init');
+        });
+        $scope.socket.on('send:message', function(message){
+            console.log('heard send');
+            $scope.messages.push(message);
+        });
 
-        $scope.initChat();
+        $scope.messages = [];
 
-    };
-    // update drawing mode 
+        $scope.sendMessage = function(){
+            console.log('clicked send');
+            socket.emit('send:message', {message: $scope.message
+            });
+            $scope.messages.push({
+                message: $scope.message
+            });
 
-     $scope.submitMessage = function(message){
-        $scope.messages.push(message);
-        $scope.socket.emit('newMessage', message);
-     //$scope.$apply();
-     };
+            // clear message box
+            $scope.message = '';
 
-
-    // load our whiteboard
-    $scope.initChat = function(){
-
-        // $scope.chat = chat;
-
-        // TODO: revise to loadfromjson
-        // context vars for extended objects
-        var context = {
-            'socket': $scope.socket
         };
-        // where should we put points 
 
-        $scope.chat = new ChatWrapper(context);
-        // $scope.canvas.loadFromJSON(drawing);
-
-        // $scope.canvas.discardActiveObject();
-
-    };
-
-    // shut it down 
-    $scope.$on("$destroy",  function( event ) {
-        $scope.canvas.dispose();
-        console.log("FYI - Destroyed scope for DrawingController");
-    });
-    // $scope.socket.on('newMessage', function(message){
-    //     console.log('listeningevent fired chats.js');
-    //     $scope.chat.newMessage(message);
-    // });
-
+   
 }]);
