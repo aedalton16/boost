@@ -59,13 +59,10 @@ require('./app/controllers/chatController').init(io);
  * routes
  */
 require('./app/routes/drawingRoutes')(app);
-require('./app/routes/userRoutes')(app, passport);
+// require('./app/routes/userRoutes')(app, passport);
 
 app.use(express.static(__dirname + '/public'));
 
-/*
- * express listen:3030 or environment var PORT
- */
 
 server.listen(port);
 

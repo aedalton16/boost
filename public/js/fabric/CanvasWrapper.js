@@ -108,12 +108,13 @@ var CanvasWrapper = function(id, context){
         self.socket.emit('changing', e.target);
     });
 
-     this.canvas.on('selection:cleared', function(e){
-        console.log("cleared");
-        self.socket.emit('cleared', e.target); // TODO: come back here 
-        self.socket.emit('saveDrawing', self.canvas);
-        //self.checkAcitvity()
-    });
+    //  this.canvas.on('selection:cleared', function(e){
+    //     console.log("cleared --d"); // firing thrice 
+    //     // self.socket.emit('cleared', e.target); // TODO: come back here 
+    //     self.socket.emit('saveDrawing', self.canvas);
+    //     // this.checkAcitvity()
+    //     // self.checkActivity();
+    // });
 
     this.canvas.on('object:rotating', function(e){
         console.log("rotating");
@@ -162,11 +163,11 @@ var CanvasWrapper = function(id, context){
         self.canvas.renderAll();
     });
 
-    this.socket.on('addObject', function(o){
+    this.socket.on('addObject', function(o){ //return here GRID
 
       // TODO: filter
         if(o.drawingId !== self.canvas._id){
-            console.log('got message from another drawing!! crap!! Need to fix this!!! Bailing out : '+o.drawingId + ' : '+self.canvas._id);
+            console.log('gconflicting messages received, bail. '+o.drawingId + ' : '+self.canvas._id);
             return;
         }
 
@@ -177,21 +178,19 @@ var CanvasWrapper = function(id, context){
 
     });
 
-    /**
-     * handles layer changing events - probably a more clever way to use a single method for all of these
-     */
+    // handles layer changing events TODO: simplify 
+     
     this.socket.on('sendToBack', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // we must set to active every time, seems odd but only way to make it "real time" react
+        // we must set to active every time
+        // TODO: improve make it "real time" react
         self.canvas.setActiveObject(obj);
         obj.sendToBack();
         self.checkActivity();
     });
 
-    /**
-     * handles layer changing events - probably a more clever way to use a single method for all of these
-     */
+   
     this.socket.on('sendBackwards', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
@@ -201,25 +200,18 @@ var CanvasWrapper = function(id, context){
         self.checkActivity();
     });
 
-    /**
-     * handles layer changing events - probably a more clever way to use a single method for all of these
-     */
+
     this.socket.on('bringForward', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // we must set to active every time, seems odd but only way to make it "real time" react
         self.canvas.setActiveObject(obj);
         obj.bringForward();
         self.checkActivity();
     });
 
-    /**
-     * handles layer changing events - probably a more clever way to use a single method for all of these
-     */
     this.socket.on('bringToFront', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // we must set to active every time, seems odd but only way to make it "real time" react
         self.canvas.setActiveObject(obj);
         obj.bringToFront();
         self.checkActivity();
@@ -231,7 +223,7 @@ var CanvasWrapper = function(id, context){
     this.socket.on('removeObject', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // remove the object we got
+        // remove the object 
         self.canvas.remove(obj);
         self.checkActivity();
     });
@@ -252,6 +244,7 @@ CanvasWrapper.prototype.resetDrawingMode = function(){
 CanvasWrapper.prototype.updateCurrentBackground = function() { // fix callback 
     console.log('click');
     this.canvas.setBackgroundColor(this.currentColor, this.canvas.renderAll.bind(this.canvas));
+    // this.socket.emit('changing', this.canvas.getActiveObject());
 }
 
 // change fill of active object
@@ -280,6 +273,8 @@ CanvasWrapper.prototype.updateCurrentStrokeWidth = function(currentWidth) {
 // TODO: parse out 
 CanvasWrapper.prototype.clearCurrentCanvas = function(e) {
     this.canvas.clear(); 
+    // this.socket.emit('changing', this.canvas);
+        // this.activity = true;
 }
 
 CanvasWrapper.prototype.updateCurrentPoints = function(currentPoints) {

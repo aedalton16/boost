@@ -79,20 +79,22 @@
             <input type="color" ng-model="test" name="colorpicker" id="" />
         </div> 
            <!-- TODO: intelligently add button/pen with HTML5 colorpicker -->         
-        </div>
-    </div> 
+    </div>
+</div> 
         <!-- TODO: put chat in a footer page -->
     
     <canvas id="c"></canvas>
-    <div class="chat-area">
-    <div class="chat">
-        <div class="chat-head"> Chat! </div>
-            <ul id="messages" style="padding-left: 4px"></ul>
-        <form action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
-        </form>
-    </div>
-    </div>
 
 
-</div>
+</div>   
+<div ng-controller="ChatsController" ng-init="init()">
+<ul id="messages"></ul> 
+<button type="button" class="btn btn-primary" id="blackBtn" ng-click="submitMessage('helloWorld')"> <i class="fa fa-star"></i></button>
+<!-- ng repeat -->
+
+
+</div> 
+
+
+<!-- ppl are cranky at the ng-controller and want to use dir?? -->
+ 

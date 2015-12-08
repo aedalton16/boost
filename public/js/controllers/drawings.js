@@ -16,7 +16,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
     $scope.init = function(){
 
         // render our drawing 
-        Drawings.get({drawingId: $routeParams.drawingId},
+        Drawings.get({drawingId: $routeParams.drawingId}, // how does it know tho...
             function(drawing){
                 $scope.initCanvas(drawing);
             },
@@ -39,6 +39,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
         return false;
     };
 
+    // is this dry is this an opp for a direc
     // color 
     $scope.updateColor = function(color){
         $scope.currentColor = color;

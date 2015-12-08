@@ -78,15 +78,18 @@ exports.deleteById = function(req, res){
 /*
  * socket listener
  */
-function listener(socket_io){
+function listener(socket_io){ // these fire, a lot.... 
 
     socket_io.on('changing', function(message){
+        console.log('drawingController fired changing');
         sockets.emit('changing', message);
     });
     socket_io.on('text-changing', function(message){
+        console.log('drawingController fired text-changing');
         sockets.emit('text-changing', message);
     });
     socket_io.on('sendToBack', function(message){
+        console.log('drawingController fired sendToBack');
         sockets.emit('sendToBack', message);
     });
     socket_io.on('sendBackwards', function(message){

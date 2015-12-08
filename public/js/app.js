@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ngResource', 'welcome','about', 'drawings']);
+var app = angular.module('app', ['ngRoute', 'ngResource', 'welcome','about', 'drawings', 'chats']); // HERE INSTANTIATE
 
 // setup our routes
 app.config(['$routeProvider',
@@ -29,6 +29,7 @@ app.controller('MainController', ['$scope', '$rootScope', '$log', '$location', f
 
     $scope.socket = io.connect();
 
+    
     
     $rootScope.$on("$locationChangeStart", function(event, next, current){
         if(!isCanvasSupported()){
