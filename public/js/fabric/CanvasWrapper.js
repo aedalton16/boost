@@ -6,6 +6,7 @@ var CanvasWrapper = function(id, context){
     this.activity = false; //
     this.currentColor = context.currentColor;
     this.strokeWidth = context.strokeWidth || '5';
+    this.backgroundColor = this.canvas.backgroundColor || 'white';
 
     // how to handle listeners for multiple pages??? removing these potentially dangerous 
     this.socket.removeAllListeners();
@@ -14,7 +15,9 @@ var CanvasWrapper = function(id, context){
     this.tools = {
         LINE :      new LineTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
         RECTANGLE : new RectangleTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
-        POLYGON : new PolygonTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
+        POLYGON :   new PolygonTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
+        ERASE :     new EraserTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
+        GRID :      new GridTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
         TRIANGLE :  new TriangleTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
         CIRCLE :    new CircleTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
         FREE :      new FreeDrawingTool({'drawingId':this.canvas._id, 'fabricCanvas':this.canvas, 'socket':this.socket}),
@@ -33,7 +36,8 @@ var CanvasWrapper = function(id, context){
     this.canvas.on("mouse:down", function(o){
         self.mouseDown = true;
         // so the polygon gets angry around here 
-        if(self.canvas._hoveredTarget && self.handler.drawingMode !== 'default' && self.handler.drawingMode !== 'fill'){
+        // we also dont want to have a default override on a variety of circumstances so TODO: fix this and optimize for eaze of use 
+        if(self.canvas._hoveredTarget && self.handler.drawingMode !== 'default' && self.handler.drawingMode !== 'fill' && self.handler.drawingMode !== 'free' && self.hander.drawingMode !== 'erase'){
             self.deactivatedTool = self.handler;
             self.handler = self.tools.DEFAULT;
             self.handler.init();
@@ -134,7 +138,7 @@ var CanvasWrapper = function(id, context){
     this.socket.on('changing', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // this is pretty lame, i'm just transferring everything, surely a better way
+        //  transferring everything, TODO: a better way
         if(obj.type === "labeled-line"){
             obj.initialize([o.x1, o.y1, o.x2, o.y2], o);
         }else if(obj.type === "labeled-path"){
@@ -158,11 +162,11 @@ var CanvasWrapper = function(id, context){
         self.canvas.renderAll();
     });
 
-    this.socket.on('addObject', function(o){
+    this.socket.on('addObject', function(o){ //return here GRID
 
       // TODO: filter
         if(o.drawingId !== self.canvas._id){
-            console.log('got message from another drawing!! crap!! Need to fix this!!! Bailing out : '+o.drawingId + ' : '+self.canvas._id);
+            console.log('gconflicting messages received, bail. '+o.drawingId + ' : '+self.canvas._id);
             return;
         }
 
@@ -173,21 +177,19 @@ var CanvasWrapper = function(id, context){
 
     });
 
-    /**
-     * handles layer changing events - probably a more clever way to use a single method for all of these
-     */
+    // handles layer changing events TODO: simplify 
+     
     this.socket.on('sendToBack', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // we must set to active every time, seems odd but only way to make it "real time" react
+        // we must set to active every time
+        // TODO: improve make it "real time" react
         self.canvas.setActiveObject(obj);
         obj.sendToBack();
         self.checkActivity();
     });
 
-    /**
-     * handles layer changing events - probably a more clever way to use a single method for all of these
-     */
+   
     this.socket.on('sendBackwards', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
@@ -197,25 +199,18 @@ var CanvasWrapper = function(id, context){
         self.checkActivity();
     });
 
-    /**
-     * handles layer changing events - probably a more clever way to use a single method for all of these
-     */
+
     this.socket.on('bringForward', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // we must set to active every time, seems odd but only way to make it "real time" react
         self.canvas.setActiveObject(obj);
         obj.bringForward();
         self.checkActivity();
     });
 
-    /**
-     * handles layer changing events - probably a more clever way to use a single method for all of these
-     */
     this.socket.on('bringToFront', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // we must set to active every time, seems odd but only way to make it "real time" react
         self.canvas.setActiveObject(obj);
         obj.bringToFront();
         self.checkActivity();
@@ -227,7 +222,7 @@ var CanvasWrapper = function(id, context){
     this.socket.on('removeObject', function(o){
         var obj = self.canvas.findById(o._id);
         if(!obj) return;
-        // remove the object we got
+        // remove the object 
         self.canvas.remove(obj);
         self.checkActivity();
     });
@@ -243,7 +238,13 @@ CanvasWrapper.prototype.changeDrawingMode = function(mode){
 // helper 
 CanvasWrapper.prototype.resetDrawingMode = function(){
     this.changeDrawingMode('default');
-};
+}
+
+CanvasWrapper.prototype.updateCurrentBackground = function() { // fix callback 
+    console.log('click');
+    this.canvas.setBackgroundColor(this.currentColor, this.canvas.renderAll.bind(this.canvas));
+    // this.socket.emit('changing', this.canvas.getActiveObject());
+}
 
 // change fill of active object
 CanvasWrapper.prototype.updateCurrentColor = function(currentColor) {
@@ -256,9 +257,23 @@ CanvasWrapper.prototype.updateCurrentColor = function(currentColor) {
     }
 }
 
+// change fill of active object
+CanvasWrapper.prototype.updateCurrentStrokeWidth = function(currentWidth) {
+    this.strokeWidth = currentWidth;
+
+    if(this.canvas.getActiveObject()){
+        this.canvas.getActiveObject().strokeWidth = currentWidth;
+        this.canvas.getActiveObject().setCoords();
+        this.socket.emit('changing', this.canvas.getActiveObject());
+        this.activity = true;
+    }
+}
+
 // TODO: parse out 
 CanvasWrapper.prototype.clearCurrentCanvas = function(e) {
     this.canvas.clear(); 
+    // this.socket.emit('changing', this.canvas);
+        // this.activity = true;
 }
 
 CanvasWrapper.prototype.updateCurrentPoints = function(currentPoints) {

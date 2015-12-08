@@ -50,6 +50,7 @@ FreeDrawingTool.prototype.onPathCreated = function(o){
     newPath.set({type: 'labeled-path'});
     newPath.set({drawingId: this.drawingId});
     newPath.set({stroke:this.currentColor});
+    newPath.set({strokeWidth:this.strokeWidth});
     this.fabricCanvas.remove(o.path);
     this.socket.emit('addObject', newPath.toObject(['drawingId']));
 
