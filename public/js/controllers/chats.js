@@ -13,7 +13,7 @@ chats.controller('ChatsController', ['$scope', "socket",
         });
         socket.on('send:message', function(message){
 
-            $scope.messages.push(message);
+            $scope.messages.push(message.text);
             
         });
 
@@ -23,9 +23,9 @@ chats.controller('ChatsController', ['$scope', "socket",
             console.log('clicked send');
             socket.emit('send:message', {text: $scope.message
             });
-            $scope.messages.push({
-                text: $scope.message
-            });
+            // $scope.messages.push({
+            //     text: $scope.message
+            // });
 	    console.log($scope.messages);
 
             // clear message box

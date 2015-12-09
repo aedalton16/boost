@@ -64,7 +64,7 @@ require('./app/controllers/drawingController').init(io);
 // require('./app/controllers/chatController').init(io);
 
 
-require('./app/controllers/userController')(passport);
+require('./app/config/passportConfig')(passport); // ** 
 
 /*
  * routes
