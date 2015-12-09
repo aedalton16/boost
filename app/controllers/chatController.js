@@ -17,4 +17,10 @@ function listener(socket_io){
         sockets.emit('send:message', data); // i tink dis is all of dem? 
 
   });
+
+  socket.io_on('change:name', function(data){
+  	changeName(data.oldName, data.newName);
+  });
+  socket.on('user:join', function(data))
+
 }
