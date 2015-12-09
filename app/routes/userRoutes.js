@@ -1,6 +1,7 @@
 'use strict';
 
 // drawings routes use drawings controller
+var path = require('path');
 var userController = require('../controllers/userController');
 var User = require('../models/userModel');
 
@@ -9,6 +10,12 @@ module.exports = function(app, passport) {
     // app.post('/users', userController.create);
 
     // app.get('/users', userController.all);
+
+    var session = require('../controllers/sessionController');
+
+    app.get('/auth/session', isLoggedIn, session.session);
+    app.post('/auth/session', session.login);
+    app.del('/auth/session', session.logout);
 
     app.get('/user/:userId', function(req, res){
         User.findOne({'_id': req.params.userId}, function(err, user){
@@ -60,7 +67,7 @@ module.exports = function(app, passport) {
 
     // protected, logged in to visit
     app.get('/draw', isLoggedIn, function(req, res) {
-        res.render('drawings/drawing.tpl.html', {
+        res.render('drawings/drawing.tpl.html', { // TODO: modify for {{}}
             user : req.user // get the user out of session and pass to template
         });
     });

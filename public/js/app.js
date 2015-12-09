@@ -21,6 +21,17 @@ app.config(['$routeProvider',
             });
     }]);
 
+app.run(function ($rootScope, $location, Auth) {
+
+    //watching the value of the currentUser variable.
+    $rootScope.$watch('currentUser', function(currentUser) {
+      // if no currentUser and on a page that requires authorization then try to update it
+      // will trigger 401s if user does not have a valid session
+      if (!currentUser) {
+        Auth.currentUser();
+      }
+    });
+
 // is this nec 
 app.controller('MainController', ['$scope', '$rootScope', '$log', '$location', function($scope, $rootScope, $log, $location){
 
