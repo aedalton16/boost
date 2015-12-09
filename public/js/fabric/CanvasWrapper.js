@@ -2,14 +2,16 @@ var CanvasWrapper = function(id, context){
 
     this.canvas = new fabric.LabeledCanvas(id, context);
     this.socket = context.socket;
+    this.chat = context.chat; 
     this.mouseDown = false;
     this.activity = false; //
+
     this.currentColor = context.currentColor;
     this.strokeWidth = context.strokeWidth || '5';
     this.backgroundColor = this.canvas.backgroundColor || 'white';
 
     // how to handle listeners for multiple pages??? removing these potentially dangerous 
-    this.socket.removeAllListeners();
+    // this.socket.removeAllListeners();
 
     // drawing toolkit 
     this.tools = {
@@ -105,7 +107,7 @@ var CanvasWrapper = function(id, context){
 
     this.canvas.on('object:scaling', function(e){
         console.log("scaling");
-        self.socket.emit('changing', e.target);
+        self.socket.emit('changing**', e.target);
     });
 
      this.canvas.on('selection:cleared', function(e){
@@ -128,9 +130,9 @@ var CanvasWrapper = function(id, context){
         console.log("removed");
     });
 
-    // this.canvas.on("selection:cleared", function(e){
-    //     console.log("selection cleared ");
-    // });
+    this.canvas.on("selection:cleared", function(e){
+        console.log("selections cleared ");
+    });
 
     /**
      * listens for changing events, these are scaling, moving, color change, etc
@@ -161,6 +163,13 @@ var CanvasWrapper = function(id, context){
         self.checkActivity();
         self.canvas.renderAll();
     });
+    this.socket.on('newMessage', function(msg){
+        this.chat.push(msg);
+         console.log(msg);
+
+         // this.chat.append($("<li>").text(msg));
+
+	}); // it just wont handle two listeners and i have no idea why. 
 
     this.socket.on('addObject', function(o){ //return here GRID
 

@@ -1,0 +1,11 @@
+  <div ng-controller="ChatsController" ng-init="init()">
+    <ul class="list-group" ng-repeat="m in messages">
+        <li class="list-group-item">{{m}}</li>
+    </ul>
+
+  <form> 
+    <input type="text" class="form-control" ng-model="message" placeholder="Message Here">
+    <input type="button" class="btn btn-success" ng-click="sendMessage()" value="send" style="float:right"/>
+</form> 
+
+</div> 

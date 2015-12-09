@@ -1,6 +1,18 @@
+  <div ng-controller="ChatsController" ng-init="init()">
+    <ul class="list-group" ng-repeat="m in messages">
+        <li class="list-group-item">{{m}}</li>
+    </ul>
+
+  <form> 
+    <input type="text" class="form-control" ng-model="message" placeholder="Message Here">
+    <input type="button" class="btn btn-success" ng-click="sendMessage()" value="send" style="float:right"/>
+</form> 
+
+</div> 
+
 <div ng-controller="DrawingsController" ng-init="init()">
 
-    <h3>Drawing: {{drawing.name}}</h3>
+    <h3>Drawing: {{drawing.name}} </h3>
 <!-- TODO: Min like theres no tomorrow. These images, should we jsut use bootstrap? takes a long time  -->
 
 <!-- TODO: insert userID area if logged in -->
@@ -84,17 +96,9 @@
         <!-- TODO: put chat in a footer page -->
     
     <canvas id="c"></canvas>
+  
+    <button type="button" class="btn btn-primary" id="blackBtn" ng-click="submitMessage('helloWorld')"> <i class="fa fa-star"></i></button>
+    
 
-
-</div>   
-<div ng-controller="ChatsController" ng-init="init()">
-<ul id="messages"></ul> 
-<button type="button" class="btn btn-primary" id="blackBtn" ng-click="submitMessage('helloWorld')"> <i class="fa fa-star"></i></button>
-<!-- ng repeat -->
-
-
-</div> 
-
-
-<!-- ppl are cranky at the ng-controller and want to use dir?? -->
- 
+    <!-- <div chat> </div>  -->
+</div>

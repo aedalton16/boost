@@ -1,6 +1,6 @@
 var welcome = angular.module('welcome', []);
 
-welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', function($scope, $location, Drawings){
+welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', "socket", function($scope, $location, Drawings, socket){
 
    // init 
     $scope.newDrawing = {};
@@ -27,31 +27,31 @@ welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', func
             });
     };
     // drawing added 
-    $scope.socket.on("add-drawing", function(drawing){
-        $scope.$apply(function(){
+    socket.on("add-drawing", function(drawing){
+        // $scope.$apply(function(){
             $scope.drawings.push(drawing);
-        });
+        // });
     });
 
     // drawing deleted 
-    $scope.socket.on("remove-drawing", function(drawing_id){
-        $scope.$apply(function(){
+    socket.on("remove-drawing", function(drawing_id){
+        // $scope.$apply(function(){
             $scope.drawings.forEach(function(obj, index){
                 if(obj._id === drawing_id){
                     $scope.drawings.splice(index, 1);
                 }
             });
-        });
+        // });
     });
 
     /*
     * update our status 
     */
-    $scope.socket.on('connect', function(){
+    socket.on('connect', function(){
         console.log('oh hai-- connected to server');
     });
 
-    $scope.socket.on('disconnect', function(){
+    socket.on('disconnect', function(){
         console.log('okie bai-- disconnected from server');
     });
 

@@ -1,33 +1,46 @@
-<!-- placeholder while i work this out -->
-<div ng-controller="WelcomeController" ng-init="init()">
-    <div class="container">
-    <h1 class="page-header"> <h1> DartModeler</h1> 
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container">
 
-    <div style="padding-bottom: 25px;">
-        <div id="info">Click an existing drawing or create a new one. Thanks to socket.io, these files can be shared and interactively viewed --open two browsers with the same drawing-id to see!</div>
-        
-    </div>
-    </div>
-    <div class="container">
+<div class="col-sm-6 col-sm-offset-3">
 
-        <div class="row" ng-hide="!drawings">
-            <div class="col-md-4">
-                <h3> Existing Models </h3> 
-                <ul class="list-group" ng-repeat="d in drawings">
-                    <li class="list-group-item"><a href="#/drawings/{{d._id}}">{{d.name}}</a></li>
-                </ul>
-             </div>
-         
-            <div class="col-md-8">
-            <h3> Create New Model</h3>
-                <form>
-                <input type="text" class="form-control" ng-model="newDrawing.name" placeholder="Drawing Name">
-                <input type="text" class="form-control" ng-model="newDrawing.description" placeholder="Drawing Description">
-                <input type="button" class="btn btn-primary" ng-click="create()" value="save" style="float:right"/>
-                <input type="button" class="btn btn-success" ng-click="newDrawing = null" value="clear" style="float:right"/>
-                </form>
-            </div>
+    <h1><span class="fa fa-sign-in"></span> Login</h1>
+
+    <!-- show any messages that come back with authentication -->
+<!--     <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %> -->
+
+    <!-- LOGIN FORM -->
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" name="email">
         </div>
-    </div> 
-    
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+
+        <button type="submit" class="btn btn-warning btn-lg">Login</button>
+    </form>
+
+    <hr>
+
+    <p>Need an account? <a href="/signup">Signup</a></p>
+    <p>Or go <a href="/">home</a>.</p>
+
 </div>
+
+</div>
+</body>
+</html>

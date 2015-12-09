@@ -51,6 +51,35 @@ p {
 
 
 
+.overflowable {
+  height: 400px;
+}
+
+.well.message-spot{
+  margin-bottom: 50px;
+  height: 400px;
+  overflow: auto;
+}
+
+.bar-submit-message{
+  border-top: 1px solid #33b5e5;
+}
+
+.form-send-message {
+  margin-top: 20px
+}
+
+.overflowable p {
+  margin: 0;
+}
+
+
+p.active{
+  background: #FFF;
+  color: #000;
+}
+
+
 header {
     /*position: absolute;*/
     width: 80%;

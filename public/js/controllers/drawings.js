@@ -1,8 +1,8 @@
-var drawings = angular.module('drawings', []);
+var drawings = angular.module('drawings', ['welcome']);
 
 // todo: tighten this up 
-drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', 'Drawings', 
-    function($scope, $route, $routeParams, Drawings){
+drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', 'Drawings','socket',
+    function($scope, $route, $routeParams, Drawings, socket){
 
     // set the stage
     $scope.currentColor = 'red';
@@ -11,6 +11,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
 
     // always init values
     $scope.drawingMode = 'free';
+    $scope.messages = {};
 
     // on each load 
     $scope.init = function(){
@@ -68,11 +69,18 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
         $scope.canvas.updateCurrentStrokeWidth($scope.strokeWidth);
     };
 
+  $scope.submitMessage = function(message){
+        $scope.messages.push({name: 'message'});
+	  $scope.socket.emit('newMessage', message);
+	 // //$scope.$apply();
+      };
+
 
     // load our whiteboard
     $scope.initCanvas = function(drawing){
-
+        console.log('socket'); // debugger
         $scope.drawing = drawing;
+        $scope.messages = $("#messages");
 
         // TODO: revise to loadfromjson
         // context vars for extended objects
@@ -84,7 +92,8 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
             'points': $scope.points,
             'strokeWidth': $scope.strokeWidth,
             'drawingMode': $scope.drawingMode,
-            'socket': $scope.socket,
+            'socket': socket,
+            'chat' : $scope.messages, 
             'selection': false
         };
         // where should we put points 
@@ -117,5 +126,8 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
         $scope.canvas.dispose();
         console.log("FYI - Destroyed scope for DrawingController");
     });
+ //    $scope.socket.on('newMessage', function(message){ never fired? 
+	//     console.log('listeningevent fired drawings.js');
+	// });
 
 }]);

@@ -1,15 +1,15 @@
 'use strict';
-
+// was it the seperate controller instances/ probably not can do both though to make smaller? 
 var mongoose = require('mongoose');
 var Drawing = mongoose.model('Drawing');
 var DrawingObject = mongoose.model('DrawingObject');
 
 var sockets;
-
+// var drawingController = require('../controllers/drawingController');
 /*
  * initializes controller, must be called explicitly
  */
-exports.init = function(io){
+exports.init = function(io){ // this right here.............
     sockets = io.sockets;
     io.sockets.on('connection', listener);
 };
@@ -88,6 +88,15 @@ function listener(socket_io){ // these fire, a lot....
         console.log('drawingController fired text-changing');
         sockets.emit('text-changing', message);
     });
+
+    // when the client emits 'send:message', we hear it, then broadcast the message to others 
+     socket_io.on('send:message', function (data) { // and dis is just zee one? 
+    // we tell the client to execute 'new message'
+     console.log('new message :' + data);
+        sockets.emit('send:message', data); // i tink dis is all of dem? 
+
+  });
+
     socket_io.on('sendToBack', function(message){
         console.log('drawingController fired sendToBack');
         sockets.emit('sendToBack', message);
