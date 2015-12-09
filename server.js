@@ -16,6 +16,7 @@ var io = require('socket.io').listen(server, {log:false});
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session      = require('express-session');
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -45,6 +46,13 @@ var mongoURL = process.env.MONGOHQ_URL || "mongodb://localhost";
 mongoose.connect(mongoURL + "/boost_1");
 
 
+// required for passport
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+
 /*
 * controller config, db models 
 */
@@ -52,13 +60,17 @@ require('./app/models/drawingModel');
 require('./app/models/userModel');
 
 require('./app/controllers/drawingController').init(io);
-require('./app/controllers/userController');//(passport);
+// require('./app/controllers/userController');//(passport);
 // require('./app/controllers/chatController').init(io);
+
+
+require('./app/controllers/userController')(passport);
 
 /*
  * routes
  */
 require('./app/routes/drawingRoutes')(app);
+require('./app/routes/userRoutes')(app, passport);
 // require('./app/routes/userRoutes')(app, passport);
 
 app.use(express.static(__dirname + '/public'));

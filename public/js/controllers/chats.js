@@ -1,6 +1,10 @@
 var chats = angular.module('chats', ['welcome']);
 
 // todo: tighten this up 
+/*
+*
+* intentionally not writing to DB as of right now  
+*/
 chats.controller('ChatsController', ['$scope', "socket",
     function($scope, socket){
 

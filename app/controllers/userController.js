@@ -1,81 +1,107 @@
-'use strict';
+// / config/passport.js
 
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
+// middleware for passport Auth 
+// load all the things we need
+var LocalStrategy = require('passport-local').Strategy;
 
-var sockets;
+// load up the user model
+var User = require('../models/userModel');
 
-/**
- * init our controller, must be called explicitly
- */
-exports.init = function(io){
-    sockets = io.sockets;
-    io.sockets.on('connection', listener);
+// expose this function to our app using module.exports
+module.exports = function(passport) {
+
+    // required for persistent login sessions
+    // passport needs ability to serialize and unserialize users out of session
+
+    // used to serialize the user for the session
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
+
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        User.findById(id, function(err, user) {
+            done(err, user);
+        });
+    });
+
+    // named strategy
+    passport.use('local-signup', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, email, password, done) {
+
+        // asynchronous
+        // User.findOne wont fire unless data is sent back
+        process.nextTick(function() {
+
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        User.findOne({ 'local.email' :  email }, function(err, user) {
+            // if there are any errors, return the error
+            if (err)
+                return done(err);
+
+            // check to see if theres already a user with that email
+            if (user) {
+                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+            } else {
+
+                // if there is no user with that email
+                // create the user
+                var newUser            = new User();
+
+                // set the user's local credentials
+                newUser.local.email    = email;
+                newUser.local.password = newUser.generateHash(password);
+
+                // save the user
+                newUser.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, newUser);
+                });
+            }
+
+        });    
+
+        });
+
+    }));
+    
+    // Local login strategy 
+
+    passport.use('local-login', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, email, password, done) { // callback with email and password from our form
+
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        User.findOne({ 'local.email' :  email }, function(err, user) {
+            // if there are any errors, return the error before anything else
+            if (err)
+                return done(err);
+
+            // if no user is found, return the message
+            if (!user)
+                return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+
+            // if the user is found but the password is wrong
+            if (!user.validPassword(password))
+                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+
+            // all is well, return successful user
+            return done(null, user);
+        });
+
+    }));
+
 };
 
-
-/*
-* socket listener
-*/
-function listener(socket_io){
-
-    // Chatroom
-
-    var numUsers = 0;
-    var addedUser = false;
-
-    // when the client emits 'new message', this listens and executes
-    socket.on('new message', function (data) {
-        // we tell the client to execute 'new message'
-        socket.broadcast.emit('new message', {
-            username: socket.username,
-            message: data
-        });
-    });
-
-    // when the client emits 'add user', this listens and executes
-    socket.on('add user', function (username) {
-        if (addedUser) return;
-
-        // we store the username in the socket session for this client
-        socket.username = username;
-        ++numUsers;
-        addedUser = true;
-        socket.emit('login', {
-            numUsers: numUsers
-        });
-
-        // echo globally (all clients) that a person has connected
-        socket.broadcast.emit('user joined', {
-        username: socket.username,
-        numUsers: numUsers
-        });
-    });
-
-    // when the client emits 'typing', we broadcast it to others
-    socket.on('typing', function () {
-        socket.broadcast.emit('typing', {
-            username: socket.username
-        });
-    });
-
-    // when the client emits 'stop typing', we broadcast it to others
-    socket.on('stop typing', function () {
-        socket.broadcast.emit('stop typing', {
-            username: socket.username
-        });
-    });
-
-    // when the user disconnects.. perform this
-    socket.on('disconnect', function () {
-        if (addedUser) {
-            --numUsers;
-
-            // echo globally that this client has left
-            socket.broadcast.emit('user left', {
-                username: socket.username,
-                numUsers: numUsers
-            });
-        }
-    });
-}
