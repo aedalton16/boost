@@ -88,10 +88,12 @@ function listener(socket_io){ // these fire, a lot....
         console.log('drawingController fired text-changing');
         sockets.emit('text-changing', message);
     });
-    socket_io.on('newMessage', function(message){
-	    console.log('drawingController fired newMessage');
-	    sockets.emit('newMessage', message);
-	});
+     socket_io.on('send:message', function (data) { // and dis is just zee one? 
+    // we tell the client to execute 'new message'
+     console.log('new message :' + data);
+        sockets.emit('send:message', data); // i tink dis is all of dem? 
+
+  });
 
     socket_io.on('sendToBack', function(message){
         console.log('drawingController fired sendToBack');

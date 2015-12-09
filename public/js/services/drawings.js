@@ -7,7 +7,7 @@ angular.module('drawings').factory('Drawings', ['$resource', function($resource)
     }, {
         update: {
             method: 'PUT'
-        }
+        }	
     });
 
 }]);

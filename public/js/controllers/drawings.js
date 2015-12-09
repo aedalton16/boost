@@ -1,8 +1,8 @@
-var drawings = angular.module('drawings', []);
+var drawings = angular.module('drawings', ['welcome']);
 
 // todo: tighten this up 
-drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', 'Drawings', 
-    function($scope, $route, $routeParams, Drawings){
+drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', 'Drawings','socket',
+    function($scope, $route, $routeParams, Drawings, socket){
 
     // set the stage
     $scope.currentColor = 'red';
@@ -78,7 +78,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
 
     // load our whiteboard
     $scope.initCanvas = function(drawing){
-
+        console.log('socket'); // debugger
         $scope.drawing = drawing;
         $scope.messages = $("#messages");
 
@@ -92,7 +92,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
             'points': $scope.points,
             'strokeWidth': $scope.strokeWidth,
             'drawingMode': $scope.drawingMode,
-            'socket': $scope.socket,
+            'socket': socket,
             'chat' : $scope.messages, 
             'selection': false
         };

@@ -11,7 +11,7 @@ var CanvasWrapper = function(id, context){
     this.backgroundColor = this.canvas.backgroundColor || 'white';
 
     // how to handle listeners for multiple pages??? removing these potentially dangerous 
-    this.socket.removeAllListeners();
+    // this.socket.removeAllListeners();
 
     // drawing toolkit 
     this.tools = {

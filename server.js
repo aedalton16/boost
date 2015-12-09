@@ -53,7 +53,7 @@ require('./app/models/userModel');
 
 require('./app/controllers/drawingController').init(io);
 require('./app/controllers/userController');//(passport);
-require('./app/controllers/chatController').init(io);
+// require('./app/controllers/chatController').init(io);
 
 /*
  * routes

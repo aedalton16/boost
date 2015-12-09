@@ -1,9 +1,6 @@
-'use strict';
-
-
-angular.module('chat.directives', []).
-  directive('chatVersion', ['version', function(version) {
-    return function(scope, elm, attrs) {
-      elm.text(version);
+angular.module('drawings')
+  .directive('footer', function() {
+    return {
+      templateUrl: 'views/drawings/chat.tpl.html'
     };
-  }]);
+  });

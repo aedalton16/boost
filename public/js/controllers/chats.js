@@ -1,26 +1,28 @@
-var chats = angular.module('chats', []);
+var chats = angular.module('chats', ['welcome']);
 
 // todo: tighten this up 
 chats.controller('ChatsController', ['$scope', "socket",
     function($scope, socket){
 
-        $scope.socket.on('init', function(data){
+        socket.on('init', function(data){
            console.log('init');
         });
-        $scope.socket.on('send:message', function(message){
-            console.log('heard send');
+        socket.on('send:message', function(message){
+
             $scope.messages.push(message);
+            
         });
 
         $scope.messages = [];
 
         $scope.sendMessage = function(){
             console.log('clicked send');
-            socket.emit('send:message', {message: $scope.message
+            socket.emit('send:message', {text: $scope.message
             });
             $scope.messages.push({
-                message: $scope.message
+                text: $scope.message
             });
+	    console.log($scope.messages);
 
             // clear message box
             $scope.message = '';

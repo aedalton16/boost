@@ -1,3 +1,15 @@
+  <div ng-controller="ChatsController" ng-init="init()">
+    <ul class="list-group" ng-repeat="m in messages">
+        <li class="list-group-item">{{m}}</li>
+    </ul>
+
+  <form> 
+    <input type="text" class="form-control" ng-model="message" placeholder="Message Here">
+    <input type="button" class="btn btn-success" ng-click="sendMessage()" value="send" style="float:right"/>
+</form> 
+
+</div> 
+
 <div ng-controller="DrawingsController" ng-init="init()">
 
     <h3>Drawing: {{drawing.name}}</h3>
@@ -86,18 +98,7 @@
     <canvas id="c"></canvas>
   
     <button type="button" class="btn btn-primary" id="blackBtn" ng-click="submitMessage('helloWorld')"> <i class="fa fa-star"></i></button>
+    
 
-</div>   
-<div ng-controller="ChatsController" ng-init="init()">
-    <ul class="list-group" ng-repeat="m in messages">
-        <li class="list-group-item">{{m}}</li>
-    </ul>
-
-  <form> 
-    <input type="text" class="form-control" ng-model="message" placeholder="Message Here">
-    <input type="button" class="btn btn-success" ng-click="sendMessage()" value="send" style="float:right"/>
-</form> 
-
-</div> 
-<!-- ppl are cranky at the ng-controller and want to use dir?? -->
- 
+    <!-- <div chat> </div>  -->
+</div>
