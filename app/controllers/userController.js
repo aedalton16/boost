@@ -7,6 +7,8 @@ var LocalStrategy = require('passport-local').Strategy;
 // load up the user model
 var User = require('../models/userModel');
 
+// misplaced middleware? perhaps use this separately and have a user ctrlr mroe like drawings? 
+
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 

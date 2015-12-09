@@ -43,11 +43,11 @@ mongoose.connection.on('error', function (err) {
 
 // TODO: parse into db.js file 
 var mongoURL = process.env.MONGOHQ_URL || "mongodb://localhost";
-mongoose.connect(mongoURL + "/boost_1");
+mongoose.connect(mongoURL + "/boost_1"); // somehow a little tick mark got in here which is terrifying.......
 
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ secret: 'dartmongoose' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -74,6 +74,7 @@ require('./app/routes/userRoutes')(app, passport);
 // require('./app/routes/userRoutes')(app, passport);
 
 app.use(express.static(__dirname + '/public'));
+app.set('views', __dirname + '/public/views');
 
 
 server.listen(port);

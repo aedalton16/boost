@@ -10,9 +10,6 @@ app.config(['$routeProvider',
             when('/draw', {
                 templateUrl: 'views/welcome/welcome.tpl.html'
             }).
-            when('/user', {
-                templateUrl: 'views/user/login.tpl.html'
-            }).
             when('/drawings/:drawingId', {
                 templateUrl: 'views/drawings/drawing.tpl.html'
             }).
@@ -27,7 +24,7 @@ app.config(['$routeProvider',
 // is this nec 
 app.controller('MainController', ['$scope', '$rootScope', '$log', '$location', function($scope, $rootScope, $log, $location){
 
-    $scope.socket = io.connect();
+    $scope.socket = io.connect(); // HI HELLO HERE DUPCON
 
     
     

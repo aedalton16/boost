@@ -28,20 +28,20 @@ welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', "soc
     };
     // drawing added 
     socket.on("add-drawing", function(drawing){
-        $scope.$apply(function(){
+        // $scope.$apply(function(){
             $scope.drawings.push(drawing);
-        });
+        // });
     });
 
     // drawing deleted 
     socket.on("remove-drawing", function(drawing_id){
-        $scope.$apply(function(){
+        // $scope.$apply(function(){
             $scope.drawings.forEach(function(obj, index){
                 if(obj._id === drawing_id){
                     $scope.drawings.splice(index, 1);
                 }
             });
-        });
+        // });
     });
 
     /*

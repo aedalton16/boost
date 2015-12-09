@@ -2,6 +2,7 @@
 
 // drawings routes use drawings controller
 var userController = require('../controllers/userController');
+var User = require('../models/userModel');
 
 module.exports = function(app, passport) {
 
@@ -9,21 +10,38 @@ module.exports = function(app, passport) {
 
     // app.get('/users', userController.all);
 
-    // app.get('/user/:userId', userController.findById);
-
+    app.get('/user/:userId', function(req, res){
+        User.findOne({'_id': req.params.userId}, function(err, user){
+            if(err){
+                //res.render('error', {status:500});
+                console.log('error', {status:500});
+            } else {
+                res.jsonp(user);
+            }
+        });
+    });
+    app.get('/users', function(req, res){
+           User.find().exec(function(err, users){
+        if(err){
+            console.log("ERRORORERWER 500");
+        } else {
+            res.jsonp(users);
+        }
+    });
+       });
     // app.delete('/drawings/:userId', drawingController.deleteById);
 
     // show the login form
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('/user/login.tpl.html', { message: 'signup'}); 
+        res.render('user/login.tpl.html', { message: 'signup'}); 
     });
 
     // make sure flash is good 
    app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/login', // redirect back to the signup page if there is an error
+        successRedirect : 'http://localhost:3000/#draw', // redirect to the secure profile section
+        failureRedirect : 'http://localhost:3000/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
 
@@ -31,18 +49,18 @@ module.exports = function(app, passport) {
     app.get('/signup', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('signup', { message: 'login' });
+        res.render('user/signup.tpl.html', { message: 'login' });
     });
 
        app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        successRedirect : 'http://localhost:3000/#draw', // redirect to the secure profile section
+        failureRedirect : 'http://localhost:3000/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
 
     // protected, logged in to visit
-    app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
+    app.get('/draw', isLoggedIn, function(req, res) {
+        res.render('drawings/drawing.tpl.html', {
             user : req.user // get the user out of session and pass to template
         });
     });
