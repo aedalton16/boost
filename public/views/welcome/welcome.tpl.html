@@ -3,14 +3,16 @@
 	<h1 class="page-header"> <h1> BOOST!Tutors</h1> 
 
     <div style="padding-bottom: 30px;">
-        <div ng-show="currentUser.id"> 
+        <div ng-show="currentUser_id">     </div> 
         <div id="info">Click an existing whiteboard session or create a new one. Thanks to socket.io, these files can be shared and interactively viewed --open two browsers with the same drawing-id to see!</div>
-        
-    </div>
+    
+        </div>
     </div>
     <div class="container">
         <!-- hide !user -->
         <div class="row" ng-hide="!drawings">
+<!-- 
+<h2 ng-show="currentUser">Hello {{currentUser.email}}</h2> -->            
             <div class="col-md-4">
                 <h3> Existing BOOST!Boards </h3> 
                 <ul class="list-group" ng-repeat="d in drawings">

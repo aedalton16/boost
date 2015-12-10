@@ -1,4 +1,5 @@
-var app = angular.module('app', ['ngRoute', 'ngResource', 'welcome','about', 'drawings', 'chats']); // HERE INSTANTIATE
+var app = angular.module('app', ['ngRoute', 'ngResource', 'ngCookies', 'ngSanitize','http-auth-interceptor',
+'ui.bootstrap', 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
 
 // setup our routes
 app.config(['$routeProvider',
@@ -10,8 +11,15 @@ app.config(['$routeProvider',
             when('/draw', {
                 templateUrl: 'views/welcome/welcome.tpl.html'
             }).
+            when('/profile', {
+                templateUrl: 'views/user/profile.tpl.html'
+            }).
             when('/drawings/:drawingId', {
                 templateUrl: 'views/drawings/drawing.tpl.html'
+            }).
+            when('/login', {
+                templateUrl: 'views/user/login.tpl.html',
+                controller: 'LoginCtrl'
             }).
             when('/unsupported', {
                 templateUrl: 'unsupported.html'
@@ -21,16 +29,18 @@ app.config(['$routeProvider',
             });
     }]);
 
-app.run(function ($rootScope, $location, Auth) {
 
-    //watching the value of the currentUser variable.
-    $rootScope.$watch('currentUser', function(currentUser) {
-      // if no currentUser and on a page that requires authorization then try to update it
-      // will trigger 401s if user does not have a valid session
-      if (!currentUser) {
-        Auth.currentUser();
-      }
-    });
+// app.run(function ($rootScope, $location, Auth) {
+
+//     //watching the value of the currentUser variable.
+//     $rootScope.$watch('currentUser', function(currentUser) {
+//       // if no currentUser and on a page that requires authorization then try to update it
+//       // will trigger 401s if user does not have a valid session
+//       if (!currentUser) {
+//         Auth.currentUser();
+//       }
+//     })
+// });
 
 // is this nec 
 app.controller('MainController', ['$scope', '$rootScope', '$log', '$location', function($scope, $rootScope, $log, $location){

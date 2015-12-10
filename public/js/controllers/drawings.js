@@ -1,17 +1,19 @@
-var drawings = angular.module('drawings', ['welcome']);
+var drawings = angular.module('drawings', ['welcome', 'users']);
 
-// todo: tighten this up 
-drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', 'Drawings','socket',
-    function($scope, $route, $routeParams, Drawings, socket){
+// todo: tighten this up ...break into two 
+
+drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', 'Drawings','socket', 'sharedProperties',
+    function($scope, $route, $routeParams, Drawings, socket, sharedProperties){
 
     // set the stage
     $scope.currentColor = 'red';
     $scope.strokeWidth = 2;
     $scope.points = 6;  // polygon value TODO: add drop down input menu but retain square & triangle 
-
+    $scope.stringValue = sharedProperties.getString();
     // always init values
     $scope.drawingMode = 'free';
-    $scope.messages = {};
+
+    // $scope.messages = {};
 
     // on each load 
     $scope.init = function(){
@@ -81,6 +83,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
         console.log('socket'); // debugger
         $scope.drawing = drawing;
         $scope.messages = $("#messages");
+        
 
         // TODO: revise to loadfromjson
         // context vars for extended objects
@@ -93,6 +96,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
             'strokeWidth': $scope.strokeWidth,
             'drawingMode': $scope.drawingMode,
             'socket': socket,
+            'artist' : $scope.stringValue,
             'chat' : $scope.messages, 
             'selection': false
         };

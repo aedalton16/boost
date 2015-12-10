@@ -1,4 +1,4 @@
-var chats = angular.module('chats', ['welcome']);
+var chats = angular.module('chats', ['welcome', 'users']);
 
 // todo: tighten this up 
 /*
