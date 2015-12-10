@@ -110,13 +110,9 @@ var CanvasWrapper = function(id, context){
         self.socket.emit('changing**', e.target);
     });
 
-     this.canvas.on('selection:cleared', function(e){
-        console.log("cleared");
-        // self.socket.emit('cleared', e.target); // TODO: come back here 
-        self.socket.emit('saveDrawing', self.canvas);
-        //self.checkAcitvity()
-    });
-
+    //THIS BASTARD was the mongo issue
+    //this.canvas.on('selection:cleared', function(e){
+   
     this.canvas.on('object:rotating', function(e){
         console.log("rotating");
         self.socket.emit('changing', e.target);

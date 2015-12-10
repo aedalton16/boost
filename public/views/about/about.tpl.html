@@ -1,21 +1,27 @@
 <div ng-controller="AboutController">
+<div id="boost-page">
+
+ <div class="stars"></div>
 <img class="displayed" src="img/banner.png"> 
+
+
 	<div class="container">
 		
 			<!-- <h1>About BOOST! Tutors</h1> -->
 			<br>
 			<br>
-			<h2 ng-show="!currentUser">Welcome! <a href="#/login"> Please Log In</a></h2>
+			<h2 ng-show="!currentUser">Welcome! <a class="boost-page" href="#/login"> Please Log In</a></h2>
 			<div style="text-align:center"> <i class="fa fa-rocket fa-3x"> </i> <i class="fa fa-rocket fa-5x"> </i> <i class="fa fa-rocket fa-3x">  </i> </div> 
-			<h1 ng-show="currentUser">Hello {{stringValue}} !</h1>
+			<h1 class="boost-page" ng-show="currentUser">Hello {{stringValue}} !</h1>
   			<div id="info"> In a nutshell, we are a corps of Dartmouth undergrads who provide virtual tutoring to classrooms that need it.
 
 			Using virtual whiteboard, videochat and tablet technology, we digitally recreate the experience of tutoring someone side-by-side regardless of physical location.
 
 			Currently, we target under-resourced school systems, but in the process of our work we hope to show that there is no reason why anyone in the world can’t learn from anyone else in real time.
 
-			If any of this resonates with you, <a href="http://www.boosttutors.com/apply"> please sign up to be a tutor! </a> We're only asking for an hour or two a week. Or, reach out to anyone on the <a href="http://www.boosttutors.com/team" > team page </a>. We'd love to hear from you. 
+			If any of this resonates with you, <a class="boost-page" href="http://www.boosttutors.com/apply"> please sign up to be a tutor! </a> We're only asking for an hour or two a week. Or, reach out to anyone on the <a class="boost-page" href="http://www.boosttutors.com/team" > team page </a>. We'd love to hear from you. 
 			</div>
 	</div> 
     
+</div>
 </div>

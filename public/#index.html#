@@ -3,7 +3,7 @@
 
 <head>
     <title>BOOST!Tutors</title>
-v    <meta content="IE=EDGE" http-equiv="X-UA-Compatible">
+    <meta content="IE=EDGE" http-equiv="X-UA-Compatible">
 
     <script src="libs/angular/angular.js"></script>
     <script src="libs/angular-resource/angular-resource.js"></script>

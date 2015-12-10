@@ -130,15 +130,9 @@ var CanvasWrapper = function(id, context){
         console.log("removed");
     });
 
-<<<<<<< HEAD
-    // this.canvas.on("selection:cleared", function(e){
-    //     console.log("selection cleared ");
-    // });
-=======
     this.canvas.on("selection:cleared", function(e){
         console.log("selections cleared ");
     });
->>>>>>> whiteboard
 
     /**
      * listens for changing events, these are scaling, moving, color change, etc
