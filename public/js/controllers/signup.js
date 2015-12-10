@@ -19,6 +19,6 @@ angular.module('users').controller('SignupCtrl', function ($scope, Auth, sharedP
 			}
 		    }
 		    );
-			sharedProperties.setCurrentUser($scope.user.email);
+			sharedProperties.setCurrentUser($scope.user.username);
 	    };
 	});

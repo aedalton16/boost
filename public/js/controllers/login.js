@@ -6,7 +6,7 @@ angular.module('users').controller('LoginCtrl', function ($scope, Auth, sharedPr
 
 	    $scope.login = function(form) {
 		Auth.login('password', {
-			'email': $scope.user.email,
+			'username': $scope.user.username,
 			'password': $scope.user.password
 		    },
 		    function(err) {
@@ -22,8 +22,8 @@ angular.module('users').controller('LoginCtrl', function ($scope, Auth, sharedPr
 			    $scope.error.other = err.message;
 			}
 		    });
-		console.log($scope.user.email);
-		sharedProperties.setCurrentUser($scope.user.email); //$scope.setString($scope.user.email); //new 
+		console.log($scope.user.username);
+		sharedProperties.setCurrentUser($scope.user.username); //$scope.setString($scope.user.email); //new 
 	    };
 
 	 
