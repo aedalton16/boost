@@ -11,7 +11,7 @@ angular.module('users')
         var cb = callback || angular.noop;
         Session.save({
           provider: provider,
-          email: user.email,
+          email: user.username,
           password: user.password,
           rememberMe: user.rememberMe
         }, function(user) {
