@@ -5,7 +5,7 @@ var server = require('http').createServer(app)
 var passport = require('passport');
 var path = require('path');
 var flash    = require('connect-flash');
-var port = process.env.PORT || 3000;
+var port = process.env.PORT; //|| 3000;
 /*
  * web socket config
  */
