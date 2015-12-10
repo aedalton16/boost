@@ -3,7 +3,7 @@
         <li class="list-group-item">{{m}}</li>
     </ul>
 
-  <form> 
+  <form ng-submit="sendMessage()"> 
     <input type="text" class="form-control" ng-model="message" placeholder="Message Here">
     <input type="button" class="btn btn-success" ng-click="sendMessage()" value="send" style="float:right"/>
 </form> 

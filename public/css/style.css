@@ -149,6 +149,19 @@ ul {
   color: gray;
 }
 
+#messages { 
+  list-style-type: none; 
+  left: 20px!important;
+  right: auto!important;
+
+}
+#messages li { 
+  padding: 5px 10px; 
+}
+#messages li:nth-child(odd) { 
+  background: #eee; 
+  color: #ff0000; 
+}
 .username {
   float: left;
   font-weight: 700;

@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app)
 var passport = require('passport');
+var path = require('path');
 var flash    = require('connect-flash');
 var port = process.env.PORT || 3000;
 /*
@@ -64,7 +65,7 @@ require('./app/controllers/drawingController').init(io);
 // require('./app/controllers/chatController').init(io);
 
 
-require('./app/config/passportConfig')(passport); // ** 
+require('./app/auth/config')(passport); // ** 
 
 /*
  * routes

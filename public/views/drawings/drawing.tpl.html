@@ -1,23 +1,10 @@
-  <div ng-controller="ChatsController" ng-init="init()">
-
-
-<div class="chat-area">
-    <div class="chat">
-      <div class="chat-head"> Chat! </div>
-        <ul ng-repeat="m in messages">
-        <li>{{m}}</li>
-        </ul>
-    <form>
-    <input type="text" class="form-control" ng-model="message" placeholder="Message Here" autocomplete="off" />
-    <input type="button" class="btn btn-success" ng-click="sendMessage()" value="send" style="float:right"/>
-    </form>
-    </div>
-</div>
-</div> 
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
 <div ng-controller="DrawingsController" ng-init="init()">
 
-    <h3>Drawing: {{drawing.name}} </h3>
+    <h3>Session: {{drawing.name}} </h3>
+    <h3 ng-show="currentUser">Booster: {{stringValue}}</h2>
 <!-- TODO: Min like theres no tomorrow. These images, should we jsut use bootstrap? takes a long time  -->
 
 <!-- TODO: insert userID area if logged in -->
@@ -99,11 +86,33 @@
     </div>
 </div> 
         <!-- TODO: put chat in a footer page -->
-    
+
     <canvas id="c"></canvas>
   
     <button type="button" class="btn btn-primary" id="blackBtn" ng-click="submitMessage('helloWorld')"> <i class="fa fa-star"></i></button>
     
 
     <!-- <div chat> </div>  -->
+</div>
+</div>
+
+
+<div ng-controller="ChatsController" ng-init="init()">
+
+<div class="col-md-3">
+<div class="chat-area">
+    <div class="chat">
+      <div class="chat-head"> Chat! </div>
+        <ul ng-repeat="m in messages" id="messages">
+        <li>{{m}}</li>
+        </ul>
+    <form>
+    <input type="text" class="form-control" ng-model="message" placeholder="Message Here" autocomplete="off" />
+    <input type="submit" class="btn btn-success" ng-click="sendMessage()" value="send" style="float:right"/>
+    </form>
+    </div>
+</div>
+</div> 
+</div>
+</div>
 </div>
