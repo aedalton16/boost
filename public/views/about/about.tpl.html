@@ -5,6 +5,8 @@
 			<!-- <h1>About BOOST! Tutors</h1> -->
 			<br>
 			<br>
+			<h2 ng-show="!currentUser">Welcome. Please log in.</h2>
+			<h2 ng-show="currentUser">Hello {{stringValue}}</h2>
   			<div id="info"> In a nutshell, we are a corps of Dartmouth undergrads who provide virtual tutoring to classrooms that need it.
 
 			Using virtual whiteboard, videochat and tablet technology, we digitally recreate the experience of tutoring someone side-by-side regardless of physical location.

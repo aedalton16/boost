@@ -421,22 +421,6 @@ aside {
 	padding-left: 10px; 
 	padding-bottom: 5px; 
 }
-#messages { 
-	list-style-type: none; 
-	left: 20px!important;
-	right: auto!important;
-
-}
-#messages li { 
-	padding: 5px 10px; 
-}
-#messages li:nth-child(odd) { 
-	background: #eee; 
-	color: #ff0000; 
-}
-
-
-
 
 .bg-primary {
     background-color: #3F74E9;
