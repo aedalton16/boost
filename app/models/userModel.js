@@ -15,7 +15,8 @@ var userSchema = mongoose.Schema({
         type     : String, //encrypt 
         unique: true,
         required: true
-    }
+    },
+    provider: String
     // for now only local
     // facebook         : {
     //     id           : String,
