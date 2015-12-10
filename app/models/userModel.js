@@ -42,5 +42,13 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
+// userSchema.virtual('password').set(function(password){
+
+// })
+
+userSchema.virtual('user_info').get(function(){
+    return { '_id': this._id, 'username': this.email};
+});
+
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

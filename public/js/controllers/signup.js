@@ -1,10 +1,9 @@
 'use strict';
 
-angular.module('users').controller('SignupCtrl', function ($scope, Auth, $location) {
+angular.module('users').controller('SignupCtrl', function ($scope, Auth, sharedProperties, $location) {
 	    $scope.register = function(form) {
 		Auth.createUser({
-			email: $scope.user.email,
-			username: $scope.user.username,
+			email: $scope.user.email, 
 			password: $scope.user.password
 		    },
 		    function(err) {
@@ -20,5 +19,6 @@ angular.module('users').controller('SignupCtrl', function ($scope, Auth, $locati
 			}
 		    }
 		    );
+			sharedProperties.setCurrentUser($scope.user.email);
 	    };
 	});

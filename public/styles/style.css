@@ -23,6 +23,8 @@ CONTENTS
 1.0 Basic Setup
 --------------------------------------------------------------*/
 
+
+
 h1, h2, h3, h4, h5, h6 {
         text-align: center;
     }
@@ -152,7 +154,7 @@ header .header-content .header-content-inner p {
 
 
 form { 
-	background: #000; 
+	background: #ff0000; 
 	padding: 3px; 
 	bottom: 0; 
 	width: 100%;
@@ -535,4 +537,8 @@ img::selection {
 img::-moz-selection {
     color: #fff;
     background: 0 0;
+}
+
+.form-signin {
+    background-color: #f7f7f7;
 }
