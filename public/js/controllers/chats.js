@@ -5,23 +5,26 @@ var chats = angular.module('chats', ['welcome', 'users']);
 *
 * intentionally not writing to DB as of right now  
 */
-chats.controller('ChatsController', ['$scope', "socket",
-    function($scope, socket){
+chats.controller('ChatsController', ['$scope', "socket", 'sharedProperties',
+    function($scope, socket, sharedProperties){
 
         socket.on('init', function(data){
            console.log('init');
         });
         socket.on('send:message', function(message){
 
-            $scope.messages.push(message.text);
+            $scope.messages.push(message.username + ": " + message.text);
             
         });
 
         $scope.messages = [];
 
+        // username
+       $scope.stringValue = sharedProperties.getString();
+
         $scope.sendMessage = function(){
             console.log('clicked send');
-            socket.emit('send:message', {text: $scope.message
+            socket.emit('send:message', {username: $scope.stringValue, text: $scope.message
             });
             // $scope.messages.push({
             //     text: $scope.message

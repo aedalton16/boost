@@ -1,6 +1,6 @@
 angular.module('users')
 .service('sharedProperties', function() {
-    var stringValue = 'test string value';
+    var stringValue = 'Demo';
     var objectValue = {
         data: 'test object value'
     };
