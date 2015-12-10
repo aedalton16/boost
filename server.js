@@ -43,7 +43,7 @@ mongoose.connection.on('error', function (err) {
 });
 
 // TODO: parse into db.js file 
-var mongoURL = process.env.MONGOHQ_URL || "mongodb://localhost";
+var mongoURL = process.env.MONGOHQ_URL;// || "mongodb://localhost";
 mongoose.connect(mongoURL + "/boost_1"); // somehow a little tick mark got in here which is terrifying.......
 
 
