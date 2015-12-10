@@ -3,7 +3,7 @@
 angular.module('users').controller('SignupCtrl', function ($scope, Auth, sharedProperties, $location) {
 	    $scope.register = function(form) {
 		Auth.createUser({
-			email: $scope.user.email, 
+			username: $scope.user.username, 
 			password: $scope.user.password
 		    },
 		    function(err) {
