@@ -1,0 +1,39 @@
+{
+  "name": "boost_1",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js",
+    "test": "make test"
+  },
+  "author": "alexandra-dalton",
+  "license": "MIT",
+  "engines": {
+    "node": "0.12.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aedalton16/boost-node.git"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.14.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.0",
+    "ejs": "^2.3.4",
+    "express": "4.x",
+    "express-session": "^1.12.1",
+    "googleapis": "^2.1.6",
+    "jade": "^1.11.0",
+    "kerberos": "0.0.17",
+    "method-override": "^2.3.5",
+    "mocha": "^2.3.4",
+    "mongodb": "^2.0.48",
+    "mongoose": "^4.2.6",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.2",
+    "passport-google-oauth2": "^0.1.6",
+    "passport-local": "^1.0.0",
+    "should": "^7.1.1",
+    "socket.io": "*"
+  }
+}
