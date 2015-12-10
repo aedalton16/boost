@@ -21,6 +21,10 @@ app.config(['$routeProvider',
                 templateUrl: 'views/user/login.tpl.html',
                 controller: 'LoginCtrl'
             }).
+            when('/signup', {
+                templateUrl: 'views/user/signup.tpl.html',
+                controller: 'SignupCtrl'
+            }).
             when('/unsupported', {
                 templateUrl: 'unsupported.html'
             }).
