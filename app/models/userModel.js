@@ -54,7 +54,7 @@ userSchema.methods.validPassword = function(password) {
 // })
 
 userSchema.virtual('user_info').get(function(){
-    return { '_id': this._id, 'username': this.email};
+    return { '_id': this._id, 'username': this.username};
 });
 
 // create the model for users and expose it to our app

@@ -19,7 +19,7 @@ app.config(['$routeProvider',
             }).
             when('/login', {
                 templateUrl: 'views/user/login.tpl.html',
-                // controller: 'LoginCtrl'
+                controller: 'LoginCtrl'
             }).
             when('/signup', {
                 templateUrl: 'views/user/signup.tpl.html',
