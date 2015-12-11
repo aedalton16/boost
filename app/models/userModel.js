@@ -54,9 +54,12 @@ userSchema.methods.validPassword = function(password) {
 
 // })
 
-userSchema.virtual('user_info').get(function(){
-    return { '_id': this._id, 'username': this.username};
-});
+
+UserSchema
+  .virtual('user_info')
+  .get(function () {
+    return { '_id': this._id, 'username': this.username };
+  });
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

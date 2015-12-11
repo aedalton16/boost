@@ -1,35 +1,19 @@
-/*
-*
-* BOOST!Tutors css
-*
+/**
+ * @style.css
+ * BOOST!Tutors main stylesheet
+ *
+ * CONTENTS: 
+ * 1.0 Basic Setup
+ * 2.0 Headers and Navigation 
+ * 3.0 Toolbars 
+ * 4.0 Sections
+ * 5.0 Alignments
+ * 6.0 Media 
+ * 7.0 Chat
 */
 
-/*--------------------------------------------------------------
-CONTENTS
-----------------------------------------------------------------
-1.0 Basic Setup
-2.0 Navigation 
-3.0 Toolbars 
-4.0 Sections
-5.0 Alignments
-6.0 Media (TODO)
-    6.1 Captions
-    6.2 Galleries
-7.0 Chat
---------------------------------------------------------------*/
-
-
-
-/* Fix user-agent */
-
-* {
-  box-sizing: border-box;
-}
-
-a.boost-page{
-    color: #fff;
-    /*text-decoration: none;*/
-}
+/* 1.0 Basic Setup */
+*{ margin: 0; padding: 0;}
 
 html {
   font-weight: 300;
@@ -51,14 +35,21 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.full { height: 100%;}
+
+
+a.boost-page{
+    color: #fff;
 }
 
 ul {
   list-style: none;
   word-wrap: break-word;
 }
-
-/* Pages */
 
 .pages {
   height: 100%;
@@ -67,10 +58,6 @@ ul {
   width: 100%;
 }
 
-.navbar-inverse .navbar-nav>li>a {
-    font-size: 20px;
-    color: #9d9d9d;
-}
 
 .page {
   height: 100%;
@@ -78,81 +65,13 @@ ul {
   width: 100%;
 }
 
-
-/* Font */
-
-.messages {
-  font-size: 150%;
+#info {
+    color: #fff;
+    text-align: center;
+    font-size: 20px; 
 }
 
-.inputMessage {
-  font-size: 100%;
-}
-
-.log {
-  color: gray;
-  font-size: 70%;
-  margin: 5px;
-  text-align: center;
-}
-
-/* Messages */
-
-.chatArea {
-  height: 100%;
-  padding-bottom: 60px;
-}
-
-.messages {
-  height: 100%;
-  margin: 0;
-  overflow-y: scroll;
-  padding: 10px 20px 10px 20px;
-}
-
-.message.typing .messageBody {
-  color: gray;
-}
-
-#messages { 
-  list-style-type: none; 
-  left: 20px!important;
-  right: auto!important;
-
-}
-#messages li { 
-  padding: 5px 10px; 
-}
-#messages li:nth-child(odd) { 
-  background: #eee; 
-  color: #ff0000; 
-}
-.username {
-  float: left;
-  font-weight: 700;
-  overflow: hidden;
-  padding-right: 15px;
-  text-align: right;
-}
-
-/* Input */
-
-.inputMessage {
-  border: 10px solid #000;
-  bottom: 0;
-  height: 60px;
-  left: 0;
-  outline: none;
-  padding-left: 10px;
-  position: absolute;
-  right: 0;
-  width: 100%;
-}
-
-
-/*--------------------------------------------------------------
-1.0 Basic Setup
---------------------------------------------------------------*/
+/* 2.0 Navigation and Headers */
 
 h1, h2, h3, h4, h5, h6 {
         text-align: center;
@@ -173,22 +92,6 @@ body, html{
    color: #000000; 
    font: 13px "Comic Sans MS", cursive, sans-serif; 
 }
-
-
-
-hr {
-    max-width: 50px;
-    border-color: #3F74E9;
-    border-width: 3px;
-}
-
-p {
-    margin-bottom: 20px;
-    font-size: 26px;
-    line-height: 1.5;
-}
-
-
 
 header {
     /*position: absolute;*/
@@ -260,41 +163,71 @@ header .header-content .header-content-inner p {
     }
 }
 
+.navbar-inverse .navbar-nav>li>a {
+    font-size: 20px;
+    color: #9d9d9d;
+}
 
-/*body {
-    webkit-tap-highlight-color: #222;
-}*/
-/*--------------------------------------------------------------
-3.0 Toolbars
---------------------------------------------------------------*/
+
+/* 3.0 Toolbars */
 #draggable {
     width: 50px; 
     height: 50px; 
     padding: 0.5em; 
 }
 
-#info{
-    color: #fff;
-    text-align: center;
-    font-size: 20px; 
-}
-
 /*Angular Way??? */
-#redBtn{ border-color: #ff0000; border-width: 3px; background-color: #ff0000;}
-#whiteBtn{ border-color: #fff; border-width: 5px; background-color: #f2f2f2; color: #000;}
-#pinkBtn{ border-color: #ff3399; border-width: 3px; background-color: #ff3399;}
-#orangeBtn{ border-color: #ff9933; border-width: 3px; background-color: #ff9933;}
-#yellowBtn{ border-color: #ffff00; border-width: 3px; background-color: #ffff00;}
-#greenBtn{ border-color: #009900; border-width: 3px; background-color: #009900;}
-#cyanBtn{ border-color: #00ffff; border-width: 3px; background-color: #00ffff;}
-#blueBtn{ border-color: #0000ff; border-width: 3px; background-color: #0000ff;}
-#purpleBtn{ border-color: #9900cc; border-width: 3px; background-color: #9900cc;}
-#blackBtn{ border-color: #000000; border-width: 3px; background-color: #000000;}
-
-
-
-
-
+#redBtn { 
+  border-color: #ff0000; 
+  border-width: 3px; 
+  background-color: #ff0000;
+}
+#whiteBtn { 
+  border-color: #fff; 
+  border-width: 5px; 
+  background-color: #f2f2f2; 
+  color: #000;
+}
+#pinkBtn { 
+  border-color: #ff3399; 
+  border-width: 3px; 
+  background-color: #ff3399;
+}
+#orangeBtn { 
+  border-color: #ff9933; 
+  border-width: 3px; 
+  background-color: #ff9933;
+}
+#yellowBtn { 
+  border-color: #ffff00; 
+  border-width: 3px; 
+  background-color: #ffff00;
+}
+#greenBtn { 
+  border-color: #009900; 
+  border-width: 3px; 
+  background-color: #009900;
+}
+#cyanBtn {  
+  border-color: #00ffff; 
+  border-width: 3px; 
+  background-color: #00ffff;
+}
+#blueBtn { 
+  border-color: #0000ff; 
+  border-width: 3px; 
+  background-color: #0000ff;
+}
+#purpleBtn { 
+  border-color: #9900cc; 
+  border-width: 3px; 
+  background-color: #9900cc;
+}
+#blackBtn { 
+  border-color: #000000; 
+  border-width: 3px; 
+  background-color: #000000;
+}
 
 .colorbox{
     float: left;
@@ -442,16 +375,12 @@ fieldset[disabled] .btn-primary.active {
     background: #222;
 }
 
-
-
 .btn-group>.btn:last-child:not(:first-child), .btn-group>.dropdown-toggle:not(:first-child) {
     border-top-left-radius: 15;
     border-bottom-left-radius: 15;
 }
 
-/*--------------------------------------------------------------
-4.0 Sections
---------------------------------------------------------------*/
+/* 4.0: Sections*/
 
 section {
     padding: 100px 0;
@@ -464,7 +393,6 @@ aside {
 .no-padding {
     padding: 0;
 }
-
 
 .section-heading {
     margin-top: 0;
@@ -492,73 +420,26 @@ aside {
 
 }
 
-/*--------------------------------------------------------------
-7.0 Chat
---------------------------------------------------------------*/
-.chat-area{
-	 position:fixed;
-	 width : 100%; 
-  bottom:0px;
-  right:0px;
-}
-.chat{
-	margin:0px;
-  padding:0px;
-  width:250px;
-  float:right;
-}
-.chat-head{
-	width:100%;
-	background-color:#1a1a1a;
-	height:30px;
-	color:#ffffff;
-	padding-top: 5px; 
-	padding-left: 10px; 
-	padding-bottom: 5px; 
-}
-#messages { 
-	list-style-type: none; 
-	left: 20px!important;
-	right: auto!important;
-
-}
-#messages li { 
-	padding: 5px 10px; 
-}
-#messages li:nth-child(odd) { 
-	background: #eee; 
-	color: #ff0000; 
+#boost-page{ /*padding: 100px 0;*/
+  height: 1000px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#162951+18,162951+18,2c539e+57,388ac9+84,3bbad3+100 */
+  background: #162951; /* Old browsers */
+  background: -moz-linear-gradient(top,  #162951 18%, #162951 18%, #2c539e 57%, #388ac9 84%, #3bbad3 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#162951', endColorstr='#3bbad3',GradientType=0 ); /* IE6-9 */
 }
 
+#boost-page-light{
+  height: 1000px; /*//janky but need to have full page and its 5AM*/
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4e90dc+0,4e90dc+7,4e90dc+7,64a9e6+20,64a9e6+20,74b3e6+30,acd3f0+100 */
 
-
-
-.bg-primary {
-    background-color: #3F74E9;
-}
-
-.bg-dark {
-    color: #fff;
-    background-color: #222;
-}
-
-.text-faded {
-    color: rgba(255,255,255,.7);
-}
-
-.service-box {
-    margin: 50px auto 0;
-    max-width: 400px;
-}
-
-@media(min-width:992px) {
-    .service-box {
-        margin: 20px auto 0;
-    }
-}
-
-.service-box p {
-    margin-bottom: 0;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4e90dc+0,4e90dc+13,64a9e6+24,74b3e6+34,acd3f0+100 */
+  background: #4e90dc; /* Old browsers */
+  background: -moz-linear-gradient(top,  #4e90dc 0%, #4e90dc 13%, #64a9e6 24%, #74b3e6 34%, #acd3f0 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e90dc', endColorstr='#acd3f0',GradientType=0 ); /* IE6-9 */
 }
 
 
@@ -648,28 +529,140 @@ img::-moz-selection {
     background: 0 0;
 }
 
+/* 7.0 Chat */
 
+.chat-area{
+	 position:fixed;
+	 width : 100%; 
+  bottom:0px;
+  right:0px;
+}
+.chat{
+	margin:0px;
+  padding:0px;
+  width:250px;
+  float:right;
+}
+.chat-head{
+	width:100%;
+	background-color:#1a1a1a;
+	height:30px;
+	color:#ffffff;
+	padding-top: 5px; 
+	padding-left: 10px; 
+	padding-bottom: 5px; 
+}
 
+.inputMessage {
+  border: 10px solid #000;
+  bottom: 0;
+  height: 60px;
+  left: 0;
+  outline: none;
+  padding-left: 10px;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
 
-/*--------------------------------------------------------------
-8.0 Login
---------------------------------------------------------------*/
+.messages {
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 10px 20px 10px 20px;
+}
 
-.rocket-white{
+.message.typing .messageBody {
+  color: gray;
+}
+
+#messages { 
+  list-style-type: none; 
+  left: 20px!important;
+  right: auto!important;
+
+}
+
+#messages li { 
+  padding: 5px 10px; 
+}
+
+#messages li:nth-child(odd) { 
+  background: #eee; 
+  color: #ff0000; 
+}
+
+.username {
+  float: left;
+  font-weight: 700;
+  overflow: hidden;
+  padding-right: 15px;
+  text-align: right;
+}
+
+.messages {
+  font-size: 150%;
+}
+
+.inputMessage {
+  font-size: 100%;
+}
+
+.log {
+  color: gray;
+  font-size: 70%;
+  margin: 5px;
+  text-align: center;
+}
+
+.bg-primary {
+    background-color: #3F74E9;
+}
+
+.bg-dark {
+    color: #fff;
+    background-color: #222;
+}
+
+.text-faded {
+    color: rgba(255,255,255,.7);
+}
+
+.service-box {
+    margin: 50px auto 0;
+    max-width: 400px;
+}
+
+@media(min-width:992px) {
+    .service-box {
+        margin: 20px auto 0;
+    }
+}
+
+.service-box p {
+    margin-bottom: 0;
+}
+
+/*8.0: Login */
+
+.rocket-white { /*logo*/
   color: #fff;
 }
+
 form { 
   background: #f5f5f5; 
   padding: 3px; 
   bottom: 0; 
   width: 100%;
 }
+
 form input{
   border: 0; 
   padding: 10px; 
   width: 100%;
   margin-right: .5%; 
 }
+
 form button {
   width: 20%;
   background: #99ff66;
@@ -681,17 +674,13 @@ form button {
   -moz-border-radius: 5px;
 }
 
-/*body{
-    background-color:#f5f5f5;
-}*/
-.form-signin
-{
+.form-signin {
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
 }
-.form-signin .form-control
-{
+
+.form-signin .form-control {
     position: relative;
     font-size: 16px;
     height: auto;
@@ -700,40 +689,38 @@ form button {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.form-signin .form-control:focus
-{
+
+.form-signin .form-control:focus {
     z-index: 2;
 }
-.form-signin input[type="text"]
-{
+
+.form-signin input[type="text"] {
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
-.form-signin input[type="password"]
-{
+
+.form-signin input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-.account-wall
-{
+
+.account-wall {
     margin-top: 80px;
     padding: 40px 0px 20px 0px;
     background-color: #ffffff;
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
 }
-.login-title
-{
+
+.login-title {
     color: #fff;
     font-size: 50px;
     line-height: 150%;
     font-weight: 400;
-
-    /*display: block;*/
 }
-.profile-img
-{
+
+.profile-img {
     width: 96px;
     height: 96px;
     margin: 0 auto 10px;
@@ -742,8 +729,7 @@ form button {
     -webkit-border-radius: 50%;
     border-radius: 50%;
 }
-.select-img
-{
+.select-img {
   border-radius: 50%;
     display: block;
     height: 75px;
@@ -753,8 +739,8 @@ form button {
     -webkit-border-radius: 50%;
     border-radius: 50%;
 }
-.select-name
-{
+
+.select-name{
     display: block;
     margin: 30px 10px 10px;
 }
@@ -770,44 +756,8 @@ form button {
     border-radius: 50%;
 }
 
-/*Lets start with the cloud formation rather*/
+/* Citation:; http://thecodeplayer.com/walkthrough/pure-css3-animated-clouds-background !!*/
 
-/*The container will also serve as the SKY*/
-
-*{ margin: 0; padding: 0;}
-
-#boost-page{
-  /*padding: 100px 0;*/
-
-    height: 1000px;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#162951+18,162951+18,2c539e+57,388ac9+84,3bbad3+100 */
-/*background: #162951; /* Old browsers */
-background: -moz-linear-gradient(top,  #162951 18%, #162951 18%, #2c539e 57%, #388ac9 84%, #3bbad3 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#162951', endColorstr='#3bbad3',GradientType=0 ); /* IE6-9 */
-
- 
-}
-
-#boost-page-light{
-
-  height: 1000px; /*//janky but need to have full page and its 5AM*/
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4e90dc+0,4e90dc+7,4e90dc+7,64a9e6+20,64a9e6+20,74b3e6+30,acd3f0+100 */
-
-
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4e90dc+0,4e90dc+13,64a9e6+24,74b3e6+34,acd3f0+100 */
-background: #4e90dc; /* Old browsers */
-background: -moz-linear-gradient(top,  #4e90dc 0%, #4e90dc 13%, #64a9e6 24%, #74b3e6 34%, #acd3f0 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e90dc', endColorstr='#acd3f0',GradientType=0 ); /* IE6-9 */
-
-}
-
-
-/* BIG THANKS TO http://thecodeplayer.com/walkthrough/pure-css3-animated-clouds-background !!*/
-/*Time to finalise the cloud shape*/
 .cloud {
   width: 200px; height: 60px;
   background: #fff;
@@ -840,14 +790,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e90dc', end
   top: -55px; left: auto; right: 15px;
 }
 
-/*Time to animate*/
 .x1 {
   -webkit-animation: moveclouds 15s linear infinite;
   -moz-animation: moveclouds 15s linear infinite;
   -o-animation: moveclouds 15s linear infinite;
 }
 
-/*variable speed, opacity, and position of clouds for realistic effect*/
 .x2 {
   left: 200px;
   
@@ -915,10 +863,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e90dc', end
   100% {margin-left: -1000px;}
 }
 
-/*SPACE/NIGHT SKY*/
-
-
-/*TODO: make closer to nav--done:)*/
 .stars {
   position:absolute;
   top:5;
@@ -930,7 +874,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e90dc', end
   /*display:block;*/
 
 
-/*CITE SOURCE!*/
+/*Img Citation: */
 
   background: url("/img/stars.png") repeat top center;
   z-index:0;
