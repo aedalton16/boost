@@ -71,8 +71,7 @@ require('./app/auth/config')(passport); // **
  * routes
  */
 require('./app/routes/drawingRoutes')(app);
-require('./app/routes/userRoutes')(app, passport);
-// require('./app/routes/userRoutes')(app, passport);
+app.use('/auth', require('./app/routes/userRoutes'))
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/public/views');
