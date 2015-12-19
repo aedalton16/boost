@@ -1,37 +1,47 @@
-var app = angular.module('app', ['ngRoute', 'ngResource', 'ngCookies', 'ngSanitize','http-auth-interceptor',
-'ui.bootstrap', 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
+var app = angular.module('Boost', [
+  'ngRoute', 
+  'ngResource', 
+  'ngCookies', 
+  'ngSanitize',
+  'http-auth-interceptor', 
+  'ui.bootstrap', 
+  'welcome',
+  'about', 
+  'users', 
+  'drawings', 
+  'chats'
+]); 
 
 // setup our routes
-app.config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.
-            when('/welcome', {
-                templateUrl: 'views/about/about.tpl.html'
-            }).
-            when('/draw', {
-                templateUrl: 'views/welcome/welcome.tpl.html'
-            }).
-            when('/profile', {
-                templateUrl: 'views/user/profile.tpl.html'
-            }).
-            when('/drawings/:drawingId', {
-                templateUrl: 'views/drawings/drawing.tpl.html'
-            }).
-            when('/login', {
-                templateUrl: 'views/user/login.tpl.html',
-                controller: 'LoginCtrl'
-            }).
-            when('/signup', {
-                templateUrl: 'views/user/signup.tpl.html',
-                controller: 'SignupCtrl'
-            }).
-            when('/unsupported', {
-                templateUrl: 'unsupported.html'
-            }).
-            otherwise({
-                templateUrl: 'views/about/about.tpl.html'
-            });
-    }]);
+app.config(['$routeProvider', function($routeProvider) {
+  $routeProvider
+  .when('/welcome', {
+    templateUrl: 'views/about/about.tpl.html'
+  })
+  .when('/draw', {
+    templateUrl: 'views/welcome/welcome.tpl.html'
+  })
+  .when('/profile', {
+    templateUrl: 'views/user/profile.tpl.html'
+  })
+  .when('/drawings/:drawingId', {
+    templateUrl: 'views/drawings/drawing.tpl.html'
+  })
+  .when('/login', {
+    templateUrl: 'views/user/login.tpl.html',
+    controller: 'LoginCtrl'
+  })
+  .when('/signup', {
+    templateUrl: 'views/user/signup.tpl.html',
+    controller: 'SignupCtrl'
+  })
+  .when('/unsupported', {
+    templateUrl: 'unsupported.html'
+  })
+  .otherwise({
+    templateUrl: 'views/about/about.tpl.html'
+  });
+}]);
 
 
 // app.run(function ($rootScope, $location, Auth) {
@@ -47,30 +57,34 @@ app.config(['$routeProvider',
 // });
 
 // is this nec 
-app.controller('MainController', ['$scope', '$rootScope', '$log', '$location', function($scope, $rootScope, $log, $location){
+app.controller('MainController', [
+  '$scope', 
+  '$rootScope', 
+  '$log', 
+  '$location', 
+  function($scope, $rootScope, $log, $location){
 
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
 
-    
-    
     $rootScope.$on("$locationChangeStart", function(event, next, current){
-        if(!isCanvasSupported()){
-            $log.info("routing to unsupported");
-            $location.url('/unsupported');
-        }
+      if(!isCanvasSupported()){
+        $log.info("routing to unsupported");
+        $location.url('/unsupported');
+      }
     });
 
-}]);
+  }
+]);
 
 
 // TODO: use angular log 
 window.console = window.console || (function(){
-    var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){};
-    return c;
+  var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){};
+  return c;
 })();
 
 // TODO: add mdrnizer
 function isCanvasSupported(){
-    var elem = document.createElement('canvas');
-    return !!(elem.getContext && elem.getContext('2d'));
+  var elem = document.createElement('canvas');
+  return !!(elem.getContext && elem.getContext('2d'));
 }

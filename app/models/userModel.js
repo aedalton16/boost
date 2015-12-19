@@ -13,7 +13,7 @@ var userSchema = mongoose.Schema({
     },
     password:{
         type     : String, //encrypt 
-        unique: true,
+        unique: false,
         required: true
     },
     provider: String
@@ -55,7 +55,7 @@ userSchema.methods.validPassword = function(password) {
 // })
 
 
-UserSchema
+userSchema
   .virtual('user_info')
   .get(function () {
     return { '_id': this._id, 'username': this.username };

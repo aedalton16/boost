@@ -14,7 +14,7 @@ welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', 'soc
 
    // write to our db on user save
     $scope.create = function(){
-        var c = new fabric.LabeledCanvas();
+        var c = new LabeledCanvas();
         c.name = $scope.newDrawing.name;
         c.description = $scope.newDrawing.description;
         Drawings.save(c,

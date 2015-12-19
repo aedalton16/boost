@@ -17,6 +17,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
+    "browserify": "^12.0.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.0",
     "ejs": "^2.3.4",
@@ -34,6 +35,7 @@
     "passport-google-oauth2": "^0.1.6",
     "passport-local": "^1.0.0",
     "should": "^7.1.1",
-    "socket.io": "*"
+    "socket.io": "*",
+    "watchify": "^3.6.1"
   }
 }
