@@ -1,7 +1,9 @@
 var fabric = require('fabric').fabric;
 var tools = require('./tools');
 
-// Don't attach to fabric itself...bad practice
+// Don't attach to fabric itself...bad practice. The right thing to do here is probably
+// use fabric namespaces. I did end up breaking getKlass for some reason so namespace
+// is definitely the right answer.
 var customElements = {
   LabeledCanvas: require('./elements/LabeledCanvas'),
   LabeledCircle: require('./elements/LabeledCircle'),
