@@ -16,7 +16,7 @@ var customElements = {
 }
 
 
-CanvasWrapper = function(id, context, options){
+var CanvasWrapper = function(id, context, options){
 
   this.canvas = new customElements.LabeledCanvas(id, context);
   this.socket = context.socket;
@@ -343,4 +343,6 @@ CanvasWrapper.prototype.checkActivity = function(){
     this.socket.emit('saveDrawing', this.canvas);
     this.activity = false;
   }
-}
+};
+
+module.exports = CanvasWrapper;

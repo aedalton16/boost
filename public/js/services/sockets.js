@@ -1,4 +1,6 @@
-angular.module('welcome').factory('socket', function ($rootScope) {
+var io = require('socket.io-client');
+
+var sockets = function ($rootScope) {
   var socket = io.connect(); // this part tho 
   return {
     on: function (eventName, callback) {
@@ -20,4 +22,6 @@ angular.module('welcome').factory('socket', function ($rootScope) {
       })
     }
   };
-});
+};
+
+module.exports = sockets;

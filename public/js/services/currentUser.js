@@ -1,35 +1,37 @@
-angular.module('users')
-.service('sharedProperties', function() {
-    var stringValue = 'Demo';
-    var objectValue = {
-        data: 'test object value'
-    };
-    
-    return {
-        getString: function() {
-            return stringValue;
-        },
-        setCurrentUser: function(value) {
-            console.log('shared fired,  ' + value);
-            stringValue = value;
+var currentUser = function() {
+  var stringValue = 'Demo';
+  var objectValue = {
+    data: 'test object value'
+  };
 
-        },
-        getObject: function() {
-            return objectValue;
-        }
-    };
-});
+  return {
+    getString: function() {
+      return stringValue;
+    },
+    setCurrentUser: function(value) {
+      console.log('shared fired,  ' + value);
+      stringValue = value;
+
+    },
+    getObject: function() {
+      return objectValue;
+    }
+  };
+};
 
 
-    // .service('sharedProperties', function () {
-    //     var property = $scope.user.email;
+// .service('sharedProperties', function () {
+//     var property = $scope.user.email;
 
-    //     return {
-    //         getProperty: function () {
-    //             return property;
-    //         },
-    //         setProperty: function(value) {
-    //             property = value;
-    //         }
-    //     };
-    // });
+//     return {
+//         getProperty: function () {
+//             return property;
+//         },
+//         setProperty: function(value) {
+//             property = value;
+//         }
+//     };
+// });
+
+module.exports = currentUser;
+

@@ -1,4 +1,4 @@
-<section data-ng-controller="ChatController">
+<section data-ng-controller="ChatCtrl">
   <div data-ng-repeat="message in messages" data-ng-switch="message.type">
     <strong data-ng-switch-when='status'>
       <span data-ng-bind="message.created | date:'mediumTime'"></span>

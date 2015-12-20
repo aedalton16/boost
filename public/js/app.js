@@ -1,15 +1,56 @@
-var app = angular.module('Boost', [
-  'ngRoute', 
-  'ngResource', 
-  'ngCookies', 
-  'ngSanitize',
-  'http-auth-interceptor', 
-  'ui.bootstrap', 
-  'welcome',
-  'about', 
-  'users', 
-  'drawings', 
-  'chats'
+'use strict';
+
+var angular = require('angular');
+var io = require('socket.io-client');
+
+// All angular wiring goes here, so you can see exactly where each dependency is
+// Follow the require() trails for the actual logic
+// This way no one gets lost!
+
+// Create modules
+angular.module('boost.users', []);
+angular.module('boost.welcome', []);
+angular.module('boost.about', ['boost.users']);
+angular.module('boost.chats', ['boost.welcome', 'boost.users']);
+angular.module('boost.drawings', ['boost.welcome', 'boost.users']);
+
+// Register services TODO: prefer inline array annotation here for DI, so you can see where wirings lead
+angular.module('boost.users').factory('User', require('./services/User'));
+angular.module('boost.users').factory('Session', require('./services/Session'));
+angular.module('boost.users').factory('Auth', require('./services/Auth'));
+angular.module('boost.users').service('sharedProperties', require('./services/currentUser'));
+angular.module('boost.welcome').factory('socket', require('./services/sockets'));
+angular.module('boost.chats').filter('interpolate', ['version', require('./services/chatFilter')]);
+angular.module('boost.drawings').factory('Drawing', ['$resource', require('./services/Drawing')]);
+
+// Register controllers
+angular.module('boost.about').controller('AboutCtrl', ['$scope', 'sharedProperties', require('./controllers/AboutCtrl')]);
+angular.module('boost.chats').controller('ChatCtrl', ['$scope', "socket", 'sharedProperties', require('./controllers/ChatCtrl')]);
+angular.module('boost.drawings').controller('DrawingCtrl', [
+  '$scope', 
+  '$route', 
+  '$routeParams', 
+  'Drawing',
+  'socket', 
+  'sharedProperties',
+  require('./controllers/DrawingCtrl')
+]);
+angular.module('boost.users').controller('LoginCtrl', require('./controllers/LoginCtrl'));
+angular.module('boost.users').controller('SignupCtrl', require('./controllers/SignupCtrl'));
+angular.module('boost.welcome').controller('WelcomeCtrl', ['$scope', '$location', 'Drawing', 'socket', require('./controllers/WelcomeCtrl')]);
+
+var app = angular.module('boost', [
+  require('angular-route'), 
+  require('angular-resource'), 
+  require('angular-cookies'), 
+  require('angular-sanitize'),
+  //require('angular-http-auth'), 
+  //require('angular-ui-bootstrap'), 
+  'boost.welcome',
+  'boost.about', 
+  'boost.users', 
+  'boost.drawings', 
+  'boost.chats'
 ]); 
 
 // setup our routes
