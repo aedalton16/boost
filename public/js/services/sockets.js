@@ -25,3 +25,4 @@ var sockets = function ($rootScope) {
 };
 
 module.exports = sockets;
+

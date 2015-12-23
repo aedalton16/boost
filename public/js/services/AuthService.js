@@ -1,9 +1,16 @@
 'use strict';
 
-var Auth = function($location, $rootScope, Session, User, $cookieStore) {
+var AuthService = function($location, $rootScope, $resource, Session, User, $cookieStore) {
+  var Session = $resource('/auth/login');
+  var User = $resource('/auth/users/:id', {}, {
+    'update': {
+      method: 'PUT'
+    }
+  });
+
   $rootScope.currentUser = $cookieStore.get('user') || null;
   $cookieStore.remove('user');
-
+  
   return {
 
     login: function(provider, user, callback) {
@@ -76,4 +83,4 @@ var Auth = function($location, $rootScope, Session, User, $cookieStore) {
   };
 };
 
-module.exports = Auth;
+module.exports = AuthService;

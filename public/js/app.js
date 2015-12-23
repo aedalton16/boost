@@ -15,9 +15,7 @@ angular.module('boost.chats', ['boost.welcome', 'boost.users']);
 angular.module('boost.drawings', ['boost.welcome', 'boost.users']);
 
 // Register services TODO: prefer inline array annotation here for DI, so you can see where wirings lead
-angular.module('boost.users').factory('User', require('./services/User'));
-angular.module('boost.users').factory('Session', require('./services/Session'));
-angular.module('boost.users').factory('Auth', require('./services/Auth'));
+angular.module('boost.users').factory('AuthService', require('./services/AuthService'));
 angular.module('boost.users').service('sharedProperties', require('./services/currentUser'));
 angular.module('boost.welcome').factory('socket', require('./services/sockets'));
 angular.module('boost.chats').filter('interpolate', ['version', require('./services/chatFilter')]);

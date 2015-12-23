@@ -18,7 +18,7 @@ function listener(socket_io){
 
   });
 
-  socket.io_on('change:name', function(data){
+  socket_io.on('change:name', function(data){
   	changeName(data.oldName, data.newName);
   });
   socket.on('user:join', function(data))

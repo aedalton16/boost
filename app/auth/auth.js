@@ -5,7 +5,7 @@
  */
 exports.ensureAuthenticated = function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.send(401);
+  res.sendStatus(401);
 }
 
 /**
@@ -14,7 +14,7 @@ exports.ensureAuthenticated = function ensureAuthenticated(req, res, next) {
 exports.blog = {
   hasAuthorization: function(req, res, next) {
     if (req.blog.creator._id.toString() !== req.user._id.toString()) {
-      return res.send(403);
+      return res.sendStatus(403);
     }
     next();
   }

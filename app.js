@@ -1,35 +1,36 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
-var server = require('http').createServer(app)
 var passport = require('passport');
 var path = require('path');
-var flash    = require('connect-flash');
-var port = process.env.PORT || 3000;
-/*
- * web socket config
- */
-var io = require('socket.io').listen(server, {log:false});
-
-/*
-* standard utilities
-*/
+var flash  = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session      = require('express-session');
+var session = require('express-session');
+var server = require('http').createServer(app)
+
+var port = process.env.PORT || 3000;
+var mongoURL = process.env.MONGOHQ_URL || "mongodb://localhost";
+/*
+ * web socket config TODO: Let's set up separate ports for chat, whiteboard, etc
+ */
+var io = require('socket.io').listen(server, {log:false});
 
 app.use(morgan('dev'));
 app.use(cookieParser());
 
 /* 
-* safest for Express 4
-*/
+ * safest for Express 4
+ */
 
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json()); 
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 
+// TODO: Why do we still have this?
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
@@ -41,42 +42,26 @@ mongoose.connection.on('error', function (err) {
   console.log(err);
   process.exit(1);
 });
-
-// TODO: parse into db.js file 
-var mongoURL = process.env.MONGOHQ_URL || "mongodb://localhost";
-mongoose.connect(mongoURL + "/boost"); // somehow a little tick mark got in here which is terrifying.......
+mongoose.connect(mongoURL + "/boost");
+// Initialize models
+var models = require('./app/models');
 
 
 // required for passport
 app.use(session({ secret: 'dartmongoose' })); // session secret
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(passport.session());
+app.use(flash());
 
-
-/*
-* controller config, db models 
-*/
-require('./app/models/drawingModel');
-require('./app/models/userModel');
-
+// Initialize routes
 require('./app/controllers/drawingController').init(io);
-// require('./app/controllers/userController');//(passport);
-// require('./app/controllers/chatController').init(io);
-
-
-require('./app/auth/config')(passport); // ** 
-
-/*
- * routes
- */
-require('./app/routes/drawingRoutes')(app);
-app.use('/auth', require('./app/routes/userRoutes'))
+var routes = require('./app/routes');
+app.use('/api', routes)
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/public/views');
 
-
 server.listen(port);
 
 exports = module.exports = app;
+

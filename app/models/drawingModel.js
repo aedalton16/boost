@@ -1,15 +1,8 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-
-/**
- * Drawing Schema
- */
 var DrawingSchema = new Schema({
     created: {
         type: Date,
@@ -53,3 +46,4 @@ DrawingSchema.path('name').validate(function(name) {
 
 mongoose.model('Drawing', DrawingSchema);
 mongoose.model('DrawingObject', DrawingObjectSchema);
+

@@ -1,11 +1,11 @@
 'use strict';
 
-var LoginCtrl = function ($scope, Auth, sharedProperties, $location) {
+var LoginCtrl = function ($scope, AuthService, sharedProperties, $location) {
   $scope.error = {};
   $scope.user = {};
 
   $scope.login = function(form) {
-    Auth.login('password', {
+    AuthService.login('password', {
       'username': $scope.user.username,
       'password': $scope.user.password
     }, function(err) {

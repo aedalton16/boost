@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-  passport = require('passport');
+var mongoose = require('mongoose');
+var passport = require('passport');
 
 /**
  * Session
@@ -18,9 +18,9 @@ exports.session = function (req, res) {
 exports.logout = function (req, res) {
   if(req.user) {
     req.logout();
-    res.send(200);
+    res.sendStatus(200);
   } else {
-    res.send(400, "Not logged in");
+    res.status(400).send("Not logged in");
   }
 };
 
@@ -30,11 +30,12 @@ exports.logout = function (req, res) {
  */
 exports.login = function (req, res, next) {
   passport.authenticate('local-login', function(err, user, info) {
-    var error = err || info;
-    if (error) { return res.json(400, error); }
+    err = err || info;
+    if (err) { return res.status(400).json(err); }
     req.logIn(user, function(err) {
-      if (err) { return res.send(err); }
+      if (err) { return res.status(400).send(err); }
       res.json(req.user.user_info);
     });
   })(req, res, next);
-}
+};
+
