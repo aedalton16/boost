@@ -44,7 +44,7 @@ mongoose.connection.on('error', function (err) {
 });
 mongoose.connect(mongoURL + "/boost");
 // Initialize models
-var models = require('./app/models');
+var models = require('./models');
 
 
 // required for passport
@@ -54,12 +54,12 @@ app.use(passport.session());
 app.use(flash());
 
 // Initialize routes
-require('./app/controllers/drawingController').init(io);
-var routes = require('./app/routes');
+require('./controllers/drawingController').init(io);
+var routes = require('./routes');
 app.use('/api', routes)
 
-app.use(express.static(__dirname + '/public'));
-app.set('views', __dirname + '/public/views');
+app.use(express.static(__dirname + '/client'));
+app.set('views', __dirname + '/client/views');
 
 server.listen(port);
 

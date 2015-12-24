@@ -2,8 +2,8 @@
   "name": "boost_1",
   "version": "0.0.1",
   "scripts": {
-    "prestart": "browserify public/js/app.js -o public/js/bundle.js",
-    "start": "node app.js",
+    "prestart": "browserify client/js/app.js -o client/js/bundle.js",
+    "start": "node server/app.js",
     "test": "make test"
   },
   "author": "Alexandra Dalton",
