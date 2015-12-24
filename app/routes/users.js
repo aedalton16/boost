@@ -19,14 +19,24 @@ router.post('/register', function(req, res) {
     if (err) {
       return res.status(500).json({err: err});
     }
-    passport.authenticate('local')(req, res, function () {
-      return res.status(200).json({status: 'Registration successful!'});
+    passport.authenticate('local', function (err, user, info) {
+      return res.status(200).json({status: 'Registration successful!', username: user.username});
     });
   });
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-  res.redirect('/');
+router.post('/login', function(req, res) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      return res.status(500).json({err: err});
+    }
+    if (!user) {
+      return res.status(401).json({err: info});
+    }
+    req.login(user, function(err) {
+      res.status(200).json({status: 'Login successful!', username: user.username});
+    });
+  })(req, res);
 });
 
 router.get('/logout', function(req, res) {
