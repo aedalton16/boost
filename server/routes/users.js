@@ -20,8 +20,8 @@ router.post('/register', function(req, res) {
       return res.status(500).json({err: err});
     }
     passport.authenticate('local', function (err, user, info) {
-      return res.status(200).json({status: 'Registration successful!', username: user.username});
-    });
+      res.status(200).json({status: 'Registration successful!', username: user.username});
+    })(req, res);
   });
 });
 

@@ -34,8 +34,17 @@ var UserSchema = mongoose.Schema({
 
 var options = {};
 options.passwordValidator = function(password, cb) {
-  // TODO: Change to actual test
-  if (password.length >= 8) {
+  // (                  - Start of group
+  // ^                  - Start of string
+  //  (?=.*\d)          - Decimal
+  //  (?=.*[a-z])       - lowercase
+  //  (?=.*[A-Z])       - UPPERCASE
+  //  (?=.*[@#$%!?^&*]) - $p3c!a1
+  //  .{6,20}           - Between 6 to 20 characters
+  // $                  - End of string
+  // )                  - End of group
+  var passwordFormat = /(^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!?^&*]).{6,20}$)/g;
+  if (passwordFormat.test(password)) {
     cb(null);
   } else {
     cb(new errors.InvalidPasswordError("Password is of an invalid form."));
