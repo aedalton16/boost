@@ -1,4 +1,4 @@
-var CanvasWrapper = function(id, context){
+    var CanvasWrapper = function(id, context){
 
     this.canvas = new fabric.LabeledCanvas(id, context);
     this.socket = context.socket;

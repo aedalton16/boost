@@ -1,72 +1,47 @@
 
-<div id="boost-page">
-
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:80px; }
+    </style>
+</head>
+<body>
 <div class="container">
-  <div class="stars"></div>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">
-                Log in to BOOST!Tutors
-            </h1>
-            <div style="text-align:center" class="rocket-white"> <i class="fa fa-rocket fa-5x"> </i> </div> 
-            <div class="account-wall">
 
-                <form class="form-signin"
-                      name="form"
-                      ng-submit="login(form)"
-                      novalidate> 
-<!-- for now !!!-->
-<!-- revert back?? -->
-                    <div ng-class="{'has-error': form.username.$error.mongoose}">
-                        <input type="text"
-                               class="form-control"
-                               placeholder="Username"
-                               name="username"
-                               ng-model="user.username"
-                               required
-                               autofocus
-                               mongoose-error/>
-                        <p class="help-block"
-                           ng-show="form.username.$error.mongoose">
-                            {{ errors.username }}
-                        </p>
-                    </div>
+<div class="col-sm-6 col-sm-offset-3">
 
-                    <div ng-class="{'has-error': form.password.$error.mongoose}">
-                        <input type="password"
-                               class="form-control"
-                               placeholder="Password"
-                               name="password"
-                               ng-model="user.password"
-                               required
-                               mongoose-error/>
-                        <p class="help-block"
-                           ng-show="form.password.$error.mongoose">
-                            {{ errors.password }}
-                        </p>
-                    </div>
+    <h1><span class="fa fa-sign-in"></span> Login</h1>
 
-                    <div class="form-group has-error">
-                        <p class="help-block">{{ error.other }}</p>
-                    </div>
+    <!-- show any messages that come back with authentication -->
+<!--     <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %> -->
 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit"> Sign in <i class="fa fa-rocket"> </i>  </button>
-
-                    <span class="clearfix"></span>
-                </form>
-            </div>
-            <br> 
-            <!-- TODO: alert if no account? -->
-            <a href="#/signup" class="btn btn-success btn-block">Don't have an account? Create one! <i class="fa fa-rocket 3x"></i>  </a>
+    <!-- LOGIN FORM -->
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" name="email">
         </div>
-    </div>
-    <!-- <div id="clouds"> -->
-  <div class="cloud x1"></div>
-  <!-- Time for multiple clouds to dance around -->
-  <div class="cloud x2"></div>
-  <div class="cloud x3"></div>
-  <div class="cloud x4"></div>
-  <div class="cloud x5"></div>
-<!-- </div> -->
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+
+        <button type="submit" class="btn btn-warning btn-lg">Login</button>
+    </form>
+
+    <hr>
+
+    <p>Need an account? <a href="/signup">Signup</a></p>
+    <p>Or go <a href="/">home</a>.</p>
+
 </div>
-</div> 
+
+</div>
+</body>
+</html>

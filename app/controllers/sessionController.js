@@ -36,5 +36,6 @@ exports.login = function (req, res, next) {
       if (err) { return res.send(err); }
       res.json(req.user.user_info);
     });
-  })(req, res, next);
+  })(req, res, next); //doesnt kick back callback 
+  
 }

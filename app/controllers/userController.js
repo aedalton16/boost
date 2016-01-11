@@ -5,24 +5,34 @@ var mongoose = require('mongoose'),
   passport = require('passport'),
   ObjectId = mongoose.Types.ObjectId;
 
-
+/**
+ * Create user
+ * requires: {username, password, email}
+ * returns: {email, password}
+ */
 exports.create = function (req, res, next) {
   var newUser = new User(req.body);
+  console.log(req.body);
   newUser.provider = 'local';
 
   newUser.save(function(err) {
     if (err) {
-      return res.json(400, err);
+      console.log('no save');
+      return  res.status(400).json(err);
     }
 
     req.logIn(newUser, function(err) {
-      if (err) return next(err);
+      if (err) { 
+      console.log('no login err');return next(err);}
       return res.json(newUser.user_info);
     });
   });
 };
 
-
+/**
+ *  Show profile
+ *  returns {username, profile}
+ */
 exports.show = function (req, res, next) {
   var userId = req.params.userId;
 
@@ -33,11 +43,15 @@ exports.show = function (req, res, next) {
     if (user) {
       res.send({username: user.username, profile: user.profile });
     } else {
-      res.send(404, 'USER NOT FOUND')
+      res.send(404, 'USER_NOT_FOUND')
     }
   });
 };
 
+/**
+ *  Username exists
+ *  returns {exists}
+ */
 exports.exists = function (req, res, next) {
   var username = req.params.username;
   User.findOne({ username : username }, function (err, user) {

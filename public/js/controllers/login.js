@@ -5,6 +5,7 @@ angular.module('users').controller('LoginCtrl', function ($scope, Auth, sharedPr
 	    $scope.user = {};
 
 	    $scope.login = function(form) {
+	    	// console
 		Auth.login('password', {
 			'username': $scope.user.username,
 			'password': $scope.user.password

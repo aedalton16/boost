@@ -1,5 +1,7 @@
 'use strict';
 
+// http://stackoverflow.com/questions/14188834/documentation-for-ensureauthentication-isauthenticated-passports-function
+
 /**
  *  Route middleware to ensure user is authenticated.
  */
