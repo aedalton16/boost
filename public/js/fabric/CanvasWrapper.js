@@ -94,7 +94,7 @@
 
     this.canvas.on('object:modified', function(e){
         console.log('modified : saving canvas');
-        self.socket.emit('saveDrawing', self.canvas);
+        self.socket.emit('saveDrawing', self.canvas); // saving drawing 
     });
 
     this.canvas.on('object:selected', function(e){

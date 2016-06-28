@@ -36,6 +36,8 @@ app.set('view engine', 'html');
 /*
  * db config
  */
+mongoose.connect('mongodb://localhost/boost');
+
 mongoose.connection.on('error', function (err) {
   console.log('Could not connect to mongo server!');
   console.log(err);
@@ -45,7 +47,7 @@ mongoose.connection.on('error', function (err) {
 // TODO: parse into db.js file 
 // var mongoURL = 'mongodb://myUserAdmin:abc123@localhost:27017/boost'; //process.env.MONGOHQ_URL || 
 // mongoose.connect(mongoURL); // somehow a little tick mark got in here which is terrifying.......
-mongoose.connect('mongodb://accountUser:password@localhost/boost');
+
 
 // required for passport
 // app.use(session({ secret: 'dartmongoose' })); // session secret

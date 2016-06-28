@@ -1,0 +1,1 @@
+var classrooms = angular.module('classrooms', ['welcome, 'users']);

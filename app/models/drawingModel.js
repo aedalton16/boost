@@ -20,6 +20,11 @@ var DrawingSchema = new Schema({
         default: '',
         trim: true
     },
+    classroomId: {
+        type: String, 
+        default: '', 
+        trim: true
+    }
     description: {
         type: String,
         default: '',
@@ -34,7 +39,7 @@ var DrawingObjectSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    drawingId: {
+    drawingId: { // OR** schema.ObjectId, ref: 'Drawing'
         type: String,
         default: '',
         trim: true
