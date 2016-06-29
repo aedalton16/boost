@@ -125,13 +125,9 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
 
     };
 
-    // shut it down 
     $scope.$on("$destroy",  function( event ) {
         $scope.canvas.dispose();
         console.log("FYI - Destroyed scope for DrawingController");
     });
- //    $scope.socket.on('newMessage', function(message){ never fired? 
-	//     console.log('listeningevent fired drawings.js');
-	// });
 
 }]);

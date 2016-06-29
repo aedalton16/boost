@@ -38,4 +38,4 @@ ClassroomSchema.path('name').validate(function(name) {
 }, 'Name cannot be blank');
 
 
-mongoose.model('Classroom', Classroom); 
+mongoose.model('Classroom', ClassroomSchema); 

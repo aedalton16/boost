@@ -1,4 +1,4 @@
-    var CanvasWrapper = function(id, context){
+var CanvasWrapper = function(id, context){
 
     this.canvas = new fabric.LabeledCanvas(id, context);
     this.socket = context.socket;
@@ -9,9 +9,6 @@
     this.currentColor = context.currentColor;
     this.strokeWidth = context.strokeWidth || '5';
     this.backgroundColor = this.canvas.backgroundColor || 'white';
-
-    // how to handle listeners for multiple pages??? removing these potentially dangerous 
-    // this.socket.removeAllListeners();
 
     // drawing toolkit 
     this.tools = {
@@ -39,7 +36,8 @@
         self.mouseDown = true;
         // so the polygon gets angry around here 
         // we also dont want to have a default override on a variety of circumstances so TODO: fix this and optimize for eaze of use 
-        if(self.canvas._hoveredTarget && self.handler.drawingMode !== 'default' && self.handler.drawingMode !== 'fill' && self.handler.drawingMode !== 'free' && self.hander.drawingMode !== 'erase'){
+        // change to array? 
+        if(self.canvas._hoveredTarget && self.handler.drawingMode !== 'default' && self.handler.drawingMode !== 'fill' && self.handler.drawingMode !== 'free' && self.handler.drawingMode !== 'erase'){
             self.deactivatedTool = self.handler;
             self.handler = self.tools.DEFAULT;
             self.handler.init();
