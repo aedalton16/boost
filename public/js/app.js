@@ -1,36 +1,28 @@
-var app = angular.module('app', ['ngRoute', 'ngResource', 'ngCookies', 'ngSanitize','http-auth-interceptor',
-'ui.bootstrap', 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
+var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'ngRoute', 'ngResource', 'ngCookies', 'ngSanitize','http-auth-interceptor', 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
 
 // setup our routes
-app.config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.
-            when('/welcome', {
-                templateUrl: 'views/about/about.tpl.html'
-            }).
-            when('/draw', {
-                templateUrl: 'views/welcome/welcome.tpl.html'
-            }).
-            when('/profile', {
-                templateUrl: 'views/user/profile.tpl.html'
-            }).
-            when('/drawings/:drawingId', {
+app.config(['$stateProvider', '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/draw');
+        $stateProvider.
+        state('welcome', {
+            url: '/welcome', 
+            templateUrl: 'views/about/about.tpl.html'
+        })
+        .state('draw', {
+            url: '/draw',
+            templateUrl: 'views/welcome/welcome.tpl.html'
+        })
+        .state('state3', {
+            url: '/profile',
+            templateUrl: 'views/user/profile.tpl.html'
+        }).
+        state('state4', {
+            url: '/drawings/:drawingId',
                 templateUrl: 'views/drawings/drawing.tpl.html'
-            }).
-            when('/login', {
-                templateUrl: 'views/user/login.tpl.html',
-                controller: 'LoginCtrl'
-            }).
-            when('/signup', {
-                templateUrl: 'views/user/signup.tpl.html',
-                controller: 'SignupCtrl'
-            }).
-            when('/unsupported', {
-                templateUrl: 'unsupported.html'
-            }).
-            otherwise({
-                templateUrl: 'views/about/about.tpl.html'
-            });
+            }
+        );
+   
     }]);
 
 
