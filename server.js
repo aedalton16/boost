@@ -22,6 +22,9 @@ var session      = require('express-session');
 app.use(morgan('dev'));
 app.use(cookieParser());
 
+var favicon = require('serve-favicon');
+
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
 /* 
 * safest for Express 4
 */
