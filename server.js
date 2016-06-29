@@ -36,7 +36,8 @@ app.set('view engine', 'html');
 /*
  * db config
  */
-mongoose.connect('mongodb://localhost/boost');
+var mongoURL = process.env.MONGOHQ_URL || "mongodb://localhost";
+mongoose.connect(mongoURL + "/boost");
 
 mongoose.connection.on('error', function (err) {
   console.log('Could not connect to mongo server!');
