@@ -71,7 +71,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
         $scope.canvas.updateCurrentStrokeWidth($scope.strokeWidth);
     };
 
-  $scope.submitMessage = function(message){
+  $scope.submitMessage = function(message){ // HERE?
         $scope.messages.push({name: 'message'});
 	  $scope.socket.emit('newMessage', message);
 	 // //$scope.$apply();
