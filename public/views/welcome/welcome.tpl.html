@@ -1,28 +1,37 @@
-<div ng-controller="WelcomeController" ng-init="init()">
-
-<div id="boost-page-light">
-     <div class="stars"></div>
-    <div class="container">
-        <h1 class="welcome"> BOOST!Tutors</h1>
-        <div style="text-align:center" class="rocket-white"> <i class="fa fa-rocket fa-5x"> </i> </div>  
-
-        <div style="padding-bottom: 30px;">
-            <div id="info">Click an existing whiteboard session or create a new one. Thanks to socket.io, these files can be shared and interactively viewed --open two browsers with the same drawing-id to see!
-        </div>
-
-    </div>
-
-    <div class="row"  ng-hide="!drawings">
-        <div class="col-md-4"> 
-            <h3> Existing BOOST!Boards </h3> 
-            <ul class="list-group" ng-repeat="d in drawings">
-                <li class="list-group-item"><a href="#/drawings/{{d._id}}">{{d.name}}</a></li>
-            </ul>
-        </div>
-
-        <div class="col-md-8">
-            <h3> Create New Board</h3>
-
+<div layout-fill id ="boostpage"> 
+    <div ng-controller="WelcomeController" ng-init="init()" >
+        <h1> Boost!Tutors </h1>
+        <div> <i class="fa fa-rocket fa-5x"> </i> </div> 
+        <div> 
+            <p> 
+                Click an existing whiteboard session or create a new one. Thanks to socket.io, these files can be shared and interactively viewed --open two browsers with the same drawing-id to see!
+            </p>
+        </div> 
+         <div flex-gt-sm="50" layout="column">
+            <md-toolbar layout="row" class="md-hue-3">
+            <div class="md-toolbar-tools">
+            <span>Select Existing</span>
+            </div>
+            </md-toolbar>
+            <md-content>
+                <md-list flex>
+                <md-list-item class="md-3-line" ng-repeat="d in drawings" ng-click="null">
+                <div class="md-list-item-text" layout="column">
+                    <a href="#/drawings/{{d._id}}"><h3>{{ d.name }}</h3></a>
+                </div>
+                </md-list-item>
+                </md-list>
+            </md-content>
+        <md-divider></md-divider>
+        <div flex-gt-sm="50" flex>
+            <md-toolbar layout="row" class="md-hue-3">
+            <div class="md-toolbar-tools">
+            <span>Create Board</span>
+            </div>
+            </md-toolbar>
+            <md-content>
+            <md-list class="md-dense" flex>
+            <md-list-item class="md-3-line">
             <form class="form-signup">
                 <input type="text" class="form-control" ng-model="newDrawing.name" placeholder="Drawing Name">
                 <input type="text" class="form-control" ng-model="newDrawing.description" placeholder="Drawing Description">
@@ -31,21 +40,9 @@
                 <input type="button" class="btn btn-success" ng-click="newDrawing = null" value="clear"/>
             </form>
         </div>
+        </md-list-item>
 
+        </md-list>
+    </md-content>
 
-   
-
-    <!-- </div> -->
-    </div>
-<!-- <div id="clouds"> -->
-
-<!-- </div> -->
 </div>
-</div>
-</div>
-
-
-
-
-
-

@@ -1,38 +1,66 @@
 var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAria','ngRoute', 'ngResource', 'ngMaterial','ngCookies', 'ngSanitize','http-auth-interceptor', 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
 
 // setup our routes
-app.config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.
-            when('/welcome', {
-                templateUrl: 'views/about/about.tpl.html'
-            }).
-            when('/draw', {
-                templateUrl: 'views/welcome/welcome.tpl.html'
-            }).
-            when('/profile', {
-                templateUrl: 'views/user/profile.tpl.html'
-            }).
-            when('/drawings/:drawingId', {
-                templateUrl: 'views/drawings/drawing.tpl.html'
-            }).
-            when('/login', {
-                templateUrl: 'views/user/login.tpl.html',
-                controller: 'LoginCtrl'
-            }).
-            when('/signup', {
-                templateUrl: 'views/user/signup.tpl.html',
-                controller: 'SignupCtrl'
-            }).
-            when('/unsupported', {
-                templateUrl: 'unsupported.html'
-            }).
-            otherwise({
-                templateUrl: 'views/about/about.tpl.html'
-            });
+app.config(['$stateProvider', '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider) { // ** MAKE SURE TO SWITCH OVER COMPREHENSIVELY 
+        $stateProvider
+        .state('welcome', {
+            url:'/welcome',
+            templateUrl: 'views/about/about.tpl.html',
+            controller: 'WelcomeController'
+        })
+        .state('draw', {
+            url: '/draw',
+            templateUrl: 'views/welcome/welcome.tpl.html'
+        })
+        .state('drawing', {
+            url: '/drawings/:drawingId',
+            templateUrl: 'views/drawings/drawing.tpl.html'
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'views/user/login.tpl.html'
+        })
+        ;
+
+        $urlRouterProvider.otherwise('/welcome');
+
+
+
+
+            // when('/welcome', {
+            //     templateUrl: 'views/about/about.tpl.html'
+            // }).
+            // when('/draw', {
+            //     templateUrl: 'views/welcome/welcome.tpl.html'
+            // }).
+            // when('/profile', {
+            //     templateUrl: 'views/user/profile.tpl.html'
+            // }).
+            // when('/drawings/:drawingId', {
+            //     templateUrl: 'views/drawings/drawing.tpl.html'
+            // }).
+            // when('/login', {
+            //     templateUrl: 'views/user/login.tpl.html',
+            //     controller: 'LoginCtrl'
+            // }).
+            // when('/signup', {
+            //     templateUrl: 'views/user/signup.tpl.html',
+            //     controller: 'SignupCtrl'
+            // }).
+            // when('/unsupported', {
+            //     templateUrl: 'unsupported.html'
+            // }).
+            // otherwise({
+            //     templateUrl: 'views/about/about.tpl.html'
+            // });
     }]);
 
 
+app.run(function ($rootScope, $state, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+});
 app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', function($scope, $rootScope, $log, $location, $mdBottomSheet, $mdSidenav, $mdDialog){
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
@@ -78,18 +106,6 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBott
     }
   ];
 
-// Is this proper instead of router?
-  $scope.alert = ''; 
-$scope.showDrawings = function($event) {
-    $scope.alert = '';
-    $mdDrawings.show({
-      templateUrl: 'views/welcome/welcome.tpl.html',
-      controller: 'WelcomeController',
-      targetEvent: $event
-    }).then(function(clickedItem) {
-      $scope.alert = clickedItem.name + ' clicked!';
-    });
-  };
   $scope.showListBottomSheet = function($event) {
     $scope.alert = '';
     $mdBottomSheet.show({

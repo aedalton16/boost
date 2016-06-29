@@ -15,9 +15,10 @@
 /* 1.0 Basic Setup */
 *{ margin: 0; padding: 0;}
 
-/*.ng-scope {
+.ng-scope {
   min-height: 100%;
-}*//*
+}
+//*
 html {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
@@ -43,7 +44,7 @@ html, body {
     width: 100%;
     height: 100%;
 }
-*/
+
 
 /*.full { height: 100%;}
 
@@ -53,7 +54,7 @@ html, body {
 html, body { 
   
  }
- #tab1{
+ #boostpage{
     /*height: 1000px;*/
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#162951+18,162951+18,2c539e+57,388ac9+84,3bbad3+100 */
   background: #162951; /* Old browsers */
@@ -61,7 +62,8 @@ html, body {
   background: -webkit-linear-gradient(top,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#162951', endColorstr='#3bbad3',GradientType=0 ); /* IE6-9 */
- }
+  background-size: cover;
+}
 a.boost-page{
     color: #fff;
 }

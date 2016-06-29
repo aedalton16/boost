@@ -6,9 +6,13 @@ angular.module('drawings').factory('Drawings', ['$resource', function($resource)
     return $resource('drawings/:drawingId', {
         drawingId: '@_id'
     }, {
-        update: {
+        'update': {
             method: 'PUT'
         }	
-    });
+    },
+    {'query': {method: 'GET', isArray: false }}
+
+
+    );
 
 }]);

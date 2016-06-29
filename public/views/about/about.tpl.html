@@ -1,5 +1,5 @@
 <div ng-controller="AboutController">
-<div id="boost-page">
+<div id="boostpage">
 
 <div class="stars"></div>
 	<img class="displayed" src="img/banner_white.png"> 
@@ -10,7 +10,7 @@
 			<!-- <h1>About BOOST! Tutors</h1> -->
 			<br>
 			<br>
-			<h2 ng-show="!currentUser">Welcome! <a class="boost-page" href="#/login"> Please Log In</a></h2>
+			<h2 ng-show="!currentUser" ui-sref-active="active">Welcome! <a ui-sref="login"> Please Log In</a></h2>
 			<div style="text-align:center"> <i class="fa fa-rocket fa-3x"> </i> <i class="fa fa-rocket fa-5x"> </i> <i class="fa fa-rocket fa-3x">  </i> </div> 
 			<h1 class="boost-page" ng-show="currentUser">Hello {{stringValue}} !</h1>
   			<div id="info"> In a nutshell, we are a corps of Dartmouth undergrads who provide virtual tutoring to classrooms that need it.

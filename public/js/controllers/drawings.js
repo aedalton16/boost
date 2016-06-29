@@ -2,8 +2,8 @@ var drawings = angular.module('drawings', ['welcome', 'users']);
 
 // todo: tighten this up ...break into two 
 
-drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', 'Drawings','socket', 'sharedProperties',
-    function($scope, $route, $routeParams, Drawings, socket, sharedProperties){
+drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', 'Drawings','socket', 'sharedProperties',
+    function($scope, $route, $stateParams, Drawings, socket, sharedProperties){
 
     // set the stage
     $scope.currentColor = 'red';
@@ -36,7 +36,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
     $scope.init = function(){
 
         // render our drawing 
-        Drawings.get({drawingId: $routeParams.drawingId}, // how does it know tho...
+        Drawings.get({drawingId: $stateParams.drawingId}, // resource bad config
             function(drawing){
                 $scope.initCanvas(drawing);
             },
