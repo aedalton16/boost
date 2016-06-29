@@ -41,7 +41,7 @@ app.set('view engine', 'html');
  */
 
   // mongodb://<dbuser>:<dbpassword>@ds011314.mlab.com:11314/boost
-var mongoURL = process.env.MONGOHQ_URL || "mongodb://localhost";
+var mongoURL = process.env.MONGODB_URI || "mongodb://localhost";
 mongoose.connect(mongoURL + "/boost");
 
 mongoose.connection.on('error', function (err) {
