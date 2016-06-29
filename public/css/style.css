@@ -15,9 +15,9 @@
 /* 1.0 Basic Setup */
 *{ margin: 0; padding: 0;}
 
-.ng-scope {
+/*.ng-scope {
   min-height: 100%;
-}/*
+}*//*
 html {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
@@ -50,13 +50,17 @@ html, body {
 */
 
 /*TODO: SOLVE ANGULAR PARTIAL ISSUE*/
-html, body { height: 100%; width: 100%; margin: 0;  background-size: cover;
-    background: #162951; /* Old browsers */
+html, body { 
+  
+ }
+ #tab1{
+    /*height: 1000px;*/
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#162951+18,162951+18,2c539e+57,388ac9+84,3bbad3+100 */
+  background: #162951; /* Old browsers */
   background: -moz-linear-gradient(top,  #162951 18%, #162951 18%, #2c539e 57%, #388ac9 84%, #3bbad3 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#162951', endColorstr='#3bbad3',GradientType=0 ); /* IE6-9 */
-  
  }
 a.boost-page{
     color: #fff;
@@ -440,9 +444,9 @@ fieldset[disabled] .btn-primary.active {
 
 /* 4.0: Sections*/
 
-section {
+/*section {
     padding: 100px 0;
-}
+}*/
 
 aside {
     padding: 50px 0;
@@ -916,6 +920,48 @@ form button {
 
   background: url("/img/stars.png") repeat top center;
   z-index:0;
+}
+
+/*-------*/
+
+$gray: #eee;
+
+md-content.md-default-theme {
+  background-color: $gray;
+}
+md-card {
+  background-color: #fff;
+  h2:first-of-type {
+    margin-top: 0;
+  }
+}
+md-toolbar {
+  .md-button.md-default-theme {
+    border-radius: 99%; // round toolbar buttons
+  }
+}
+h2 {
+  font-weight: 400;
+}
+.md-toolbar-tools-bottom {
+  font-size: small;
+  & :last-child {
+    opacity: 0.8;
+  }
+}
+md-toolbar:not(.md-hue-1),
+.md-fab {
+  fill: #fff;
+}
+md-sidenav {
+  fill: #737373;
+  ng-md-icon {
+    position: relative;
+    top: 5px; // adjust for svg viewbox
+  }
+}
+.user-avatar {
+  border-radius: 99%;
 }
 
 
