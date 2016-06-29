@@ -16,21 +16,19 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$routeParams', '
     // $scope.messages = {};
 
     // on each load 
-
-
-
+    // need to put this elsewhere TODO: NEST CONTROLLERS**
     $scope.status = {
-    isopen: false
+        isopen: false
     };
 
     $scope.toggled = function(open) {
-    console.log('Dropdown is now: ', open);
+        console.log('Dropdown is now: ', open);
     };
 
     $scope.toggleDropdown = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    $scope.status.isopen = !$scope.status.isopen;
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.status.isopen = !$scope.status.isopen;
     };
 
     $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
