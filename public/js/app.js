@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'ngRoute', 'ngResource', 'ngCookies', 'ngSanitize','http-auth-interceptor', 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
+var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAria','ngRoute', 'ngResource', 'ngMaterial','ngCookies', 'ngSanitize','http-auth-interceptor', 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
 
 // setup our routes
 app.config(['$routeProvider',
@@ -47,7 +47,15 @@ app.controller('MainController', ['$scope', '$rootScope', '$log', '$location', f
     });
 
 }]);
-
+// app.controller('DemoCtrl', function() {
+//        this.topDirections = ['left', 'up'];
+//       this.bottomDirections = ['down', 'right'];
+//       this.isOpen = false;
+//       this.availableModes = ['md-fling', 'md-scale'];
+//       this.selectedMode = 'md-fling';
+//       this.availableDirections = ['up', 'down', 'left', 'right'];
+//       this.selectedDirection = 'up';
+//   });
 
 
 app.directive('toggle', function(){

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-9">
             <div ng-controller="DrawingsController" ng-init="init()">
-
+       
                 <h3>Session: {{drawing.name}} </h3>
                 <h2 ng-show="currentUser">Booster: {{stringValue}}</h2>
 
@@ -56,10 +56,10 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu" style="min-width: 80px; text-align:center" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 
-                            <li><button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'line' ? 'on' : 'off'}}" ng-click="changeDrawingMode('default')"><i class="fa fa-minus" title="Select" data-toggle="tooltip" data-placement="right" tooltip></i> </button></li>
-                            <li><button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'circle' ? 'on' : 'off'}}" ng-click="changeDrawingMode('free')"><i class="fa fa-circle-o"></i></button></li>
-                            <li><button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'triangle' ? 'on' : 'off'}}" ng-click="changeDrawingMode('fill')"><i class="fa fa-star-o"></i></button> </li>
-                            <li> <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'rectange' ? 'on' : 'off'}}" ng-click="changeDrawingMode('text')"><i class="fa fa-square-o"></i></button> </li>
+                            <li><button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'line' ? 'on' : 'off'}}" ng-click="changeDrawingMode('line')"><i class="fa fa-minus" title="Select" data-toggle="tooltip" data-placement="right" tooltip></i> </button></li>
+                            <li><button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'circle' ? 'on' : 'off'}}" ng-click="changeDrawingMode('circle')"><i class="fa fa-circle-o"></i></button></li>
+                            <li><button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'triangle' ? 'on' : 'off'}}" ng-click="changeDrawingMode('triangle')"><i class="fa fa-star-o"></i></button> </li>
+                            <li> <button type="button" class="btn btn-primary" ng-class="{{ drawingMode === 'rectange' ? 'on' : 'off'}}" ng-click="changeDrawingMode('rectangle')"><i class="fa fa-square-o"></i></button> </li>
                         </ul>
                     </div>
 
@@ -76,7 +76,7 @@
 
                     <div class="btn-group" uib-dropdown is-open="true">
                         <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                        Colors <span class="caret"></span>
+                        <div class="colorbox" id="currentColorBox" ng-style="{backgroundColor: currentColor}"></div> <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu" style="min-width: 80px; text-align:center" uib-dropdown-menu role="menu" aria-labelledby="single-button"> 
                         <!-- TODO: make CSS classes here -->
@@ -90,7 +90,7 @@
                             <li> <button type="button" class="btn btn-primary" id="blackBtn" ng-click="updateColor('black')"> <i class="fa fa-star"></i></button> </li>
                             <li> <button type="button" class="btn btn-primary" id="whiteBtn" ng-click="updateColor('white')"> <i class="fa fa-star"></i> </button> </li>
                             <li class="divider"></li>
-                            <li> <div class="colorbox" id="currentColorBox" ng-style="{backgroundColor: currentColor}"></div></li>
+                           <!--  <li> <div class="colorbox" id="currentColorBox" ng-style="{backgroundColor: currentColor}"></div></li> -->
                             <li> <input type="color" ng-model="test" name="colorpicker" id="" /> </li> <!-- broken -->
                         </ul>
 
@@ -124,3 +124,8 @@
         </div>
     </div> 
 </div>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved. 
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+-->

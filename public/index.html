@@ -5,7 +5,7 @@
     <title>BOOST!Tutors</title>
     <meta content="IE=EDGE" http-equiv="X-UA-Compatible">
 
-    <script src="libs/angular/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="libs/angular-cookies/angular-cookies.js"></script>
     <script src="libs/angular-sanitize/angular-sanitize.js"></script>
     <script src="libs/angular-resource/angular-resource.js"></script>
@@ -14,8 +14,12 @@
     <script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="libs/angular-http-auth/src/http-auth-interceptor.js"></script>
 
-     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
-  
+     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+    
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="libs/jquery/dist/jquery.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="libs/fabric/dist/fabric.js"></script>
@@ -69,15 +73,19 @@
     <!-- run and minify -->
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" type="text/css">
-    
-
-    
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="css/navbar.css" type="text/css"/>
   
 </head>
  
 <body ng-controller="MainController">
-  <nav class="navbar navbar-inverse" style="margin-bottom: 5px">
+
+
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-lg-2">
+      <nav class="navbar navbar-default navbar-fixed-side">
+         <nav class="navbar navbar-inverse" style="margin-bottom: 5px">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
@@ -100,7 +108,14 @@
       </div><!-- /.navbar-collapse -->
     </div>
   </nav>
-    <div ng-view class="full"/>
+      </nav>
+    </div>
+    <div class="col-sm-9 col-lg-10">
+     <div ng-view class="full"/>
+    </div>
+  </div>
+</div>
+    
 
 </body>
 
