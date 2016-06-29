@@ -9,12 +9,14 @@ app.config(['$routeProvider',
             }).
             when('/draw', {
                 templateUrl: 'views/welcome/welcome.tpl.html'
+                // controller: 'DrawingsController'
+
             }).
             when('/profile', {
                 templateUrl: 'views/user/profile.tpl.html'
             }).
             when('/drawings/:drawingId', {
-                templateUrl: 'views/drawings/drawing.tpl.html'
+                teomplateUrl: 'views/drawings/drawing.tpl.html'
             }).
             when('/login', {
                 templateUrl: 'views/user/login.tpl.html',

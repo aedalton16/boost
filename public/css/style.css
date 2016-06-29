@@ -15,9 +15,14 @@
 /* 1.0 Basic Setup */
 *{ margin: 0; padding: 0;}
 
+.ng-scope {
+  min-height: 100%;
+}/*
 html {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
+  width: 100%;
+
 }
 
 html, input {
@@ -38,188 +43,21 @@ html, body {
     width: 100%;
     height: 100%;
 }
+*/
 
-@import 'bootstrap/variables';
+/*.full { height: 100%;}
 
-.navbar-fixed-side {
-  @media (max-width: $grid-float-breakpoint) {
-    margin-left: -15px;
-    margin-right: -15px;
-  }
+*/
 
-  @media (min-width: $grid-float-breakpoint) {
-    $navbar-default-link-hover-bg: darken($navbar-default-bg, 3%);
-    $navbar-inverse-link-hover-bg: lighten($navbar-inverse-bg, 5%);
-    $navbar-inverse-border: lighten($navbar-inverse-bg, 8%);
-
-    position: fixed;
-    margin: 0 -15px;
-    height: 100vh;
-    width: inherit;
-    overflow: auto;
-    border-top-width: 0;
-    border-bottom-width: 0;
-    border-radius: 0;
-
-    .container, .container-fluid {
-      width: auto;
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    .navbar-header {
-      float: none;
-    }
-
-    .navbar-brand {
-      height: auto;
-    }
-
-    > .container, > .container-fluid {
-      .navbar-brand {
-        margin-left: 0;
-      }
-    }
-
-    .navbar-collapse {
-      width: 100%;
-      border-top: 1px solid $navbar-default-border;
-    }
-
-    .navbar-nav {
-      float: none;
-      margin: 0 (-$navbar-padding-horizontal);
-
-      > li {
-        float: none;
-        > a {
-          padding-top:    10px;
-          padding-bottom: 10px;
-          border-bottom: 1px solid $navbar-default-border;
-        }
-      }
-    }
-
-    .navbar-form {
-      margin: 0;
-      margin-left: -$navbar-padding-horizontal;
-      margin-right: -$navbar-padding-horizontal;
-      padding: 10px $navbar-padding-horizontal;
-      border-bottom: 1px solid $navbar-default-border;
-    }
-
-    .navbar-text {
-      float: none;
-      margin-left: 0;
-      margin-right: 0;
-    }
-
-    .navbar-left,
-    .navbar-right {
-      float: none !important;
-    }
-
-    .navbar-nav {
-      .dropdown-menu {
-        position: static;
-        float: none;
-        width: auto;
-        margin-top: 0;
-        background-color: transparent;
-        border: 0;
-        box-shadow: none;
-        border-bottom: 1px solid $navbar-default-border;
-
-        > li > a,
-        .dropdown-header {
-          padding: 5px 15px 5px 25px;
-        }
-
-        > li {
-          > a {
-            line-height: $line-height-computed;
-            color: $navbar-default-link-color;
-
-            &:hover, &:focus {
-              background-image: none;
-            }
-          }
-        }
-
-        > .active > a {
-          background-color: $navbar-default-link-active-bg;
-          color: $navbar-default-link-active-color;
-        }
-      }
-
-      > li > a,
-      .dropdown-menu > li > a {
-        &:hover, &:focus {
-          background-color: $navbar-default-link-hover-bg;
-          color: $navbar-default-link-hover-color;
-        }
-      }
-    }
-
-    .dropdown > .dropdown-toggle,
-    .dropdown-menu > .dropdown-header {
-      background-color: transparent !important;
-      color: lighten($navbar-default-color, 15%) !important;
-      cursor: default;
-      font-size: 0.8em;
-      text-transform: uppercase;
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .dropdown-toggle .caret {
-      display: none;
-    }
-
-    .dropdown-menu {
-      display: block;
-    }
-
-    &.navbar-inverse {
-      .navbar-collapse,
-      .navbar-nav > li > a,
-      .navbar-form,
-      .navbar-nav .dropdown-menu {
-        border-color: $navbar-inverse-border;
-      }
-
-      .divider {
-        background-color: $navbar-inverse-border;
-      }
-
-      .navbar-nav {
-        .dropdown-menu > li > a {
-          color: $navbar-inverse-link-color;
-        }
-
-        .dropdown-menu > .active > a {
-          background-color: $navbar-inverse-link-active-bg;
-          color: $navbar-inverse-link-active-color;
-        }
-
-        > li:not(.active) > a,
-        .dropdown-menu > li:not(.active) > a {
-          &:hover, &:focus {
-            background-color: $navbar-inverse-link-hover-bg;
-            color: $navbar-inverse-link-hover-color;
-          }
-        }
-      }
-
-      .dropdown > .dropdown-toggle {
-        color: darken($navbar-inverse-color, 15%) !important;
-      }
-    }
-  }
-}
-.full { height: 100%;}
-
-
+/*TODO: SOLVE ANGULAR PARTIAL ISSUE*/
+html, body { height: 100%; width: 100%; margin: 0;  background-size: cover;
+    background: #162951; /* Old browsers */
+  background: -moz-linear-gradient(top,  #162951 18%, #162951 18%, #2c539e 57%, #388ac9 84%, #3bbad3 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#162951', endColorstr='#3bbad3',GradientType=0 ); /* IE6-9 */
+  
+ }
 a.boost-page{
     color: #fff;
 }
@@ -273,7 +111,7 @@ body, html{
 
 header {
     /*position: absolute;*/
-    width: 80%;
+    width: 100%;
 
     display: block;
     margin: 0 auto;
@@ -640,27 +478,7 @@ aside {
 
 }
 
-#boost-page{ /*padding: 100px 0;*/
-  height: 1000px;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#162951+18,162951+18,2c539e+57,388ac9+84,3bbad3+100 */
-  background: #162951; /* Old browsers */
-  background: -moz-linear-gradient(top,  #162951 18%, #162951 18%, #2c539e 57%, #388ac9 84%, #3bbad3 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #162951 18%,#162951 18%,#2c539e 57%,#388ac9 84%,#3bbad3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#162951', endColorstr='#3bbad3',GradientType=0 ); /* IE6-9 */
-}
 
-#boost-page-light{
-  height: 1000px; /*//janky but need to have full page and its 5AM*/
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4e90dc+0,4e90dc+7,4e90dc+7,64a9e6+20,64a9e6+20,74b3e6+30,acd3f0+100 */
-
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4e90dc+0,4e90dc+13,64a9e6+24,74b3e6+34,acd3f0+100 */
-  background: #4e90dc; /* Old browsers */
-  background: -moz-linear-gradient(top,  #4e90dc 0%, #4e90dc 13%, #64a9e6 24%, #74b3e6 34%, #acd3f0 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e90dc', endColorstr='#acd3f0',GradientType=0 ); /* IE6-9 */
-}
 
 
 /*--------------------------------------------------------------

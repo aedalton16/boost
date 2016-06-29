@@ -1,4 +1,4 @@
-@import 'bootstrap/variables';
+
 
 .navbar-fixed-side {
   @media (max-width: $grid-float-breakpoint) {

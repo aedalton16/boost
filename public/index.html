@@ -74,18 +74,12 @@
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="css/navbar.css" type="text/css"/>
+    <!-- <link rel="stylesheet" href="css/style.css" type="text/css"/> -->
   
 </head>
  
 <body ng-controller="MainController">
-
-
-  <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-lg-2">
-      <nav class="navbar navbar-default navbar-fixed-side">
-         <nav class="navbar navbar-inverse" style="margin-bottom: 5px">
+  <nav class="navbar navbar-inverse" style="margin-bottom: 5px">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
@@ -108,14 +102,7 @@
       </div><!-- /.navbar-collapse -->
     </div>
   </nav>
-      </nav>
-    </div>
-    <div class="col-sm-9 col-lg-10">
-     <div ng-view class="full"/>
-    </div>
-  </div>
-</div>
-    
+    <div ng-view class="full"/>
 
 </body>
 
