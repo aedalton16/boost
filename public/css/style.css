@@ -13,7 +13,7 @@
 */
 
 #about-title{
-  font-size: 100px;
+  font-size: 50px;
   font-weight: bold;
   font-family:  'Montserrat', sans-serif;
 
@@ -24,9 +24,9 @@ i.fa-magic {
   -o-transform:rotateY(180deg);
   -ms-transform:rotateY(180deg);
 }
-.ng-scope{
+/*.ng-scope{  incorrect zoom 
   height: 100%;
-}
+}*/
 /*md-tabs.md-default-theme md-tabs-ink-bar {
     color: rgb(255,255,255);
     background: rgb(255,255,255);
@@ -103,8 +103,8 @@ ul {
   background: url("/img/stars.png") repeat top center;
   background-color: #0277BD;
   margin-top: 10px;
-  padding: 20px;
-  font-size: 20px;
+  padding: 10px;
+  font-size: 18px;
   border-radius: 24px;
 
   
@@ -114,19 +114,19 @@ ul {
   background: url("/img/stars.png") repeat top center;
   background-color: #0277BD;
   margin-top: 15px;
-  padding: 20px;
-  font-size: 20px;
+  padding: 10px;
+  font-size: 18px;
   border-radius: 24px;
 }
 #sidenav-btn:hover{
   background-color: #ff3300;
 
-  font-size: 40px;
+  font-size: 30px;
 }
 #sidenav-btn-top:hover{
   background-color: #ff3300;
 
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .pages {
@@ -146,7 +146,7 @@ ul {
 #info {
     color: #fff;
     text-align: center;
-    font-size: 35px; 
+    font-size: 14px; 
 }
 
 /* 2.0 Navigation and Headers */
@@ -168,7 +168,7 @@ body, html{
    width: 100%;
    height: 100%;
    color: #000000; 
-   font: 24px;/*, cursive, sans-serif;*/ 
+   font: 14px;/*, cursive, sans-serif;*/ 
    font-weight: 400;
    /*font-family:"Myriad Set Pro", "Lucida Grande", "Helvetica Neue", "Helvetica", "Arial", "Verdana", "sans-serif";*/
    font-family: 'Montserrat', sans-serif;
@@ -345,6 +345,8 @@ header .header-content .header-content-inner p {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: 70%;
+    width: 85%;
     /*min-height: 100%;*/
     min-width: inherit; 
   }
@@ -1003,9 +1005,18 @@ md-sidenav {
   fill: #737373;
   ng-md-icon {
     position: relative;
-    top: 5px; // adjust for svg viewbox
+    top: 5px; /*// adjust for svg viewbox*/
   }
 }
+
+md-sidenav, 
+md-sidenav.md-locked-open, 
+md-sidenav.md-closed.md-locked-open-add-active {
+    min-width: 200px !important;
+    width: 85vw !important;
+    max-width: 210px !important;
+} 
+
 .user-avatar {
   border-radius: 99%;
 }

@@ -17,6 +17,7 @@ angular.module('users').controller('LoginCtrl', function ($scope, Auth, sharedPr
 				console.log('ok');
 				console.log($scope.user.email);
 				sharedProperties.setCurrentUser($scope.user.email);
+				// $scope.$apply();
 				socket.emit('login', {'currentUser': $scope.user.email});
 			    $location.path('#/draw');
 
