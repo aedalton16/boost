@@ -101,14 +101,25 @@
       </h1>
     </div>
   </md-toolbar>
-  
+  <!-- move the top bar -->
   <div layout="row" flex class="change-my-css">
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-      <div>Side Navigation</div>
 
+      <md-toolbar class="md-tall md-hue-2">
+        <span flex></span>
+        <div layout="column" class="md-toolbar-tools-bottom inset">
+          <!-- <user-avatar></user-avatar> ng-dir--> 
+          <span></span>
+          <i class="fa fa-rocket fa-3x">  </i> 
+          <h2 ng-show="currentUser" class="ng-hide">Booster: {{stringValue}}</h2>
+          <h2 ng-show="!currentUser" class="ng-hide"> Please <a ui-sref="login" style="color:red"> Login!</a></h2>
+          
+        </div>
+      </md-toolbar>
       </md-sidenav>
   
     <md-content layout="column" id="content" flex class="md-padding">
+      <md-toolbar>
         <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
           <md-tab id="tab1" aria-controls="tab1-content">
           Latest
@@ -117,8 +128,9 @@
           Favorites
           </md-tab>
         </md-tabs>
-
-        <ui-view layout="column" layout-fill layout-padding>
+      </md-toolbar>
+        <!-- default view is about and then switches  -->
+        <ui-view layout="column" layout-fill layout-padding> 
 
             <ng-switch on="data.selectedIndex" class="tabpanel-container">
               <div role="tabpanel"
@@ -147,9 +159,16 @@
                     </md-card-content>
                   </md-card>
               </div>
-              
           </ng-switch>
         </ui-view>
+          <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+        <ng-md-icon icon="add"></ng-md-icon>
+      </md-button>
+      <md-toolbar ng-show="!showSearch">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+            <ng-md-icon icon="menu"></ng-md-icon>
+          </md-button>
     </md-content>
   </div>
       

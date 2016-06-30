@@ -6,7 +6,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
         $stateProvider
         .state('welcome', {
             url:'/welcome', //change to about
-            templateUrl: 'index.html',//views/about/about.tpl.html',
+            templateUrl: 'views/about/about.tpl.html',
             controller: 'WelcomeController'
         })
         .state('draw', {
@@ -41,23 +41,7 @@ app.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$stateParams = $stateParams;
 });
 
-// .run(function ($rootScope, $location, Auth) {
 
-//     //watching the value of the currentUser variable.
-//     $rootScope.$watch('currentUser', function(currentUser) {
-//       // if no currentUser and on a page that requires authorization then try to update it
-//       // will trigger 401s if user does not have a valid session
-//       if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) == -1 )) {
-//         Auth.currentUser();
-//       }
-//     });
-
-//     // On catching 401 errors, redirect to the login page.
-//     $rootScope.$on('event:auth-loginRequired', function() {
-//       $location.path('/login');
-//       return false;
-//     });
-//   });
 app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties',function($scope, $rootScope, $log, $location, $mdBottomSheet, $mdSidenav, $mdDialog, sharedProperties){
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
