@@ -15,10 +15,8 @@
 /* 1.0 Basic Setup */
 *{ margin: 0; padding: 0;}
 
-html, body, .ng-scope, .container-fluid, .row {
-  height: 100%;
-}
-//*
+
+/*
 html {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
@@ -198,35 +196,12 @@ header .header-content .header-content-inner p {
   z-index: 50;
 }
 
-.md-button.md-fab.md-fab-bottom-right.md-speed-dial {
-  transform: translate3d(0,0,0);
-  width: 40px;
-  height: 40px;
-  background: green;
-
-  transition: 0.2s ease-out;
-  transition-property: transform, opacity;
-  &.ng-enter,
-  &.ng-leave.ng-leave-active {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  &.ng-enter.ng-enter-active,
-  &.ng-leave {
-    opacity: 1;
-    transform: scale(1);
-  }
-  &.ng-enter-stagger,
-  &.ng-leave-stagger {
-    transition-delay: .03s;
-    transition-duration: 0s;
-  }
-
-  @for $i from 1 through 10 {
-    &:nth-child(#{$i}) {
-      margin-bottom: unquote('#{($i - 1) * 45}px');
-    }
-  }
+.md-button.md-fab.md-fab-bottom-right {
+    top: auto;
+    right: 20px;
+    bottom: 50%;
+    left: auto;
+    position: absolute;
 }
 
 #toolkit {
