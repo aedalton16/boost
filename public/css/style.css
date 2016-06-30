@@ -67,7 +67,7 @@ md-tabs md-ink-bar {
 
  #boostpage{
   height: 100%;
-  padding: 20px;
+  padding-bottom: 20%;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#162951+18,162951+18,2c539e+57,388ac9+84,3bbad3+100 */
   background: #162951; /* Old browsers */
   background: -moz-linear-gradient(top,  #162951 18%, #162951 18%, #2c539e 57%, #388ac9 84%, #3bbad3 100%); /* FF3.6-15 */
@@ -78,6 +78,7 @@ md-tabs md-ink-bar {
 }
 #boostlight{
   height: 100%;
+  padding-bottom: 20%;
   background: #4e90dc; /* Old browsers */
   background: -moz-linear-gradient(top,  #4e90dc 0%, #4e90dc 13%, #64a9e6 24%, #74b3e6 34%, #acd3f0 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* Chrome10-25,Safari5.1-6 */
@@ -269,7 +270,7 @@ header .header-content .header-content-inner p {
 .md-fab .md-fab-bottom-right .md-button .md-default-theme {
     top: auto;
     right: 20px;
-    bottom: 50%;
+    bottom: 50% !important;
     left: auto;
     position: absolute;
     color: #fff;
@@ -865,7 +866,7 @@ form button {
 /* Citation:; http://thecodeplayer.com/walkthrough/pure-css3-animated-clouds-background !!*/
 
 .cloud {
-  width: 200px; height: 60px;
+  width: 10%; height: 10%;
   background: #fff;
   
   border-radius: 200px;

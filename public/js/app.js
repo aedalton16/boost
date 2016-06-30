@@ -119,6 +119,10 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBott
     });
   };
 
+$scope.socketEmit = function(message){
+  $scope.socket.emit('drawing', message);
+  console.log('socket emit fired');
+}
 // need in a partial and or a service  
   $scope.showAdd = function(ev) {
     $mdDialog.show({
@@ -210,7 +214,8 @@ app.directive('resize', function ($window) {
             scope.$apply();
         });
     }
-})
+});
+
 
 
 // app.controller('DemoCtrl', function() {
