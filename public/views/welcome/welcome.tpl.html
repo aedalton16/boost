@@ -1,10 +1,11 @@
-<div id ="boostpage" > 
+<div ng-controller="WelcomeController" ng-init="init()" >
+<div class="container" id ="boostpage" > 
     <div class="stars"></div>
-    <div ng-controller="WelcomeController" ng-init="init()" >
+        <div class="container">
         <h1 class="welcome"> BOOST!Tutors</h1>
         <div style="text-align:center" class="rocket-white"> <i class="fa fa-rocket fa-5x"> </i> </div>  
 
-        <div class="container">
+        
             <div id="info">Click an existing whiteboard session or create a new one. Thanks to socket.io, these files can be shared and interactively viewed --open two browsers with the same drawing-id to see!
             </div>
         
@@ -31,11 +32,6 @@
             </div>
         </div>
     </div>
-    </div>
-     <div class="cloud x1"></div>
-  <!-- Time for multiple clouds to dance around -->
-  <div class="cloud x2"></div>
-  <div class="cloud x3"></div>
-  <div class="cloud x4"></div>
-  <div class="cloud x5"></div>
+
+
 </div>
