@@ -123,7 +123,7 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBott
   $scope.showAdd = function(ev) {
     $mdDialog.show({
       controller: DialogController,
-      template: '<md-dialog aria-label="Mango (Fruit)"> <md-content class="md-padding"><span flex></span> <h1 >Hello {{$scope.currentUser}} !</h1></md-dialog>',
+      template: '<md-dialog aria-label="Mango (Fruit)"> <md-content class="md-padding"><span flex></span> <h1 >Personalized (Launchpad!) Modal Coming Soon! {{$scope.currentUser}} !</h1></md-dialog>',
       
       targetEvent: ev,
     })

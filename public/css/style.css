@@ -47,7 +47,8 @@ md-tabs md-ink-bar {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e90dc', endColorstr='#acd3f0',GradientType=0 ); /* IE6-9 */
 }
 a {
-    color: #ff4081;
+    color: #ff3300; /*#ff4081;*/
+    font-weight: 900;
 }
 
 ul {
@@ -188,6 +189,8 @@ header .header-content .header-content-inner p {
     bottom: 50%;
     left: auto;
     position: absolute;
+    color: #fff;
+    background-color: #ff3300;
 }
 
 #toolkit {
