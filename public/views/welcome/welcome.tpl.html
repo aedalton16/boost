@@ -7,7 +7,7 @@
         <div class="container">
             <div id="info">Click an existing whiteboard session or create a new one. Thanks to socket.io, these files can be shared and interactively viewed --open two browsers with the same drawing-id to see!
             </div>
-        </div>
+        
         <div class="row"  ng-hide="!drawings"> <!-- **where is container -->
             <div class="col-md-4"> 
                 <h3> Existing BOOST!Boards </h3> 
@@ -21,14 +21,15 @@
             <div class="col-md-8">
                 <h3> Create New Board</h3>
 
-                <form class="form-signup">
-                    <input type="text" class="form-control" ng-model="newDrawing.name" placeholder="Drawing Name">
-                    <input type="text" class="form-control" ng-model="newDrawing.description" placeholder="Drawing Description">
+                <form class="form-signup" >
+                    <input type="text" class="form-control" id="gallery" ng-model="newDrawing.name" placeholder="Drawing Name">
+                    <input type="text" class="form-control" id="gallery" ng-model="newDrawing.description" placeholder="Drawing Description">
 
                     <input type="button" class="btn btn-primary" ng-click="create()" value="save"/>
                     <input type="button" class="btn btn-success" ng-click="newDrawing = null" value="clear"/>
                 </form>
             </div>
         </div>
+    </div>
     </div>
 </div>

@@ -21,6 +21,9 @@
     background: rgb(255,255,255);
 }*/
 
+#gallery{
+  padding: 30px;
+}
 md-tabs md-ink-bar {
     color: black;
     background-color: black;
@@ -49,11 +52,42 @@ md-tabs md-ink-bar {
 a {
     color: #ff3300; /*#ff4081;*/
     font-weight: 900;
+
+}
+a:hover{
+  text-decoration: none;
 }
 
 ul {
   list-style: none;
   word-wrap: break-word;
+}
+
+
+/*make into classes w/ids*/
+#sidenav-btn{
+  background-color: #0277BD;
+  margin-top: 10px;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 24px;
+}
+#sidenav-btn-top {
+  background-color: #0277BD;
+  margin-top: 15px;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 24px;
+}
+#sidenav-btn:hover{
+  background-color: #ff3300;
+
+  font-size: 40px;
+}
+#sidenav-btn-top:hover{
+  background-color: #ff3300;
+
+  font-size: 40px;
 }
 
 .pages {
@@ -947,9 +981,10 @@ md-sidenav {
   height: 38px;
   width: 36px;
 } 
-md-toolbar h1 {
-  font-weight: normal;
-}
+
+/*md-toolbar{
+  border-radius: 24px;
+}*/
 /*md-list .md-button {
   color: inherit;
   font-weight: 500;

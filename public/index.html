@@ -100,58 +100,31 @@
 
       <md-toolbar class="md-tall md-hue-2">
         <span flex></span>
-        <div layout="column">
+        <!-- <div layout="column"> -->
           <!-- <user-avatar></user-avatar> ng-dir--> 
           <span></span>
           <i class="fa fa-rocket fa-3x">  </i> 
           <h2 ng-show="currentUser" class="ng-hide">Booster: {{stringValue}}</h2>
           <h2 ng-show="!currentUser" class="ng-hide"> Please <a ui-sref="login" style="color:#ff3300; font-weight: bold"> Login!</a></h2>
           
-          <h1> <a href="#/about"> Home </a> </h1>
-          <md-divider></md-divider>
-          <h1> <a ui-sref="profile"> </i> Profile</a> </h1>
-          <md-divider></md-divider>
-          <h1> <a href="#/draw"> </i> Draw </a> </h1>
-          <md-divider></md-divider>
+          <!-- top -->
+          <div class="btn-group-vertical">
+          <button class="btn btn-primary btn-lg" ui-sref="about" id="sidenav-btn-top"> Home </button> 
+          <!-- <md-divider></md-divider> -->
+          <button class="btn btn-primary btn-lg" ui-sref="profile" id="sidenav-btn"> Profile</button>
+          <!-- <md-divider></md-divider> -->
+          <button class="btn btn-primary btn-lg" ui-sref="draw" id="sidenav-btn"> Draw</button> 
 
+          <!-- <md-divider></md-divider> which href or?-->
         </div>
+
+        <!-- </div> -->
       </md-toolbar>
       </md-sidenav>
   
-    <md-content layout="column" id="content" flex class="md-padding">
-
-        <!-- default view is about and then switches  -->
-        <ui-view layout="column" layout-fill layout-padding> 
-
-            <ng-switch on="data.selectedIndex" class="tabpanel-container">
-              <div role="tabpanel"
-                   id="tab1-content"
-                   aria-labelledby="tab1"
-                   ng-switch-when="0"
-                   md-swipe-left="next()"
-                   md-swipe-right="previous()"
-                   layout="row" layout-align="center center">
-                  <md-card flex-gt-sm="90" flex-gt-md="80">
-                    <md-card-content>
-                      <h2>Activity</h2>
-                    </md-card-content>
-                  </md-card>
-              </div>
-              <div role="tabpanel"
-                   id="tab2-content"
-                   aria-labelledby="tab2"
-                   ng-switch-when="1"
-                   md-swipe-left="next()"
-                   md-swipe-right="previous()" 
-                   layout="row" layout-align="center center">
-                  <md-card flex-gt-sm="90" flex-gt-md="80">
-                    <md-card-content>
-                      <h2>Favorites</h2>
-                    </md-card-content>
-                  </md-card>
-              </div>
-          </ng-switch>
-        </ui-view>
+    <md-content layout="column" id="content" flex class="md-padding"> 
+ <ui-view> </ui-view>
+       
           <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
           <i class="fa fa-rocket fa-3x" style="padding: 3px"> </i>
           </md-button>

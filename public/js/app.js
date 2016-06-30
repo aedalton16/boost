@@ -66,7 +66,7 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBott
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
 
-    
+    $scope.stringValue = sharedProperties.getString();
     $rootScope.$on("$locationChangeStart", function(event, next, current){
         if(!isCanvasSupported()){
             $log.info("routing to unsupported");
