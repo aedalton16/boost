@@ -101,6 +101,7 @@
   <body layout="row" ng-controller="AppCtrl">
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
       <md-toolbar class="md-tall md-hue-2">
+      <div class="stars"></div>
         <span flex></span>
         <div layout="column" class="md-toolbar-tools-bottom inset">
           <!-- <user-avatar></user-avatar> -->
@@ -118,7 +119,7 @@
             <div class="inset">
               <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
             </div>
-            <div class="inset">{{item.title}}
+            <div class="inset"> <a href="{{item.link}}"> {{item.title}} </a>
             </div>
           </md-item-content>
         </a>
@@ -140,10 +141,10 @@
     </md-sidenav>
     <div layout="column" class="relative" layout-fill role="main">
       <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
-        <ng-md-icon icon="add"></ng-md-icon>
+        <i class="fa fa-rocket fa-2x fa-magic"> </i>
       </md-button>
       <md-toolbar ng-show="!showSearch">
-        
+        <div class="stars"></div>
         <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
           <md-tab id="tab1" aria-controls="tab1-content" ui-sref="welcome">
             About/Home

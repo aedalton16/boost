@@ -80,16 +80,16 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBott
   };
     $scope.menu = [
     {
-      link : '',
+      link : '#/auth/users/:userId',
       title: 'Dashboard',
       icon: 'dashboard'
     },
     {
-      link : '/draw',
-      title: 'Profile',
+      link : '#/draw',
+      title: 'Classrooms',
       icon: 'group'
     },
-    {
+    { //fill
       link : '',
       title: 'Messages',
       icon: 'message'

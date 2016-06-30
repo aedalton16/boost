@@ -266,6 +266,16 @@ header .header-content .header-content-inner p {
   z-index: 50;
 }
 
+.md-fab .md-fab-bottom-right .md-button .md-default-theme {
+    top: auto;
+    right: 20px;
+    bottom: 50%;
+    left: auto;
+    position: absolute;
+    color: #fff;
+    background-color: #ff3300;
+}
+
 .md-button.md-fab.md-fab-bottom-right {
     top: auto;
     right: 20px;
