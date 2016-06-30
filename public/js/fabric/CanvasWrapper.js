@@ -230,13 +230,13 @@ var CanvasWrapper = function(id, context){
         self.checkActivity();
     });
 
-    this.socket.on('remoteChange', function(o){
-        var m = o.msg; 
-        console.log('remote change triggered');
-        this.handler = this.tools[m.toUpperCase()];
-        this.handler.init(); 
+    // this.socket.on('remoteChange', function(o){
+    //     var m = o.msg; 
+    //     console.log('remote change triggered');
+    //     this.handler = this.tools[m.toUpperCase()];
+    //     this.handler.init(); 
 
-    })
+    // })
 
 };
 

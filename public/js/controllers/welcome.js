@@ -1,6 +1,6 @@
 var welcome = angular.module('welcome', []); // this isnt the right place for user things but for the purposes of the demo
 
-welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', 'socket', function($scope, $location, Drawings, socket){
+welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', function($scope, $location, Drawings){//socket
 
    // init 
     $scope.newDrawing = {};

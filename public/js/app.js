@@ -65,6 +65,7 @@ app.config(function ($mdThemingProvider) { // **
 app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties',function($scope, $rootScope, $log, $location, $mdBottomSheet, $mdSidenav, $mdDialog, sharedProperties){
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
+    
 
     $scope.stringValue = sharedProperties.getString();
     $rootScope.$on("$locationChangeStart", function(event, next, current){
