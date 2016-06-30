@@ -22,6 +22,12 @@ app.config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'views/user/login.tpl.html',
             controller: 'LoginCtrl'
         })
+        .state('about',{
+            url: '/about',
+            templateUrl: 'views/about/about.tpl.html',
+            // controller: 'SignupCtrl'
+            controller: 'SignupCtrl'
+        })
         .state('signup',{
             url: '/signup',
             templateUrl: 'views/user/signup.tpl.html',
@@ -203,19 +209,19 @@ app.directive('resize', function ($window) {
 //   });
 
 
-app.directive('toggle', function(){
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs){
-      if (attrs.toggle=="tooltip"){
-        $(element).tooltip();
-      }
-      if (attrs.toggle=="popover"){
-        $(element).popover();
-      }
-    }
-  };
-})
+// app.directive('toggle', function(){
+//   return {
+//     restrict: 'A',
+//     link: function(scope, element, attrs){
+//       if (attrs.toggle=="tooltip"){
+//         $(element).tooltip();
+//       }
+//       if (attrs.toggle=="popover"){
+//         $(element).popover();
+//       }
+//     }
+//   };
+// })
 
 
 

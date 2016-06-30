@@ -48,12 +48,15 @@ html, body {
 
 */
 
+.ng-scope{
+  height: 100%;
+}
 /*TODO: SOLVE ANGULAR PARTIAL ISSUE*/
 html, body { 
   
  }
  #boostpage{
-    /*height: 1000px;*/
+    height: 100%;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#162951+18,162951+18,2c539e+57,388ac9+84,3bbad3+100 */
   background: #162951; /* Old browsers */
   background: -moz-linear-gradient(top,  #162951 18%, #162951 18%, #2c539e 57%, #388ac9 84%, #3bbad3 100%); /* FF3.6-15 */

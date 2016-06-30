@@ -86,28 +86,20 @@
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
     <link rel="stylesheet" href="css/navbar.css" type="text/css"/>
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic"> -->
   <meta name="viewport" content="initial-scale=1" />
 
 </head>
 
 <body layout="column" ng-controller="AppCtrl">
-  <md-toolbar layout="row">
-    <div class="md-toolbar-tools">
-      <button ng-click="toggleSidenav('left')" hide-gt-sm class="menuBtn" aria-label="Toggle Menu">
-      </button>
-      <h1 layout-align-gt-sm="center">
-        Hello World
-      </h1>
-    </div>
-  </md-toolbar>
+
   <!-- move the top bar -->
   <div layout="row" flex class="change-my-css">
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" style="height: 75%">
 
       <md-toolbar class="md-tall md-hue-2">
         <span flex></span>
-        <div layout="column" class="md-toolbar-tools-bottom inset">
+        <div layout="column">
           <!-- <user-avatar></user-avatar> ng-dir--> 
           <span></span>
           <i class="fa fa-rocket fa-3x">  </i> 
@@ -121,10 +113,10 @@
     <md-content layout="column" id="content" flex class="md-padding">
       <md-toolbar>
         <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
-          <md-tab id="tab1" aria-controls="tab1-content">
+          <md-tab id="tab1" aria-controls="tab1-content" ui-sref="welcome">
           Latest
           </md-tab>
-          <md-tab id="tab2" aria-controls="tab2-content">
+          <md-tab id="tab2" aria-controls="tab2-content" ui-sref="draw">
           Favorites
           </md-tab>
         </md-tabs>
@@ -164,8 +156,8 @@
           <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
         <ng-md-icon icon="add"></ng-md-icon>
       </md-button>
-      <md-toolbar ng-show="!showSearch">
-        <div class="md-toolbar-tools">
+      <!-- <md-toolbar ng-show="!showSearch"> -->
+        <div >
           <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
             <ng-md-icon icon="menu"></ng-md-icon>
           </md-button>
