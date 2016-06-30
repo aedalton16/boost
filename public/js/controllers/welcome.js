@@ -51,6 +51,10 @@ welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', 'soc
         console.log('oh hai-- connected to server');
     });
 
+    socket.on('login', function(){
+        console.log('login heard at welcome');
+        
+    });
     socket.on('disconnect', function(){
         console.log('okie bai-- disconnected from server');
     });

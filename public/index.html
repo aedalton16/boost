@@ -83,8 +83,9 @@
     <!-- run and minify -->
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/rocket.css" type="text/css"/>
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <!-- <link rel="stylesheet" href="css/navbar.css" type="text/css"/> -->
+    
   
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic"> -->
   <meta name="viewport" content="initial-scale=1" />
@@ -104,38 +105,21 @@
           <span></span>
           <i class="fa fa-rocket fa-3x">  </i> 
           <h2 ng-show="currentUser" class="ng-hide">Booster: {{stringValue}}</h2>
-          <h2 ng-show="!currentUser" class="ng-hide"> Please <a ui-sref="login" style="color:red"> Login!</a></h2>
+          <h2 ng-show="!currentUser" class="ng-hide"> Please <a ui-sref="login" style="color:#ff4081; font-weight: bold"> Login!</a></h2>
           
+          <h1> <a href="#/about"> Home </a> </h1>
+          <md-divider></md-divider>
+          <h1> <a ui-sref="profile"> </i> Profile</a> </h1>
+          <md-divider></md-divider>
+          <h1> <a href="#/draw"> </i> Draw </a> </h1>
+          <md-divider></md-divider>
+
         </div>
       </md-toolbar>
       </md-sidenav>
   
     <md-content layout="column" id="content" flex class="md-padding">
-      <md-toolbar>
-      <div class="md-toolbar-tools" ng-show="!showSearch">
-                <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
-                    <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
-                </md-button>
-                <h2>
-                    <span>Site</span>
-                </h2>
-                <span flex></span>
-                <md-button aria-label="Search" ng-click="showAdvanced($event)">
-                    <md-icon aria-label="Search" class="material-icons">search</md-icon>
-                </md-button>
-            </div>
-        <md-tabs md-stretch-tabs="always" md-selected="data.selectedIndex">
-                <md-tab id="tab1" aria-controls="tab1-content" ui-sref="welcome">
-                    Map
-                </md-tab>
-                <md-tab id="tab2" aria-controls="tab2-content" ui-sref="draw">
-                    List
-                </md-tab>
-                <md-tab id="tab3" aria-controls="tab3-content" ui-sref="profile">
-                    Favorites
-                </md-tab>
-              </md-tabs>
-      </md-toolbar>
+
         <!-- default view is about and then switches  -->
         <ui-view layout="column" layout-fill layout-padding> 
 
@@ -169,8 +153,8 @@
           </ng-switch>
         </ui-view>
           <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
-        <ng-md-icon icon="add"></ng-md-icon>
-      </md-button>
+          <i class="fa fa-rocket fa-3x" style="padding: 3px"> </i>
+          </md-button>
       <!-- <md-toolbar ng-show="!showSearch"> -->
         <div >
           <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">

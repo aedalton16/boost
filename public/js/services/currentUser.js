@@ -18,6 +18,7 @@ angular.module('users')
             return objectValue;
         }
     };
+    'socket'
 });
 
 

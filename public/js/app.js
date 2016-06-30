@@ -27,8 +27,8 @@ app.config(['$stateProvider', '$urlRouterProvider',
         .state('about',{
             url: '/about',
             templateUrl: 'views/about/about.tpl.html',
-            // controller: 'SignupCtrl'
             controller: 'SignupCtrl'
+            // controller: 'SignupCtrl'
         })
         .state('signup',{
             url: '/signup',
@@ -49,13 +49,24 @@ app.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$stateParams = $stateParams;
 });
 
+app.config(function ($mdThemingProvider) { // **
+    var cornellRedMap = $mdThemingProvider.extendPalette('blue', {
+        '500': '#ff4081',
+        'contrastDefaultColor': 'light'
+    });
+    // Register the new color palette map with the name <code>cornellRed</code>
+    $mdThemingProvider.definePalette('cornellRed', cornellRedMap);
+    // Use that theme for the primary intentions
+    $mdThemingProvider.theme('default')
+      .primaryPalette('cornellRed');
+});
+
 
 app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties',function($scope, $rootScope, $log, $location, $mdBottomSheet, $mdSidenav, $mdDialog, sharedProperties){
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
 
-    $scope.currentUser = sharedProperties.getString();
-    console.log($scope.currentUser);
+    
     $rootScope.$on("$locationChangeStart", function(event, next, current){
         if(!isCanvasSupported()){
             $log.info("routing to unsupported");
