@@ -2,45 +2,36 @@
 
 // drawings routes use drawings controller
 var path = require('path');
-var userController = require('../controllers/userController');
-var users = userController; 
-var auth = require('../auth/auth');
+
+var auth = require('../config/auth');
 var session = require('../controllers/sessionController');
 
 var User = require('../models/userModel');
+'use strict';
 
-module.exports = function(app, passport) {
-
-    // app.post('/users', userController.create);
-
-    // app.get('/users', userController.all);
-
-    
+var users = require('../controllers/userController');
+module.exports = function(app) {
   // User Routes
-  // var users = require('../controllers/userController');
-  app.post('/signup', users.signup);
-  // app.get('/auth/users/:userId', users.findById);
+  
+  app.post('/auth/users', users.create);
+  app.get('/auth/users/:userId', users.show);
 
   // Check if username is available
   // todo: probably should be a query on users
-  // app.get('/auth/check_username/:username', users.exists);
+  app.get('/auth/check_username/:username', users.exists);
 
   // Session Routes
-  // var session = require('../controllers/sessionController');
+  
   app.get('/auth/session', auth.ensureAuthenticated, session.session);
   app.post('/auth/session', session.login);
-  
   app.del('/auth/session', session.logout);
 
-};
+  // Angular Routes
+  app.get('/partials/*', function(req, res) {
+    var requestedView = path.join('./', req.url);
+    res.render(requestedView);
+  });
 
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) { //ror 
 
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
 
-    // if they aren't redirect them to the home page
-    res.redirect('/login');
 };

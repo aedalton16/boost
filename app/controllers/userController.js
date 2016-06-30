@@ -10,20 +10,17 @@ var mongoose = require('mongoose'),
  * requires: {username, password, email}
  * returns: {email, password}
  */
-exports.signup = function (req, res, next) {
+exports.create = function (req, res, next) {
   var newUser = new User(req.body);
-  console.log(req.body);
-  newUser.provider = 'local'; //local
+  newUser.provider = 'local';
 
   newUser.save(function(err) {
     if (err) {
-      console.log('no save');
-      return  res.status(400).json(err);
+      return res.json(400, err);
     }
 
     req.logIn(newUser, function(err) {
-      if (err) { 
-      console.log('no login err');return next(err);}
+      if (err) return next(err);
       return res.json(newUser.user_info);
     });
   });
@@ -33,18 +30,20 @@ exports.signup = function (req, res, next) {
  *  Show profile
  *  returns {username, profile}
  */
+exports.show = function (req, res, next) {
+  var userId = req.params.userId;
 
-// TODO:find a way to use one set of codes and pass in model param??
- exports.findById = function(req, res){
-  User.findOne({'_id': req.params.userId}, function(err, user){
-    if (err){
-      console.log(error, {status: 500});
-    }else{
-      res.jsonp(user); //use passport? 
+  User.findById(ObjectId(userId), function (err, user) {
+    if (err) {
+      return next(new Error('Failed to load User'));
+    }
+    if (user) {
+      res.send({username: user.username, profile: user.profile });
+    } else {
+      res.send(404, 'USER_NOT_FOUND')
     }
   });
- };
-
+};
 
 /**
  *  Username exists

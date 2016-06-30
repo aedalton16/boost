@@ -79,7 +79,7 @@ require('./app/controllers/drawingController').init(io);
 // require('./app/controllers/chatController').init(io);
 
 
-require('./app/auth/config')(passport); // ** 
+require('./app/config/config'); // ** 
 
 /*
  * routes

@@ -18,22 +18,21 @@ app.config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'views/drawings/drawing.tpl.html'
         })
         .state('login', {
-            url: '/auth/session',
-            templateUrl: 'views/user/login.tpl.html'
+            url: '/login',
+            templateUrl: 'views/user/login.tpl.html',
+            controller: 'LoginCtrl'
         })
         .state('signup',{
             url: '/signup',
             templateUrl: 'views/user/signup.tpl.html',
             // controller: 'SignupCtrl'
+            controller: 'SignupCtrl'
         })
         .state('profile', { // like this??
-            url: '/auth/session',
+            url: '/auth/users/:userId',
             templateUrl: 'views/user/profile.tpl.html'
-        })
-        ;
-
+        });
         $urlRouterProvider.otherwise('/welcome');
-
     }]);
 
 
@@ -41,6 +40,24 @@ app.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 });
+
+// .run(function ($rootScope, $location, Auth) {
+
+//     //watching the value of the currentUser variable.
+//     $rootScope.$watch('currentUser', function(currentUser) {
+//       // if no currentUser and on a page that requires authorization then try to update it
+//       // will trigger 401s if user does not have a valid session
+//       if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) == -1 )) {
+//         Auth.currentUser();
+//       }
+//     });
+
+//     // On catching 401 errors, redirect to the login page.
+//     $rootScope.$on('event:auth-loginRequired', function() {
+//       $location.path('/login');
+//       return false;
+//     });
+//   });
 app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties',function($scope, $rootScope, $log, $location, $mdBottomSheet, $mdSidenav, $mdDialog, sharedProperties){
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
