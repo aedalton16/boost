@@ -66,13 +66,18 @@ ul {
 
 /*make into classes w/ids*/
 #sidenav-btn{
+  background: url("/img/stars.png") repeat top center;
   background-color: #0277BD;
   margin-top: 10px;
   padding: 20px;
   font-size: 20px;
   border-radius: 24px;
+
+  
+
 }
 #sidenav-btn-top {
+  background: url("/img/stars.png") repeat top center;
   background-color: #0277BD;
   margin-top: 15px;
   padding: 20px;
