@@ -83,7 +83,8 @@
     <!-- run and minify -->
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/rocket.css" type="text/css"/>
+ <link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:300" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
     
   
@@ -107,7 +108,7 @@
           <i class="fa fa-rocket fa-3x">  </i> 
           <h2 ng-show="currentUser" class="ng-hide">Booster: {{stringValue}}</h2>
           <h2 ng-show="!currentUser" class="ng-hide"> Please <a ui-sref="login" style="color:#ff3300; font-weight: bold"> Login!</a></h2>
-          
+          <!-- <img alt="Brand" style="height:100px; weight:100px" src="../../img/rocket.png"> -->
           <!-- top -->
           <div class="btn-group-vertical">
           <button class="btn btn-primary btn-lg" ui-sref="about" id="sidenav-btn-top"> Home </button> 
@@ -127,7 +128,7 @@
  <ui-view> </ui-view>
        
           <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
-          <i class="fa fa-rocket fa-3x" style="padding: 3px"> </i>
+          <i class="fa fa-rocket fa-3x fa-magic" style="padding: 3px"> </i>
           </md-button>
       <!-- <md-toolbar ng-show="!showSearch"> -->
         <div >

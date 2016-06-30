@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAria','ngRoute', 'ngResource', 'ngMaterial','ngCookies', 'ngSanitize','http-auth-interceptor', 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
+var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAria','ngRoute', 'ngResource','ngAnimate', 'ngMaterial','ngCookies', 'ngSanitize','http-auth-interceptor', 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
 
 // setup our routes
 app.config(['$stateProvider', '$urlRouterProvider',
