@@ -6,7 +6,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
         $stateProvider
         .state('welcome', {
             url:'/welcome', //change to about
-            templateUrl: 'views/about/about.tpl.html',
+            templateUrl: 'index.html',//views/about/about.tpl.html',
             controller: 'WelcomeController'
         })
         .state('draw', {
