@@ -175,25 +175,6 @@ app.config(function($mdThemingProvider) {
         .primaryPalette('grey')
 });
 
-app.config(function ($mdThemingProvider) {
-    //$primary-color-dark:   #680000;
-    //$primary-color:        #b31b1b;
-    //$primary-color-light:  #FFCDD2;
-    //$primary-color-text:   #FFFFFF;
-    //$accent-color:         #9E9E9E;
-    //$primary-text-color:   #212121;
-    //$secondary-text-color: #727272;
-    //$divider-color:        #B6B6B6;
-    var cornellRedMap = $mdThemingProvider.extendPalette('red', {
-        '500': '#162951',
-        'contrastDefaultColor': 'light'
-    });
-    // Register the new color palette map with the name <code>cornellRed</code>
-    $mdThemingProvider.definePalette('cornellRed', cornellRedMap);
-    // Use that theme for the primary intentions
-    $mdThemingProvider.theme('default')
-      .primaryPalette('cornellRed');
-});
 
 app.directive('resize', function ($window) {
     return function (scope, element) {

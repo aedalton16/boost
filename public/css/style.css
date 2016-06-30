@@ -15,70 +15,17 @@
 /* 1.0 Basic Setup */
 *{ margin: 0; padding: 0;}
 
-
-/*
-html {
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  width: 100%;
-
-}
-
-html, input {
-  font-family:
-    "HelveticaNeue-Light",
-    "Helvetica Neue Light",
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    "Lucida Grande",
-    sans-serif;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
-
-/*.full { height: 100%;}
-
-*/
-
-
-//change underline color for tabs
-
-
 .ng-scope{
   height: 100%;
-
 }
 
 
-/*md-tabs.md-default-theme.md-primary md-tab:not([disabled]).active{
-  text-decoration: blink;
+md-tabs.md-default-theme md-tabs-ink-bar {
+    color: rgb(255,255,255);
+    background: rgb(255,255,255);
 }
-md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
-  height: 50%;
-}
-md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
-    color: green !important;
-    background-color:red !important;
-    padding-top: 30px;
-}
-*/
-md-tabs md-ink-bar {
-    color: yellow;
-    background-color: yellow;
-    height: 3px;
-}
- #boostpage{
-    height: 90%;
-    padding: 20px;
-    /*margin-top: 20px;*/
+ .boostpage{
+  height: 100%;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#162951+18,162951+18,2c539e+57,388ac9+84,3bbad3+100 */
   background: #162951; /* Old browsers */
   background: -moz-linear-gradient(top,  #162951 18%, #162951 18%, #2c539e 57%, #388ac9 84%, #3bbad3 100%); /* FF3.6-15 */
@@ -87,16 +34,15 @@ md-tabs md-ink-bar {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#162951', endColorstr='#3bbad3',GradientType=0 ); /* IE6-9 */
   background-size: cover;
 }
-#boostlight{
+.boostlight{
   height: 100%;
-  width: 100%;
   background: #4e90dc; /* Old browsers */
   background: -moz-linear-gradient(top,  #4e90dc 0%, #4e90dc 13%, #64a9e6 24%, #74b3e6 34%, #acd3f0 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e90dc', endColorstr='#acd3f0',GradientType=0 ); /* IE6-9 */
 }
-a.boost-page{
+a.boostpage{
     color: #fff;
 }
 
@@ -588,25 +534,25 @@ img::-moz-selection {
 /* 7.0 Chat */
 
 .chat-area{
-	 position:fixed;
-	 width : 100%; 
+   position:fixed;
+   width : 100%; 
   bottom:0px;
   right:0px;
 }
 .chat{
-	margin:0px;
+  margin:0px;
   padding:0px;
   width:250px;
   float:right;
 }
 .chat-head{
-	width:100%;
-	background-color:#1a1a1a;
-	height:30px;
-	color:#ffffff;
-	padding-top: 5px; 
-	padding-left: 10px; 
-	padding-bottom: 5px; 
+  width:100%;
+  background-color:#1a1a1a;
+  height:30px;
+  color:#ffffff;
+  padding-top: 5px; 
+  padding-left: 10px; 
+  padding-bottom: 5px; 
 }
 
 .inputMessage {
@@ -928,6 +874,8 @@ form button {
   width:100%;
   height:75%;
   /*display:block;*/
+
+
 /*Img Citation: */
 
   background: url("/img/stars.png") repeat top center;
@@ -942,10 +890,20 @@ $gray: #eee;
   height: 100%;
 
 }
-md-content.md-default-theme {
+/*md-content.md-default-theme {
   background-color: $gray;
+}*/
+md-card {
+  background-color: #fff;
+  h2:first-of-type {
+    margin-top: 0;
+  }
 }
-
+md-toolbar {
+  .md-button.md-default-theme {
+    border-radius: 99%; // round toolbar buttons
+  }
+}
 h2 {
   font-weight: 400;
 }
@@ -991,10 +949,10 @@ md-list .md-button {
   width: 100%;
 }
 
+
 /* Using Data-URI converted from svg until <md-icon> becomes available 
 https://github.com/google/material-design-icons
 */
 .menuBtn {
   background: transparent url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI0IDI0IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGcgaWQ9IkhlYWRlciI+CiAgICA8Zz4KICAgICAgICA8cmVjdCB4PSItNjE4IiB5PSItMjIzMiIgZmlsbD0ibm9uZSIgd2lkdGg9IjE0MDAiIGhlaWdodD0iMzYwMCIvPgogICAgPC9nPgo8L2c+CjxnIGlkPSJMYWJlbCI+CjwvZz4KPGcgaWQ9Ikljb24iPgogICAgPGc+CiAgICAgICAgPHJlY3QgZmlsbD0ibm9uZSIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+CiAgICAgICAgPHBhdGggZD0iTTMsMThoMTh2LTJIM1YxOHogTTMsMTNoMTh2LTJIM1YxM3ogTTMsNnYyaDE4VjZIM3oiIHN0eWxlPSJmaWxsOiNmM2YzZjM7Ii8+CiAgICA8L2c+CjwvZz4KPGcgaWQ9IkdyaWQiIGRpc3BsYXk9Im5vbmUiPgogICAgPGcgZGlzcGxheT0iaW5saW5lIj4KICAgIDwvZz4KPC9nPgo8L3N2Zz4=) no-repeat  center center;
 }
-
