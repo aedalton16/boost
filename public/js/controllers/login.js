@@ -14,6 +14,7 @@ angular.module('users').controller('LoginCtrl', function ($scope, Auth, sharedPr
 			$scope.errors = {};
 
 			if (!err) {
+				console.log('ok');
 			    $location.path('/');
 			} else {
 			    angular.forEach(err.errors, function(error, field) {

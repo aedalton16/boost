@@ -2,7 +2,10 @@
 
 angular.module('users')
   .factory('User', function ($resource) {
-    return $resource('/auth/users/:id/', {},
+    return $resource(
+    	'/users/:id/', {
+    		userId: '@_id'
+    	},
       {
         'update': {
           method:'PUT'

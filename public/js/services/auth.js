@@ -8,14 +8,17 @@ angular.module('users')
     return {
 
       login: function(provider, user, callback) {
-        var cb = callback || angular.noop;
+        var cb = callback || angular.noop; //
         Session.save({
           provider: provider,
           email: user.username,
           password: user.password,
           rememberMe: user.rememberMe
-        }, function(user) {
+        }, 
+        function(user) {
           $rootScope.currentUser = user;
+          console.log(user);
+          console.log('here');
           return cb();
         }, function(err) {
           return cb(err.data);

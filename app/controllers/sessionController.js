@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
  * returns info on authenticated user
  */
 exports.session = function (req, res) {
-  res.json(req.user.user_info);
+  res.json(req.user);
 };
 
 /**

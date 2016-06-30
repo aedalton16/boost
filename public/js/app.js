@@ -5,7 +5,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) { // ** MAKE SURE TO SWITCH OVER COMPREHENSIVELY 
         $stateProvider
         .state('welcome', {
-            url:'/welcome',
+            url:'/welcome', //change to about
             templateUrl: 'views/about/about.tpl.html',
             controller: 'WelcomeController'
         })
@@ -18,42 +18,22 @@ app.config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'views/drawings/drawing.tpl.html'
         })
         .state('login', {
-            url: '/login',
+            url: '/auth/session',
             templateUrl: 'views/user/login.tpl.html'
+        })
+        .state('signup',{
+            url: '/signup',
+            templateUrl: 'views/user/signup.tpl.html',
+            // controller: 'SignupCtrl'
+        })
+        .state('profile', { // like this??
+            url: '/auth/session',
+            templateUrl: 'views/user/profile.tpl.html'
         })
         ;
 
         $urlRouterProvider.otherwise('/welcome');
 
-
-
-
-            // when('/welcome', {
-            //     templateUrl: 'views/about/about.tpl.html'
-            // }).
-            // when('/draw', {
-            //     templateUrl: 'views/welcome/welcome.tpl.html'
-            // }).
-            // when('/profile', {
-            //     templateUrl: 'views/user/profile.tpl.html'
-            // }).
-            // when('/drawings/:drawingId', {
-            //     templateUrl: 'views/drawings/drawing.tpl.html'
-            // }).
-            // when('/login', {
-            //     templateUrl: 'views/user/login.tpl.html',
-            //     controller: 'LoginCtrl'
-            // }).
-            // when('/signup', {
-            //     templateUrl: 'views/user/signup.tpl.html',
-            //     controller: 'SignupCtrl'
-            // }).
-            // when('/unsupported', {
-            //     templateUrl: 'unsupported.html'
-            // }).
-            // otherwise({
-            //     templateUrl: 'views/about/about.tpl.html'
-            // });
     }]);
 
 
@@ -61,11 +41,11 @@ app.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 });
-app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', function($scope, $rootScope, $log, $location, $mdBottomSheet, $mdSidenav, $mdDialog){
+app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties',function($scope, $rootScope, $log, $location, $mdBottomSheet, $mdSidenav, $mdDialog, sharedProperties){
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
 
-    
+    $scope.stringValue = sharedProperties.getString();
     
     $rootScope.$on("$locationChangeStart", function(event, next, current){
         if(!isCanvasSupported()){
@@ -83,8 +63,8 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBott
       icon: 'dashboard'
     },
     {
-      link : 'showDrawings($event)',
-      title: 'Drawings',
+      link : '/draw',
+      title: 'Profile',
       icon: 'group'
     },
     {
@@ -116,7 +96,8 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBott
       $scope.alert = clickedItem.name + ' clicked!';
     });
   };
-  
+
+// need in a partial and or a service  
   $scope.showAdd = function(ev) {
     $mdDialog.show({
       controller: DialogController,

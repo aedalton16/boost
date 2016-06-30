@@ -11,6 +11,7 @@ angular.module('users').controller('SignupCtrl', function ($scope, Auth, sharedP
 
 			if (!err) {
 			    $location.path('/');
+			    console.log('$scope.user.username');
 			} else {
 			    angular.forEach(err.errors, function(error, field) {
 				    form[field].$setValidity('mongoose', false);
