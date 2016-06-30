@@ -7,7 +7,7 @@ angular.module('users').controller('LoginCtrl', function ($scope, Auth, sharedPr
 	    $scope.login = function(form) {
 	    	// console
 		Auth.login('password', {
-			'username': $scope.user.username,
+			'email': $scope.user.email,
 			'password': $scope.user.password
 		    },
 		    function(err) {
@@ -15,7 +15,10 @@ angular.module('users').controller('LoginCtrl', function ($scope, Auth, sharedPr
 
 			if (!err) {
 				console.log('ok');
-			    $location.path('/');
+				console.log($scope.user.email);
+				sharedProperties.setCurrentUser($scope.user.email);
+			    $location.path('#/draw');
+
 			} else {
 			    angular.forEach(err.errors, function(error, field) {
 				    form[field].$setValidity('mongoose', false);
@@ -24,8 +27,7 @@ angular.module('users').controller('LoginCtrl', function ($scope, Auth, sharedPr
 			    $scope.error.other = err.message;
 			}
 		    });
-		console.log($scope.user.username);
-		sharedProperties.setCurrentUser($scope.user.username); //$scope.setString($scope.user.email); //new 
+		 //$scope.setString($scope.user.email); //new 
 	    };
 
 	 

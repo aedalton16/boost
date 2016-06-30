@@ -12,8 +12,9 @@ angular.module('users')
           $scope.errors = {};
 
           if (!err) {
-            $location.path('#/draw');
+            
             sharedProperties.setCurrentUser($scope.user.username);
+            $location.path('#/draw');
           } else {
             angular.forEach(err.errors, function(error, field) {
               form[field].$setValidity('mongoose', false);

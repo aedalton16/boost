@@ -4,9 +4,8 @@
             <h1 class="text-center login-title">
                 Sign in to continue to Angular Passport
             </h1>
+            <!--no provider sent inn form"-->
             <div class="account-wall">
-                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
-
                 <form class="form-signin"
                       name="form"
                       ng-submit="login(form)"
@@ -18,9 +17,7 @@
                                placeholder="Email"
                                name="email"
                                ng-model="user.email"
-                               required
-                               autofocus
-                               mongoose-error>
+                               >
                         <p class="help-block"
                            ng-show="form.email.$error.mongoose">
                             {{ errors.email }}
@@ -33,8 +30,8 @@
                                placeholder="Password"
                                name="password"
                                ng-model="user.password"
-                               required
-                               mongoose-error>
+                               >
+                               <!--http://mongoosejs.com/docs/validation.html-->
                         <p class="help-block"
                            ng-show="form.password.$error.mongoose">
                             {{ errors.password }}

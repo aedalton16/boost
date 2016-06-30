@@ -13,14 +13,14 @@ var UserSchema = new Schema({
   username: {
     type: String,
     unique: true,
-    required: true
+    required: false
   },
   hashedPassword: String,
   salt: String,
   name: String,
   admin: Boolean,
   guest: Boolean,
-  provider: String
+  // provider: String
 });
 
 /**

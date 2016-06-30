@@ -6,14 +6,14 @@ angular.module('users')
     $cookieStore.remove('user');
 
     return {
-
-      login: function(provider, user, callback) {
+      // how were these not cuahgt...
+      login: function(provider, user, callback) {//provider
         var cb = callback || angular.noop; //
         Session.save({
-          provider: provider,
-          email: user.username,
+          // provider: provider,
+          email: user.email,
           password: user.password,
-          rememberMe: user.rememberMe
+          // rememberMe: user.rememberMe
         }, 
         function(user) {
           $rootScope.currentUser = user;
@@ -21,7 +21,7 @@ angular.module('users')
           console.log('here');
           return cb();
         }, function(err) {
-          return cb(err.data);
+          console.log(err.data);
         });
       },
 
