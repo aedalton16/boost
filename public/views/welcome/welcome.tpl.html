@@ -1,9 +1,10 @@
-<div ng-controller="WelcomeController" ng-init="init()" >
-<div class="container" id ="boostpage" > 
+<div ng-controller="WelcomeController" id ="boostpage" ng-init="init()" >
+ 
     <div class="stars"></div>
-        <div class="container">
-        <h1 class="welcome"> BOOST!Tutors</h1>
-        <div style="text-align:center" class="rocket-white"> <i class="fa fa-rocket fa-5x"> </i> </div>  
+        <div >
+        <h1 class="gallery"> BOOST!Tutors</h1>
+        <h3 class="gallery"> Choose a drawing! </h3> 
+        <div style="text-align:center"> <img style="height:100px; width:100px;" src="../../img/rocket.png"/> </div>  
 
         
             <div id="info">Click an existing whiteboard session or create a new one. Thanks to socket.io, these files can be shared and interactively viewed --open two browsers with the same drawing-id to see!
@@ -32,6 +33,4 @@
             </div>
         </div>
     </div>
-
-
-</div>
+</div> 

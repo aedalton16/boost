@@ -98,7 +98,7 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBott
   $scope.admin = [
     {
       link : '',
-      title: 'Trash',
+      title: 'Reports',
       icon: 'delete'
     },
     {

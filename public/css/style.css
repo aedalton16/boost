@@ -159,11 +159,19 @@ h1, h2, h3, h4, h5, h6 {
 h1.boost-page {
   color: #fff;
     }
-h1.welcome{
-  padding-top: 35px;
+h1.gallery, h3.gallery{
+  /*padding-top: 35px;*/
   color:#fff;
-  font-size:40px;
   font-weight: 100px;
+}
+h1.gallery{
+    font-size:60px;
+    margin-bottom: 0px;
+}
+h3.gallery{
+  margin-top: 20px;
+  font-size:40px;
+  color: #BFBFBF;
 }
 body, html{
    width: 100%;
