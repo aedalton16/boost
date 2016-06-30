@@ -84,7 +84,7 @@
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="css/navbar.css" type="text/css"/>
+    <!-- <link rel="stylesheet" href="css/navbar.css" type="text/css"/> -->
   
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic"> -->
   <meta name="viewport" content="initial-scale=1" />
@@ -95,7 +95,7 @@
 
   <!-- move the top bar -->
   <div layout="row" flex class="change-my-css">
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" style="height: 75%">
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
 
       <md-toolbar class="md-tall md-hue-2">
         <span flex></span>
@@ -112,14 +112,16 @@
   
     <md-content layout="column" id="content" flex class="md-padding">
       <md-toolbar>
-        <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
-          <md-tab id="tab1" aria-controls="tab1-content" ui-sref="welcome">
-          Latest
-          </md-tab>
-          <md-tab id="tab2" aria-controls="tab2-content" ui-sref="draw">
-          Favorites
-          </md-tab>
-        </md-tabs>
+        <md-tabs md-stretch-tabs="always" md-selected="data.selectedIndex">
+                <md-tab id="tab1" aria-controls="tab1-content">
+                    Map
+                </md-tab>
+                <md-tab id="tab2" aria-controls="tab2-content">
+                    List
+                </md-tab>
+                <md-tab id="tab3" aria-controls="tab3-content">
+                    Favorites
+                </md-tab>
       </md-toolbar>
         <!-- default view is about and then switches  -->
         <ui-view layout="column" layout-fill layout-padding> 

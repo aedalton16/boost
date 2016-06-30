@@ -48,15 +48,37 @@ html, body {
 
 */
 
+
+//change underline color for tabs
+
+
 .ng-scope{
   height: 100%;
+
 }
-/*TODO: SOLVE ANGULAR PARTIAL ISSUE*/
-html, body { 
-  
- }
+
+
+/*md-tabs.md-default-theme.md-primary md-tab:not([disabled]).active{
+  text-decoration: blink;
+}
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+  height: 50%;
+}
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+    color: green !important;
+    background-color:red !important;
+    padding-top: 30px;
+}
+*/
+md-tabs md-ink-bar {
+    color: yellow;
+    background-color: yellow;
+    height: 3px;
+}
  #boostpage{
-    height: 100%;
+    height: 90%;
+    padding: 20px;
+    /*margin-top: 20px;*/
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#162951+18,162951+18,2c539e+57,388ac9+84,3bbad3+100 */
   background: #162951; /* Old browsers */
   background: -moz-linear-gradient(top,  #162951 18%, #162951 18%, #2c539e 57%, #388ac9 84%, #3bbad3 100%); /* FF3.6-15 */
@@ -66,7 +88,8 @@ html, body {
   background-size: cover;
 }
 #boostlight{
-  height: 1000px;
+  height: 100%;
+  width: 100%;
   background: #4e90dc; /* Old browsers */
   background: -moz-linear-gradient(top,  #4e90dc 0%, #4e90dc 13%, #64a9e6 24%, #74b3e6 34%, #acd3f0 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top,  #4e90dc 0%,#4e90dc 13%,#64a9e6 24%,#74b3e6 34%,#acd3f0 100%); /* Chrome10-25,Safari5.1-6 */
@@ -905,8 +928,6 @@ form button {
   width:100%;
   height:75%;
   /*display:block;*/
-
-
 /*Img Citation: */
 
   background: url("/img/stars.png") repeat top center;
@@ -921,20 +942,10 @@ $gray: #eee;
   height: 100%;
 
 }
-/*md-content.md-default-theme {
+md-content.md-default-theme {
   background-color: $gray;
-}*/
-md-card {
-  background-color: #fff;
-  h2:first-of-type {
-    margin-top: 0;
-  }
 }
-md-toolbar {
-  .md-button.md-default-theme {
-    border-radius: 99%; // round toolbar buttons
-  }
-}
+
 h2 {
   font-weight: 400;
 }
