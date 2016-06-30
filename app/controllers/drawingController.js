@@ -9,7 +9,7 @@ var sockets;
 /*
  * initializes controller, must be called explicitly
  */
-exports.init = function(io){ // this right here.............
+exports.init = function(io){ // this right here...........dup?..
     sockets = io.sockets;
     io.sockets.on('connection', listener);
 };

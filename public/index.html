@@ -94,9 +94,9 @@
           <!-- <user-avatar></user-avatar> ng-dir--> 
           <span></span>
           <i class="fa fa-rocket fa-3x">  </i> 
-          <h2 ng-show="currentUser" class="ng-hide">Booster: {{stringValue}}</h2>
-          <h2 ng-show="!currentUser" class="ng-hide"> Please <a ui-sref="login" style="color:red"> Login!</a></h2>
-          
+      
+          <h2 ng-show="!currentUser" ui-sref-active="active">Welcome! <a ui-sref="login" style="color:red"> Please Log In</a></h2>
+          <h1 ng-show="currentUser">Hello {{stringValue}} !</h1>
         </div>
       </md-toolbar>
       <md-list>
@@ -127,7 +127,7 @@
     </md-list>
     </md-sidenav>
 
-    <div class="relative" layout-fill role="main"><!-- layout="column" ?? -->
+    <div class="relative" layout-fill role="main" style="height: 100%"><!-- layout="column" ?? -->
       <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
         <i class="fa fa-rocket"> </i> 
       </md-button>
@@ -150,8 +150,9 @@
         </div>
         <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
           <md-tab aria-controls="tab1-content" ui-sref="welcome"> 
-            Home
+          Home
           </md-tab>
+
 
           <md-tab id="tab2" aria-controls="tab2-content" ui-sref="draw">
           <!-- <a ui-sref="welcome">About</a>  -->
@@ -181,7 +182,7 @@
        
       </md-toolbar>
       <!-- <div flex layout="fill"> -->
-      <md-content flex md-scroll-y>
+      <md-content flex md-scroll-y >
         <ui-view layout="column" layout-fill layout-padding>
           <div class="inset" hide-sm></div>
             <ng-switch on="data.selectedIndex" class="tabpanel-container">
@@ -193,8 +194,7 @@
                    md-swipe-right="previous()"
                    layout="row" layout-align="center center">
                   <md-card flex-gt-sm="90" flex-gt-md="80">
-                    <md-card-content layout-fill>
-                      
+                    <md-card-content flex>  
                         <!-- <ui-view="draw"></ui-view>  -->
                     </md-card-content>
                   </md-card>
@@ -207,33 +207,10 @@
                    md-swipe-right="previous()" 
                    layout="row" layout-align="center center">
                   <md-card flex-gt-sm="90" flex-gt-md="80">
-                    <md-card-content>
-                      <h2>Favorites</h2>
-                      <!-- <ui-view="welcome"></ui-view>  -->
-                      <md-list>
-                        <md-item ng-repeat="item in activity | filter:search | orderBy:'-what'">
-                          <md-item-content>
-                            <div class="md-tile-left inset" hide-sm>
-                                <user-avatar></user-avatar>
-                            </div>
-                            <div class="md-tile-content">
-                              <h3>{{item.what}}</h3>
-                              <h4>{{item.who}}</h4>
-                              <p>
-                                {{item.notes}}
-                              </p>
-                            </div>
-                          </md-item-content>
-                          <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
-                          <md-divider hide-gt-sm ng-if="!$last"></md-divider>
+                    <md-card-content flex>
+                      <ui-view="draw"> </ui-view> 
+                      </md-item-content>
                         </md-item>
-                        <md-divider></md-divider>
-                        <md-item layout class="inset">
-                            <md-button layout layout-align="start center" flex class="md-primary">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg> More
-                            </md-button>
-                        </md-item>
-                      </md-list>
                     </md-card-content>
                   </md-card>
               </div>

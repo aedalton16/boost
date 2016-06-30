@@ -7,6 +7,7 @@ angular.module('users')
 
     return {
       // how were these not cuahgt...
+      // its as if it was intentional...
       login: function(provider, user, callback) {//provider
         var cb = callback || angular.noop; //
         Session.save({

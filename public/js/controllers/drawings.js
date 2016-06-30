@@ -20,7 +20,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
     $scope.status = {
         isopen: false
     };
-
+    // **HERE? dup? 
     $scope.toggled = function(open) {
         console.log('Dropdown is now: ', open);
     };
@@ -34,7 +34,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
     $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 
     $scope.init = function(){
-
+        // profile
         // render our drawing 
         Drawings.get({drawingId: $stateParams.drawingId}, // resource bad config
             function(drawing){
@@ -94,7 +94,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
 	 // //$scope.$apply();
       };
 
-
+      //like profile..**
     // load our whiteboard
     $scope.initCanvas = function(drawing){
         console.log('socket'); // debugger
