@@ -48,7 +48,7 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$state','$rootScope'
       icon: 'group'
     },
     { //fill
-      link : '',
+      link : '#/video',
       title: 'Messages',
       icon: 'message'
     }

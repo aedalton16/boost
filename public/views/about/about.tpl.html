@@ -2,22 +2,17 @@
 
 <div class="stars"></div>
 
-	<img class="displayed" src="img/banner_white.png"> 
+	<img class="displayed animated bounceInUp" src="img/banner_white.png"> 
 
 			<!-- this right here.... -->
-			<h1 id="about-title" ng-show="!currentUser"> Welcome! <a ui-sref"login"> Please Log In </a> </h1>
+			
 				<div style="text-align:center" class="animated bounce">
+
 				<img style="height:100px; width:100px;" src="../../img/rocket.png"/>
 			</div>
+			<h1 id="about-title" ng-show="!currentUser">Welcome!</h1>
+			<h2> <a href="http://www.boosttutors.com/"> boost</a> </h1>
+
 			<h1 ng-show="currentUser" id="about-title">Hello {{ stringValue }} !</h1>
-
-  			<p id="info"> We, the team at BOOST!, are a corps of Dartmouth undergrads who provide virtual tutoring to classrooms that need it.
-
-			Using virtual whiteboard, webRTC and tablet technology, we digitally recreate the experience of tutoring someone side-by-side regardless of physical location.
-
-			If any of this resonates with you, <a class="boost-page" href="http://www.boosttutors.com/apply"> please sign up to be a tutor! </a> We're only asking for an hour or two a week. Or, reach out to anyone on the <a class="boost-page" href="http://www.boosttutors.com/team" > team page </a>. We'd love to hear from you. 
-			</p>
-
-
 </div>
 <!-- </div> -->

@@ -6,7 +6,8 @@ var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAria','ngRoute'
 app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider ) {
      // ** MAKE SURE TO SWITCH OVER COMPREHENSIVELY 
-   
+   // rootscope.currentuser.id or some kind of res json
+   //ng handles
     $stateProvider
         .state('welcome', {
             url:'/welcome', //change to about
@@ -42,6 +43,11 @@ app.config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'views/user/signup.tpl.html',
             // controller: 'SignupCtrl'
             controller: 'SignupCtrl'
+        })
+        .state('video', {
+            url: '/video',
+            templateUrl: 'views/drawings/chat.tpl.html',
+
         })
         .state('profile', { // like this??
             url: '/auth/users/:userId',
