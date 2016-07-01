@@ -79,6 +79,7 @@ exports.deleteById = function(req, res){
  * socket listener
  */
 function listener(socket_io){ // these fire, a lot.... 
+    //login stuff here too?**
 
     socket_io.on('changing', function(message){
         console.log('drawingController fired changing');
@@ -98,14 +99,33 @@ function listener(socket_io){ // these fire, a lot....
   }); //do we have to have 
      socket_io.on('remote:change', function (data) { // and dis is just zee one? 
     // we tell the client to execute 'new message'
-     console.log('remote change :' + data);
+         console.log('remote change :' + data);
         sockets.emit('remote:change', data); // i tink dis is all of dem? 
 
-  }); //do we have to have 
+  }); 
+
+     // **wiring
+    socket_io.on('remote:adjust', function (data) { // and dis is just zee one? 
+    // we tell the client to execute 'new message'
+         console.log('remote change :' + data);
+        sockets.emit('remote:adjust', data); // i tink dis is all of dem? 
+
+     });
+
+        // **wiring
+    socket_io.on('remote:layer', function (data) { // and dis is just zee one? 
+    // we tell the client to execute 'new message'
+         console.log('remote change :' + data);
+        sockets.emit('remote:layer', data); // i tink dis is all of dem? 
+
+     });
+
+    //do we have to have 
     socket_io.on('sendToBack', function(message){
         console.log('drawingController fired sendToBack');
         sockets.emit('sendToBack', message);
     });
+    // TODO: remove some of these calls? reduce redundancies 
     socket_io.on('sendBackwards', function(message){
         sockets.emit('sendBackwards', message);
     });

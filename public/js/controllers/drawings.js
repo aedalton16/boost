@@ -25,8 +25,26 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
         $scope.canvas.changeDrawingMode($scope.drawingMode);
         console.log(message);
     });
+
+    socket.on('remote:layer', function(message){
+        $scope.canvas.updateLayerPosition(action);
+        return false;
+    });
+
+    socket.on('remote:adjust', function(message){
+        var inc = Number(message)
+       $scope.strokeWidth = $scope.strokeWidth + inc;
+        console.log($scope.strokeWidth);
+        $scope.canvas.updateCurrentStrokeWidth($scope.strokeWidth);
+    });
+
+    socket.on('remote:color', function(message){
+        $scope.currentColor = color;
+        $scope.canvas.updateCurrentColor(color);
+    });
     // $scope.messages = {};
 
+    // elim some below?
     // on each load 
     // need to put this elsewhere TODO: NEST CONTROLLERS**
     $scope.status = {

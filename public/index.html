@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="app">
+<html ng-app="app"> <!-- ** IMPT -->
 
 <head>
     <title>BOOST!Tutors</title>
@@ -96,11 +96,7 @@
 </script>
 
 </head>
-<html lang="en" ng-app="StarterApp">
-  <head>
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
-  </head>
-  <body layout="row" ng-controller="SidenavCtrl">
+  <body layout="row" ng-controller="SidenavCtrl" >
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
       <md-toolbar class="md-tall md-hue-2">
       <!-- <div class="stars"></div> -->
@@ -141,7 +137,7 @@
          <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">
               <md-item ng-repeat="item in layer">
-              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="changeLayerPosition(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteLayer(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
               </md-item> 
             </div>
           </md-item-content>
@@ -159,12 +155,25 @@
         <md-divider></md-divider>
         <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">
-              <md-item ng-repeat="item in adjust" ng-click="updateStrokeWidth(item.mode)">
-              <md-button aria-label="Twitter" class="md-fab md-raised md-mini"> <i class="{{item.icon}}"> </i></md-button>
+              <md-item ng-repeat="item in adjust">
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteAdjust(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
               </md-item> 
             </div>
           </md-item-content>
 
+          <md-divider></md-divider>
+          <div class="btn-group" uib-dropdown>
+            <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+            <div class="colorbox" id="currentColorBox" ng-style="{backgroundColor: currentColor}"></div> <span class="caret"></span>
+            </button>
+            <ul ng-repeat="item in color" id="messages" class="dropdown-menu dropdown-menu" style="min-width: 80px; text-align:center" uib-dropdown-menu role="menu" aria-labelledby="single-button"> 
+            <!-- TODO: make CSS classes here -->
+         
+                    <li>  <button class="btn btn-primary" ng-click="remoteChangeColor(item.mode)" style="background-color: {{item.mode}}"> <i class="{{item.icon}}"> </i></button> </i></button> </li>
+            
+            </ul>
+
+          </div> 
      </div>
     
   </md-list>
@@ -213,5 +222,38 @@
         </ui-view>
       </md-content>
     </div>
+
+     <div class="fabSpeedDialdemoBasicUsage">
+        <md-content class="md-padding" layout="column">
+
+        <div class="lock-size" layout="row" layout-align="center center">
+        <md-fab-speed-dial md-direction="down" class="md-scale" ng-cloak>
+        <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn">
+        <md-tooltip md-direction="top">Menu</md-tooltip>
+
+        </md-button>
+        </md-fab-trigger>
+
+        <md-fab-actions>
+        <md-button aria-label="twitter" class="md-fab md-raised md-mini">
+        <md-tooltip md-direction="left">Twitter</md-tooltip>
+
+        </md-button>
+
+        <md-button aria-label="facebook" class="md-fab md-raised md-mini">
+        <md-tooltip md-direction="right">Facebook</md-tooltip>
+
+        </md-button>
+
+        <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
+        <md-tooltip md-direction="left">Google Hangout</md-tooltip>
+        >
+        </md-button>
+        </md-fab-actions>
+        </md-fab-speed-dial>
+        </div>
+        </md-content>
+          </div>
   </body>
 

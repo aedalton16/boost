@@ -127,6 +127,50 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
       tooltip: 'dec'
     }
   ];
+// where can we put these
+	$scope.color = [
+	{
+	mode: 'red',
+	icon: 'fa fa-star',
+	tooltip: 'red'
+	},
+	{
+	mode: '#ff3399',
+	icon: 'fa fa-star',
+	tooltip: 'pink'
+	},
+	{
+	mode: '#ff9933',
+	icon: 'fa fa-star',
+	tooltip: 'orange'
+	},
+	{
+	mode: '#ffff00',
+	icon: 'fa fa-star',
+	tooltip: 'yellow'
+	},
+	{
+	mode: '#00ffff',
+	icon: 'fa fa-star',
+	tooltip: 'cyan'
+	},
+	{
+	mode: '#9900cc',
+	icon: 'fa fa-star',
+	tooltip: 'purple'
+	},
+	{
+	mode: 'black',
+	icon: 'fa fa-star',
+	tooltip: 'black'
+	},
+	{
+	mode: 'white',
+	icon: 'fa fa-star',
+	tooltip: 'white'
+	},
+	];
+
 
   	// this.topDirections = ['left', 'up'];
    //    this.bottomDirections = ['down', 'right'];
@@ -152,6 +196,20 @@ $scope.remoteChangeMode = function(message){ //scope.socket
   // console.log('socket emit fired');
 };
 
+$scope.remoteLayer= function(message){ //scope.socket
+  socket.emit('remote:layer', message);
+  // console.log('socket emit fired');
+};
+// accomp in one? maybe send json {message: --, command: --} **TODO
+$scope.remoteAdjust= function(message){ //scope.socket
+  socket.emit('remote:adjust', message);
+  // console.log('socket emit fired');
+};
+
+$scope.remoteChangeColor= function(message){ //scope.socket
+  socket.emit('remote:color', message);
+  // console.log('socket emit fired');
+};
 // need in a partial and or a service  
   $scope.showAdd = function(ev) {
     $mdDialog.show({
