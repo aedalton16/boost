@@ -88,17 +88,17 @@
 
     <script> 
     // Compatibility shim
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mediaDevices.getUserMedia;
     // PeerJS object
 
 
-    // var peer = new Peer({ key: 'lwjd5qra8257b9', debug: 3});
+    var peer = new Peer({ key: 'lwjd5qra8257b9', debug: 3});
 
-   var peer = new Peer({
-    host: location.hostname,
-    port: location.port || (location.protocol === 'https:' ? 443 : 80),
-    path: '/peerjs'
-  })
+  //  var peer = new Peer({
+  //   host: location.hostname,
+  //   port: location.port || (location.protocol === 'https:' ? 443 : 80),
+  //   path: '/peerjs'
+  // })
 
     peer.on('open', function(){
       $('#my-id').text(peer.id);
