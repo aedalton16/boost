@@ -103,7 +103,7 @@
   <body layout="row"  ng-cloak ng-controller="profileCtrl" md-theme="{{theme}}" md-theme-watch="true">
     <div ng-controller="SidenavCtrl">
       <!-- style="bottom: 50% -->
-        <md-button class="md-fab md-fab-bottom-left" aria-label="Add" ng-click="changeTheme()" > 
+        <md-button class="md-fab md-fab-bottom-left" aria-label="Add" ng-hide="$state.current.name === 'drawing'" ng-click="changeTheme()" > 
         <i class="fa fa-cogs fa-2x"> </i>
       </md-button>
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-scroll-x="false" ng-cloak>
@@ -114,7 +114,7 @@
         
            <h4 ng-show="currentUser" ui-sref="profile">Booster: {{currentUser}}</h4>
           <button class="btn btn-danger" ui-sref="login" ng-show="!currentUser"> Login! </button>
-        
+
         </div>
       </md-toolbar>
       <md-list ng-cloak>
@@ -169,6 +169,8 @@
               <md-item ng-repeat="item in adjust">
               <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteAdjust(item.mode)"> <md-tooltip md-direction="top" md-autohide="true"  md-delay="1000">{{item.tooltip}}</md-tooltip> <i class="{{item.icon}}"> </i></md-button>
               </md-item> 
+              <!-- ng class for sidenav too? service** -->
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode('erase')"><md-tooltip md-direction="top" md-autohide="true"  md-delay="1000">erase</md-tooltip><i class="fa fa-eraser"> </i> </md-button>  
             </div>
           </md-item-content>
     <!-- </div> -->
