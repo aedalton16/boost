@@ -1,9 +1,10 @@
 angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties', 'socket',
-  function($scope, $rootScope, $log, $location, $mdBottomSheet, $mdSidenav, $mdDialog, sharedProperties, socket){
+  function($scope, $rootScope, $log, $location, 
+  	$mdBottomSheet, $mdSidenav, $mdDialog, $timeout, sharedProperties, socket){
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
 
-    $scope.stringValue = sharedProperties.getString();
+    // $scope.stringValue = sharedProperties.getString();
     $rootScope.$on("$locationChangeStart", function(event, next, current){
         if(!isCanvasSupported()){
             $log.info("routing to unsupported");
@@ -11,11 +12,24 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
         }
     });
 
+     var self = this;
+
+     $scope.topDirections = ['left', 'up'];
+      $scope.bottomDirections = ['down', 'right'];
+
+      $scope.isOpen = false;
+
+      $scope.availableModes = ['md-fling', 'md-scale'];
+      $scope.selectedMode = 'md-fling';
+
+      $scope.availableDirections = ['up', 'down', 'left', 'right'];
+      $scope.selectedDirection = 'up';
+
     // $scope.hideKit = $location.path() === '/welcome';
     // console.log($scope.hideKit);
     // console.log($location.path());
 	$scope.toggleSidenav = function(menuId) {
-	$mdSidenav(menuId).toggle();
+		$mdSidenav(menuId).toggle();
 	};
     $scope.menu = [
     {
@@ -128,47 +142,48 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
     }
   ];
 // where can we put these
-	$scope.color = [
-	{
-	mode: 'red',
-	icon: 'fa fa-star',
-	tooltip: 'red'
-	},
-	{
-	mode: '#ff3399',
-	icon: 'fa fa-star',
-	tooltip: 'pink'
-	},
-	{
-	mode: '#ff9933',
-	icon: 'fa fa-star',
-	tooltip: 'orange'
-	},
-	{
-	mode: '#ffff00',
-	icon: 'fa fa-star',
-	tooltip: 'yellow'
-	},
-	{
-	mode: '#00ffff',
-	icon: 'fa fa-star',
-	tooltip: 'cyan'
-	},
-	{
-	mode: '#9900cc',
-	icon: 'fa fa-star',
-	tooltip: 'purple'
-	},
-	{
-	mode: 'black',
-	icon: 'fa fa-star',
-	tooltip: 'black'
-	},
-	{
-	mode: 'white',
-	icon: 'fa fa-star',
-	tooltip: 'white'
-	},
+	$scope.clrs = [
+		{
+		  mode: 'red',
+		  icon: 'fa fa-star',
+		  tooltip: 'red',
+
+		},
+		{
+		  mode: '#ff3399',
+		  icon: 'fa fa-star',
+		  tooltip: 'pink'
+		},
+		{
+		  mode: '#ff9933',
+		  icon: 'fa fa-star',
+		  tooltip: 'orange'
+		},
+		{
+		  mode: '#ffff00',
+		  icon: 'fa fa-star',
+		  tooltip: 'yellow'
+		},
+			{
+		  mode: '#00ffff',
+		  icon: 'fa fa-star',
+		  tooltip: 'cyan'
+		},
+		{
+		  mode: '#9900cc',
+		  icon: 'fa fa-star',
+		  tooltip: 'purple'
+		},
+			{
+		  mode: 'black',
+		  icon: 'fa fa-star',
+		  tooltip: 'black'
+		},
+		{
+		  mode: 'white',
+		  icon: 'fa fa-star',
+		  tooltip: 'white'
+		},
 	];
 
 
@@ -207,7 +222,7 @@ $scope.remoteAdjust= function(message){ //scope.socket
 };
 
 $scope.remoteChangeColor= function(message){ //scope.socket
-  socket.emit('remote:color', message);
+  socket.emit('remote:adjust', message);
   // console.log('socket emit fired');
 };
 // need in a partial and or a service  

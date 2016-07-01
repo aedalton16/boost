@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="app"> <!-- ** IMPT -->
+<html ng-app="app" ng-cloak> <!-- ** IMPT -->
 
 <head>
     <title>BOOST!Tutors</title>
@@ -24,6 +24,7 @@
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js">
     </script>
+  
     <script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js">
     </script> 
 
@@ -79,6 +80,7 @@
     <script src="js/services/User.js"></script> 
     <script src="js/services/currentUser.js"></script> 
     <script src="js/services/sessions.js"></script>
+    <script src="http://ngmaterial.assets.s3.amazonaws.com/svg-assets-cache.js"></script>
 
     
     
@@ -96,10 +98,10 @@
 </script>
 
 </head>
-  <body layout="row" ng-controller="SidenavCtrl" >
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+  <body layout="row" ng-controller="SidenavCtrl" ng-cloak>
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-cloak>
       <md-toolbar class="md-tall md-hue-2">
-      <!-- <div class="stars"></div> -->
+
         <span flex></span>
         <div layout="column" class="md-toolbar-tools-bottom inset">
           <!-- <user-avatar></user-avatar> -->
@@ -110,7 +112,7 @@
           <div>boost@demo.com</div>
         </div>
       </md-toolbar>
-      <md-list>
+      <md-list ng-cloak>
       <md-item ng-repeat="item in menu">
         <a>
           <md-item-content md-ink-ripple layout="row" layout-align="start center">
@@ -151,33 +153,35 @@
             </div>
           </md-item-content>
 
+            <!-- <md-content class="md-padding" layout="column"> -->
+
+  <!-- </md-content> -->
+
         <!-- ADJUST -->
-        <md-divider></md-divider>
-        <md-item-content md-ink-ripple layout="row" layout-align="start center">
-            <div class="inset">
-              <md-item ng-repeat="item in adjust">
-              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteAdjust(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
-              </md-item> 
-            </div>
-          </md-item-content>
 
-          <md-divider></md-divider>
-          <div class="btn-group" uib-dropdown>
-            <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-            <div class="colorbox" id="currentColorBox" ng-style="{backgroundColor: currentColor}"></div> <span class="caret"></span>
-            </button>
-            <ul ng-repeat="item in color" id="messages" class="dropdown-menu dropdown-menu" style="min-width: 80px; text-align:center" uib-dropdown-menu role="menu" aria-labelledby="single-button"> 
-            <!-- TODO: make CSS classes here -->
-         
-                    <li>  <button class="btn btn-primary" ng-click="remoteChangeColor(item.mode)" style="background-color: {{item.mode}}"> <i class="{{item.icon}}"> </i></button> </i></button> </li>
-            
-            </ul>
-
-          </div> 
-     </div>
     
   </md-list>
     </md-sidenav>
+
+    <md-fab-speed-dial md-open="false" md-direction="right" class="md-scale" >
+        <md-fab-trigger>
+          <md-button aria-label="menu" class="md-fab md-warn">
+            <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+          </md-button>
+        </md-fab-trigger>
+
+        <md-fab-actions>
+          <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
+            <md-icon md-svg-src="img/icons/twitter.svg" aria-label="Twitter"></md-icon>
+          </md-button>
+          <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+            <md-icon md-svg-src="img/icons/facebook.svg" aria-label="Facebook"></md-icon>
+          </md-button>
+          <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
+            <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
+          </md-button>
+        </md-fab-actions>
+      </md-fab-speed-dial>
     <div layout="column" class="relative" layout-fill role="main">
       <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)" style="bottom: 50%">
         <i class="fa fa-rocket fa-2x fa-magic"> </i>
@@ -207,15 +211,15 @@
             <input ng-model="search.who" placeholder="enter search">
           </md-input-container>
           <md-button aria-label="Search" ng-click="showSearch = !showSearch">
-            <ng-md-icon icon="search"></ng-md-icon>
+            
           </md-button>
           <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
-            <ng-md-icon icon="more_vert"></ng-md-icon>
+           
           </md-button>
         </div>
        
       </md-toolbar>
-      <md-content flex md-scroll-y>
+      <md-content flex > <!--md-scroll-y-->
         <ui-view layout="column" layout-fill layout-padding>
           <div class="inset" hide-sm></div> 
           <!-- inset -->
@@ -223,37 +227,28 @@
       </md-content>
     </div>
 
-     <div class="fabSpeedDialdemoBasicUsage">
-        <md-content class="md-padding" layout="column">
 
-        <div class="lock-size" layout="row" layout-align="center center">
-        <md-fab-speed-dial md-direction="down" class="md-scale" ng-cloak>
-        <md-fab-trigger>
-        <md-button aria-label="menu" class="md-fab md-warn">
-        <md-tooltip md-direction="top">Menu</md-tooltip>
-
-        </md-button>
-        </md-fab-trigger>
-
-        <md-fab-actions>
-        <md-button aria-label="twitter" class="md-fab md-raised md-mini">
-        <md-tooltip md-direction="left">Twitter</md-tooltip>
-
-        </md-button>
-
-        <md-button aria-label="facebook" class="md-fab md-raised md-mini">
-        <md-tooltip md-direction="right">Facebook</md-tooltip>
-
-        </md-button>
-
-        <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-        <md-tooltip md-direction="left">Google Hangout</md-tooltip>
-        >
-        </md-button>
-        </md-fab-actions>
-        </md-fab-speed-dial>
-        </div>
-        </md-content>
-          </div>
   </body>
+
+    <script type="text/ng-template" id="dialog.html">
+    <md-dialog>
+      <md-toolbar>
+        <div class="md-toolbar-tools">Cool Dialog!</div>
+      </md-toolbar>
+
+      <md-dialog-content layout-padding>
+        Hello user! you clicked {{dialog.item.name}}.
+      </md-dialog-content>
+
+      <div class="md-actions">
+        <md-button aria-label="Close dialog" ng-click="dialog.close()" class="md-primary">
+          Close Greeting
+        </md-button>
+
+        <md-button aria-label="Submit dialog" ng-click="dialog.submit()" class="md-primary">
+          Submit
+        </md-button>
+      </div>
+    </md-dialog>
+  </script>
 
