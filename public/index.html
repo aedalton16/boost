@@ -16,6 +16,7 @@
     <script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="libs/angular-http-auth/src/http-auth-interceptor.js"></script>
 
+<!-- issue with 1.5.5 -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js">
     </script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
@@ -69,6 +70,7 @@
     <script src="js/controllers/drawings.js"></script>
     <script src="js/controllers/chats.js"></script>
     <script src="js/controllers/users.js"></script>
+    <script src="js/controllers/profile.js"></script>
 
     <script src="js/controllers/login.js"></script>
     <script src="js/controllers/signup.js"></script> 
@@ -98,7 +100,14 @@
 </script>
 
 </head>
-  <body layout="row" ng-controller="SidenavCtrl" ng-cloak>
+  <body layout="row"  ng-cloak ng-controller="profileCtrl" md-theme="{{theme}}" md-theme-watch="true">
+
+
+    <div ng-controller="SidenavCtrl">
+      <!-- style="bottom: 50% -->
+        <md-button class="md-fab md-fab-bottom-left" aria-label="Add" ng-click="changeTheme()" > 
+        <i class="fa fa-cogs fa-2x"> </i>
+      </md-button>
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-cloak>
       <md-toolbar class="md-tall md-hue-2">
 
@@ -125,9 +134,10 @@
         </a>
       </md-item>
       <md-divider></md-divider>
+      <!-- <div ng-show="$state.current.name === 'drawing'"> -->
       <md-subheader>BOOST!Kit</md-subheader>
-
-       <md-item-content md-ink-ripple layout="row" layout-align="start center" >
+      <!-- TOOLS -->
+       <md-item-content md-ink-ripple layout="row" layout-align="start center" ng-show="$state.current.name === 'drawing'">
             <div class="inset">
               <md-item ng-repeat="item in kit">
 
@@ -135,9 +145,10 @@
               </md-item> 
             </div>
           </md-item-content>
+
         <!-- LAYER CTRLS -->
         <md-divider></md-divider>
-         <md-item-content md-ink-ripple layout="row" layout-align="start center">
+         <md-item-content md-ink-ripple layout="row" layout-align="start center" ng-show="$state.current.name === 'drawing'">
             <div class="inset">
               <md-item ng-repeat="item in layer">
               <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteLayer(item.mode)"> <md-tooltip md-direction="top" md-autohide="true"  md-delay="1000">{{item.tooltip}}</md-tooltip> <i class="{{item.icon}}"> </i></md-button>
@@ -146,7 +157,7 @@
           </md-item-content>
 
         <!-- SHAPES CTRLS -->
-         <md-item-content md-ink-ripple layout="row" layout-align="start center">
+         <md-item-content md-ink-ripple layout="row" layout-align="start center" ng-show="$state.current.name === 'drawing'">
             <div class="inset">
               <md-item ng-repeat="item in shapes">
               <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode(item.mode)"> <md-tooltip md-direction="top" md-autohide="true"  md-delay="1000">{{item.tooltip}}</md-tooltip><i class="{{item.icon}}"> </i></md-button>
@@ -154,41 +165,24 @@
             </div>
           </md-item-content>
 
-
-            <!-- <md-content class="md-padding" layout="column"> -->
-<md-fab-speed-dial md-open="false" md-direction="up" class="md-scale" ng-cloak>
-        <md-fab-trigger>
-          <md-button aria-label="menu" class="md-fab md-warn">
-            <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
-          </md-button>
-        </md-fab-trigger>
-
-        <md-fab-actions>
-          <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="img/icons/twitter.svg" aria-label="Twitter"></md-icon>
-          </md-button>
-          <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="img/icons/facebook.svg" aria-label="Facebook"></md-icon>
-          </md-button>
-          <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
-          </md-button>
-        </md-fab-actions>
-      </md-fab-speed-dial>
-  <!-- </md-content> -->
-
-        <!-- ADJUST -->
-
-    
+          <!-- ADJUST -->
+          <md-divider></md-divider>
+          <!-- TODO: place boolean logic in ctrl? -->
+         <md-item-content md-ink-ripple layout="row" layout-align="start center" ng-show="$state.current.name === 'drawing'">
+            <div class="inset">
+              <md-item ng-repeat="item in adjust">
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteAdjust(item.mode)"> <md-tooltip md-direction="top" md-autohide="true"  md-delay="1000">{{item.tooltip}}</md-tooltip> <i class="{{item.icon}}"> </i></md-button>
+              </md-item> 
+            </div>
+          </md-item-content>
+    <!-- </div> -->
   </md-list>
     </md-sidenav>
-
+  </div>
     <div layout="column" class="relative" layout-fill role="main">
-      <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)" style="bottom: 50%">
-        <i class="fa fa-rocket fa-2x fa-magic"> </i>
-      </md-button>
+    
 
-      <md-toolbar ng-show="!showSearch">
+      <md-toolbar ng-show="!showSearch" style="min-height:30px">
         
         <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
           <md-tab id="tab1" aria-controls="tab1-content" ui-sref="welcome">

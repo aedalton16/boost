@@ -865,6 +865,12 @@ form button {
 
 /* Citation:; http://thecodeplayer.com/walkthrough/pure-css3-animated-clouds-background !!*/
 
+.thing {
+  padding: 14px;
+  font-size: large;
+  font-weight: 500;
+}
+
 .cloud {
   width: 10%; height: 10%;
   background: #fff;

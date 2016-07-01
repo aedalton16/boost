@@ -1,5 +1,5 @@
-angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties', 'socket',
-  function($scope, $rootScope, $log, $location, 
+angular.module('app').controller('SidenavCtrl', ['$scope', '$state','$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties', 'socket',
+  function($scope, $state, $rootScope, $log, $location, 
   	$mdBottomSheet, $mdSidenav, $mdDialog, $timeout, sharedProperties, socket){
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
@@ -11,7 +11,9 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
             $location.url('/unsupported');
         }
     });
-
+    // $scope.state = $state;
+    // console.log($state.includes('draw'));
+    // console.log($scope.state);
      var self = this;
 
      $scope.topDirections = ['left', 'up'];
@@ -25,9 +27,7 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
       $scope.availableDirections = ['up', 'down', 'left', 'right'];
       $scope.selectedDirection = 'up';
 
-    // $scope.hideKit = $location.path() === '/welcome';
-    // console.log($scope.hideKit);
-    // console.log($location.path());
+   
 	$scope.toggleSidenav = function(menuId) {
 		$mdSidenav(menuId).toggle();
 	};
@@ -86,22 +86,22 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
     {
       mode: 'sendToBack',
       icon: 'fa fa-chevron-left',
-      tooltip: 'to back'
+      tooltip: 'object to back'
     },
     {
       mode: 'sendBackwards',
       icon: 'fa fa-chevron-left',
-      tooltip: 'backwards'
+      tooltip: 'send object backwards'
     },
     {
     	mode: 'sendForwards',
     	icon: 'fa fa-chevron-right',
-    	tooltip: 'send forwards'
+    	tooltip: 'send object forwards'
     },
     {// diff icons
     	mode: 'bringToFront',
     	icon: 'fa fa-chevron-right',
-    	tooltip: 'to front'
+    	tooltip: 'object to front'
     }
   ];
   // better way to store!?
@@ -133,12 +133,12 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
     {
       mode: '1',
       icon: 'glyphicon glyphicon-plus',
-      tooltip: 'inc'
+      tooltip: 'increase width'
     },
     {
       mode: '-1',
       icon: 'glyphicon glyphicon-minus',
-      tooltip: 'dec'
+      tooltip: 'decrease width'
     }
   ];
 // where can we put these
