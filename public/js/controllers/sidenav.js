@@ -11,9 +11,12 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
         }
     });
 
-  $scope.toggleSidenav = function(menuId) {
-    $mdSidenav(menuId).toggle();
-  };
+    // $scope.hideKit = $location.path() === '/welcome';
+    // console.log($scope.hideKit);
+    // console.log($location.path());
+	$scope.toggleSidenav = function(menuId) {
+	$mdSidenav(menuId).toggle();
+	};
     $scope.menu = [
     {
       link : '#/auth/users/:userId',
@@ -47,27 +50,81 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
     {
       mode: 'default',
       icon: 'fa fa-hand-pointer-o',
-      tooltip: ''
+      tooltip: 'default selector'
     },
     {
       mode: 'free',
-      icon: 'fa fa-glide-g',
-      tooltip: ''
+      icon: 'glyphicon glyphicon-pencil',
+      tooltip: 'free draw'
     },
     {
 		mode: 'fill',
-		icon: 'fa fa-hand-pointer-o',
-		tooltip: ''
+		icon: 'glyphicon glyphicon-tint',
+		tooltip: 'fill shape'
     },
     {
     	mode: 'text',
 		icon: 'fa fa-text-width',
-		tooltip: ''
+		tooltip: 'insert text'
+    }
+  ];
+  $scope.layer = [
+    {
+      mode: 'sendToBack',
+      icon: 'fa fa-chevron-left',
+      tooltip: 'to back'
     },
     {
-    	mode: 'default',
-		icon: 'fa fa-hand-pointer-o',
-		tooltip: ''
+      mode: 'sendBackwards',
+      icon: 'fa fa-chevron-left',
+      tooltip: 'backwards'
+    },
+    {
+    	mode: 'sendForwards',
+    	icon: 'fa fa-chevron-right',
+    	tooltip: 'send forwards'
+    },
+    {// diff icons
+    	mode: 'bringToFront',
+    	icon: 'fa fa-chevron-right',
+    	tooltip: 'to front'
+    }
+  ];
+  // better way to store!?
+    $scope.shapes = [
+    {
+      mode: 'line',
+      icon: 'fa fa-minus',
+      tooltip: 'line tool'
+    },
+    {
+      mode: 'circle',
+      icon: 'fa fa-circle-o',
+      tooltip: 'circle tool'
+    },
+    {
+    	mode: 'triangle',
+    	icon: 'fa fa-star-o',
+    	tooltip: 'triangle tool'
+    },
+    {// diff icons
+    	mode: 'rectangle',
+    	icon: 'fa fa-square-o',
+    	tooltip: 'rectangle tool'
+    }
+  ];
+
+
+  $scope.adjust = [
+    {
+      mode: '1',
+      icon: 'glyphicon glyphicon-plus',
+      tooltip: 'inc'
+    },
+    {
+      mode: '-1',
+      icon: 'glyphicon glyphicon-minus',
+      tooltip: 'dec'
     }
   ];
 
@@ -90,7 +147,7 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$rootScope', '$log',
     });
   };
 
-$scope.socketEmit = function(message){ //scope.socket
+$scope.remoteChangeMode = function(message){ //scope.socket
   socket.emit('remote:change', message);
   // console.log('socket emit fired');
 };

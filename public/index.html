@@ -127,46 +127,53 @@
         </a>
       </md-item>
       <md-divider></md-divider>
-      <md-subheader>Management</md-subheader>
-       <div class="btn-group" uib-dropdown is-open="true">
-                        <button id="single-button" type="button" class="btn btn-lg btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                        Tools <span class="caret"></span>
-                        </button>
-      <ul class="dropdown-menu dropdown-menu" style="min-width: 80px; text-align:center" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-      <md-item ng-repeat="item in kit">
-        <!-- <a> -->
-          <!-- <md-item-content md-ink-ripple layout="row" layout-align="start center"> -->
-            <!-- <div class="inset"> -->
-              <li> <button type="button" class="btn btn-primary" ng-click="socketEmit('triangle')"> <i class="{{item.icon}}"> </i> {{item.mode}} </button></li>
-            <!-- </div> -->
-          <!-- </md-item-content> -->
-        <!-- </a> -->
-        
-      </md-item>
-    </ul>
-  </div>
-  </md-list>
-   <div class="lock-size" layout="row" layout-align="center center">
-  <md-fab-speed-dial md-open="false" md-direction="right"
-                         ng-class="md-fling">
-        <md-fab-trigger>
-          <md-button aria-label="menu" class="md-fab md-warn">
-           <i class="fa fa-bars"> </i> <!-- or tool --> 
-          </md-button>
-        </md-fab-trigger>
-        <md-fab-actions>
-          <md-item ng-repeat="item in kit">
-           <md-button aria-label="Twitter" class="md-fab md-raised md-mini"> <i class="{{item.icon}}"> </i></md-button>
-          </md-item>   
-        </md-fab-actions>
-      </md-fab-speed-dial>
-    </div>
+      <md-subheader>BOOST!Kit</md-subheader>
+
+       <md-item-content md-ink-ripple layout="row" layout-align="start center" >
+            <div class="inset">
+              <md-item ng-repeat="item in kit">
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode('{{icon.mode}}'"> <i class="{{item.icon}}"> </i></md-button>
+              </md-item> 
+            </div>
+          </md-item-content>
+        <!-- LAYER CTRLS -->
+        <md-divider></md-divider>
+         <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <div class="inset">
+              <md-item ng-repeat="item in layer">
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini"> <i class="{{item.icon}}"> </i></md-button>
+              </md-item> 
+            </div>
+          </md-item-content>
+
+        <!-- SHAPES CTRLS -->
+         <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <div class="inset">
+              <md-item ng-repeat="item in shapes">
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini"> <i class="{{item.icon}}"> </i></md-button>
+              </md-item> 
+            </div>
+          </md-item-content>
+
+        <!-- ADJUST -->
+        <md-divider></md-divider>
+        <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <div class="inset">
+              <md-item ng-repeat="item in adjust">
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini"> <i class="{{item.icon}}"> </i></md-button>
+              </md-item> 
+            </div>
+          </md-item-content>
+
+     </div>
     
+  </md-list>
     </md-sidenav>
     <div layout="column" class="relative" layout-fill role="main">
       <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)" style="bottom: 50%">
         <i class="fa fa-rocket fa-2x fa-magic"> </i>
       </md-button>
+
       <md-toolbar ng-show="!showSearch">
         
         <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
