@@ -90,10 +90,22 @@
     // Compatibility shim
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     // PeerJS object
-    var peer = new Peer({ key: 'lwjd5qra8257b9', debug: 3});
+
+
+    // var peer = new Peer({ key: 'lwjd5qra8257b9', debug: 3});
+
+   var peer = new Peer({
+    host: location.hostname,
+    port: location.port || (location.protocol === 'https:' ? 443 : 80),
+    path: '/peerjs'
+  })
+
     peer.on('open', function(){
       $('#my-id').text(peer.id);
     });
+
+    //peer server
+
     // Receiving a call
     peer.on('call', function(call){
       // Answer the call automatically (instead of prompting user) for demo purposes
@@ -293,7 +305,7 @@
       </md-content>
     </div>
 
-    
+
 
 
   </body>
