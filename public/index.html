@@ -130,7 +130,8 @@
        <md-item-content md-ink-ripple layout="row" layout-align="start center" >
             <div class="inset">
               <md-item ng-repeat="item in kit">
-              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
+
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode(item.mode)"> <md-tooltip md-direction="top" md-autohide="true"  md-delay="1000">{{item.tooltip}}</md-tooltip><i class="{{item.icon}}"> </i></md-button>
               </md-item> 
             </div>
           </md-item-content>
@@ -139,7 +140,7 @@
          <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">
               <md-item ng-repeat="item in layer">
-              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteLayer(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteLayer(item.mode)"> <md-tooltip md-direction="top" md-autohide="true"  md-delay="1000">{{item.tooltip}}</md-tooltip> <i class="{{item.icon}}"> </i></md-button>
               </md-item> 
             </div>
           </md-item-content>
@@ -148,22 +149,14 @@
          <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">
               <md-item ng-repeat="item in shapes">
-              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode(item.mode)"> <md-tooltip md-direction="top" md-autohide="true"  md-delay="1000">{{item.tooltip}}</md-tooltip><i class="{{item.icon}}"> </i></md-button>
               </md-item> 
             </div>
           </md-item-content>
 
+
             <!-- <md-content class="md-padding" layout="column"> -->
-
-  <!-- </md-content> -->
-
-        <!-- ADJUST -->
-
-    
-  </md-list>
-    </md-sidenav>
-
-    <md-fab-speed-dial md-open="false" md-direction="right" class="md-scale" >
+<md-fab-speed-dial md-open="false" md-direction="up" class="md-scale" ng-cloak>
         <md-fab-trigger>
           <md-button aria-label="menu" class="md-fab md-warn">
             <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
@@ -182,6 +175,14 @@
           </md-button>
         </md-fab-actions>
       </md-fab-speed-dial>
+  <!-- </md-content> -->
+
+        <!-- ADJUST -->
+
+    
+  </md-list>
+    </md-sidenav>
+
     <div layout="column" class="relative" layout-fill role="main">
       <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)" style="bottom: 50%">
         <i class="fa fa-rocket fa-2x fa-magic"> </i>
@@ -229,26 +230,3 @@
 
 
   </body>
-
-    <script type="text/ng-template" id="dialog.html">
-    <md-dialog>
-      <md-toolbar>
-        <div class="md-toolbar-tools">Cool Dialog!</div>
-      </md-toolbar>
-
-      <md-dialog-content layout-padding>
-        Hello user! you clicked {{dialog.item.name}}.
-      </md-dialog-content>
-
-      <div class="md-actions">
-        <md-button aria-label="Close dialog" ng-click="dialog.close()" class="md-primary">
-          Close Greeting
-        </md-button>
-
-        <md-button aria-label="Submit dialog" ng-click="dialog.submit()" class="md-primary">
-          Submit
-        </md-button>
-      </div>
-    </md-dialog>
-  </script>
-
