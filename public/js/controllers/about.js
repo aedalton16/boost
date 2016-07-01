@@ -4,7 +4,7 @@ about.controller('AboutController', ['$scope', 'sharedProperties', 'socket', fun
 	$scope.stringValue = sharedProperties.getString();
 	// $scope.$apply();
 	// $scope.bgimg = "image.jpg";
-	socket.on("login", function(user){
+	$scope.$on("login", function(user){
         // $scope.$apply(function(){
             console.log(user);
         // });

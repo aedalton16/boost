@@ -1,6 +1,31 @@
-var welcome = angular.module('welcome', []); // this isnt the right place for user things but for the purposes of the demo
+angular.module('app.controllers', [ ]).
 
-welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', 'socket', function($scope, $location, Drawings, socket){
+  .controller('SignupCtrl', [function ($scope, Auth, sharedProperties, $location) {
+    $scope.register = function(form) {
+      Auth.createUser({
+          email: $scope.user.email,
+          username: $scope.user.username,
+          password: $scope.user.password
+        },
+        function(err) {
+          $scope.errors = {};
+
+          if (!err) {
+            
+            sharedProperties.setCurrentUser($scope.user.username);
+            $location.path('#/draw');
+          } else {
+            angular.forEach(err.errors, function(error, field) {
+              form[field].$setValidity('mongoose', false);
+              $scope.errors[field] = error.type;
+            });
+          }
+        });
+
+    };
+  }])
+
+  .controller('WelcomeController', ['$scope', '$location', 'Drawings', 'socket', function($scope, $location, Drawings, socket){
 
    // init 
     $scope.newDrawing = {};
@@ -60,4 +85,5 @@ welcome.controller('WelcomeController', ['$scope', '$location', 'Drawings', 'soc
     });
 
 
-}]);
+}])
+.

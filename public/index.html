@@ -59,10 +59,12 @@
     <script src="js/fabric/LabeledIText.js"></script>
     <script src="js/fabric/CanvasWrapper.js"></script>
 
+    <script src="js/app.js"></script>
         
     <script src="js/controllers/welcome.js"></script>
-    <!--<script src="js/services/sockets.js"></script>-->
+    <script src="js/services/sockets.js"></script>
     <script src="js/controllers/about.js"></script>
+    <script src="js/controllers/sidenav.js"></script>
     <script src="js/controllers/drawings.js"></script>
     <script src="js/controllers/chats.js"></script>
     <script src="js/controllers/users.js"></script>
@@ -78,7 +80,7 @@
     <script src="js/services/currentUser.js"></script> 
     <script src="js/services/sessions.js"></script>
 
-    <script src="js/app.js"></script>
+    
     
     <!-- run and minify -->
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
@@ -98,7 +100,7 @@
   <head>
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
   </head>
-  <body layout="row" ng-controller="AppCtrl">
+  <body layout="row" ng-controller="SidenavCtrl">
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
       <md-toolbar class="md-tall md-hue-2">
       <!-- <div class="stars"></div> -->
@@ -126,19 +128,40 @@
       </md-item>
       <md-divider></md-divider>
       <md-subheader>Management</md-subheader>
-      <md-item ng-repeat="item in admin">
-        <a>
-          <md-item-content md-ink-ripple layout="row" layout-align="start center">
-            <div class="inset">
-              <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-            </div>
-            <div class="inset">{{item.title}}
-            </div>
-          </md-item-content>
-        </a>
-        <button type="button" class="btn btn-primary" ng-click="socketEmit('default')"> <i class="fa fa-pencil"> </i> </button>
+       <div class="btn-group" uib-dropdown is-open="true">
+                        <button id="single-button" type="button" class="btn btn-lg btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                        Tools <span class="caret"></span>
+                        </button>
+      <ul class="dropdown-menu dropdown-menu" style="min-width: 80px; text-align:center" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+      <md-item ng-repeat="item in kit">
+        <!-- <a> -->
+          <!-- <md-item-content md-ink-ripple layout="row" layout-align="start center"> -->
+            <!-- <div class="inset"> -->
+              <li> <button type="button" class="btn btn-primary" ng-click="socketEmit('triangle')"> <i class="{{item.icon}}"> </i> {{item.mode}} </button></li>
+            <!-- </div> -->
+          <!-- </md-item-content> -->
+        <!-- </a> -->
+        
       </md-item>
-    </md-list>
+    </ul>
+  </div>
+  </md-list>
+   <div class="lock-size" layout="row" layout-align="center center">
+  <md-fab-speed-dial md-open="false" md-direction="right"
+                         ng-class="md-fling">
+        <md-fab-trigger>
+          <md-button aria-label="menu" class="md-fab md-warn">
+           <i class="fa fa-bars"> </i> <!-- or tool --> 
+          </md-button>
+        </md-fab-trigger>
+        <md-fab-actions>
+          <md-item ng-repeat="item in kit">
+           <md-button aria-label="Twitter" class="md-fab md-raised md-mini"> <i class="{{item.icon}}"> </i></md-button>
+          </md-item>   
+        </md-fab-actions>
+      </md-fab-speed-dial>
+    </div>
+    
     </md-sidenav>
     <div layout="column" class="relative" layout-fill role="main">
       <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)" style="bottom: 50%">

@@ -1,4 +1,4 @@
-angular.module('users')
+angular.module('app')
 .service('sharedProperties', function() {
     var stringValue = null;
     var objectValue = {
@@ -18,7 +18,7 @@ angular.module('users')
             return objectValue;
         }
     };
-    'socket'
+    
 });
 
 

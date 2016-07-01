@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('drawings').factory('Drawings', ['$resource', function($resource){
+angular.module('app').factory('Drawings', ['$resource', function($resource){
 
 	// resource(url, param defaults, actions)
     return $resource('drawings/:drawingId', {

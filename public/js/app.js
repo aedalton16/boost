@@ -49,97 +49,7 @@ app.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$stateParams = $stateParams;
 });
 
-app.config(function ($mdThemingProvider) { // **
-    var cornellRedMap = $mdThemingProvider.extendPalette('blue', {
-        '500': '#ff4081',
-        'contrastDefaultColor': 'light'
-    });
-    // Register the new color palette map with the name <code>cornellRed</code>
-    $mdThemingProvider.definePalette('cornellRed', cornellRedMap);
-    // Use that theme for the primary intentions
-    $mdThemingProvider.theme('default')
-      .primaryPalette('cornellRed');
-});
-
-
-app.controller('AppCtrl', ['$scope', '$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties',function($scope, $rootScope, $log, $location, $mdBottomSheet, $mdSidenav, $mdDialog, sharedProperties){
-  
-    $scope.socket = io.connect(); // HI HELLO HERE DUPCON
-    
-
-    $scope.stringValue = sharedProperties.getString();
-    $rootScope.$on("$locationChangeStart", function(event, next, current){
-        if(!isCanvasSupported()){
-            $log.info("routing to unsupported");
-            $location.url('/unsupported');
-        }
-    });
-
-
-  $scope.toggleSidenav = function(menuId) {
-    $mdSidenav(menuId).toggle();
-  };
-    $scope.menu = [
-    {
-      link : '#/auth/users/:userId',
-      title: 'Dashboard',
-      icon: 'dashboard'
-    },
-    {
-      link : '#/draw',
-      title: 'Classrooms',
-      icon: 'group'
-    },
-    { //fill
-      link : '',
-      title: 'Messages',
-      icon: 'message'
-    }
-  ];
-  $scope.admin = [
-    {
-      link : '',
-      title: 'Reports',
-      icon: 'delete'
-    },
-    {
-      link : 'showListBottomSheet($event)',
-      title: 'Settings',
-      icon: 'settings'
-    }
-  ];
-
-  $scope.showListBottomSheet = function($event) {
-    $scope.alert = '';
-    $mdBottomSheet.show({
-      template: '<md-bottom-sheet class="md-list md-has-header"> <md-subheader>Settings</md-subheader> <md-list> <md-item ng-repeat="item in items"><md-item-content md-ink-ripple flex class="inset"> <a flex aria-label="{{currentUser}}" ng-click="listItemClick($index)"> <span class="md-inline-list-icon-label">{{ item.name }}</span> </a></md-item-content> </md-item> </md-list></md-bottom-sheet>',
-      controller: 'ListBottomSheetCtrl',
-      targetEvent: $event
-    }).then(function(clickedItem) {
-      $scope.alert = clickedItem.name + ' clicked!';
-    });
-  };
-
-$scope.socketEmit = function(message){
-  $scope.socket.emit('drawing', message);
-  console.log('socket emit fired');
-}
-// need in a partial and or a service  
-  $scope.showAdd = function(ev) {
-    $mdDialog.show({
-      controller: DialogController,
-      template: '<md-dialog aria-label="Mango (Fruit)"> <md-content class="md-padding"><span flex></span> <h1 >Personalized (Launchpad!) Modal Coming Soon! {{$scope.currentUser}} !</h1></md-dialog>',
-      
-      targetEvent: ev,
-    })
-    .then(function(answer) {
-      $scope.alert = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.alert = 'You cancelled the dialog.';
-    });
-  };
-}]);
-
+//here
 app.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet) {
   $scope.items = [
     { name: 'Share', icon: 'share' },
@@ -216,35 +126,6 @@ app.directive('resize', function ($window) {
         });
     }
 });
-
-
-
-// app.controller('DemoCtrl', function() {
-//        this.topDirections = ['left', 'up'];
-//       this.bottomDirections = ['down', 'right'];
-//       this.isOpen = false;
-//       this.availableModes = ['md-fling', 'md-scale'];
-//       this.selectedMode = 'md-fling';
-//       this.availableDirections = ['up', 'down', 'left', 'right'];
-//       this.selectedDirection = 'up';
-//   });
-
-
-// app.directive('toggle', function(){
-//   return {
-//     restrict: 'A',
-//     link: function(scope, element, attrs){
-//       if (attrs.toggle=="tooltip"){
-//         $(element).tooltip();
-//       }
-//       if (attrs.toggle=="popover"){
-//         $(element).popover();
-//       }
-//     }
-//   };
-// })
-
-
 
 
 // TODO: use angular log 

@@ -1,4 +1,4 @@
-angular.module('welcome').factory('socket', function ($rootScope) {
+app.factory('socket', function ($rootScope) {
   var socket = io.connect(); // this part tho 
   return {
     on: function (eventName, callback) { // **here

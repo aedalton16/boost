@@ -13,6 +13,16 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
     // always init values
     $scope.drawingMode = 'free';
 
+    // this is when it hears a socket call
+    socket.on('remote:change', function(message){
+        $scope.drawingMode = message || $scope.drawingMode;
+        // $scope.canvas.discardActiveObject();
+        $scope.canvas.changeDrawingMode($scope.drawingMode);
+        console.log(message);
+    });
+     socket.on('send:message', function(message){
+        console.log(message);
+    });
     // $scope.messages = {};
 
     // on each load 
@@ -46,6 +56,8 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
         );
 
     };
+
+    // this is for its own button 
     // update drawing mode 
     $scope.changeDrawingMode = function(drawingMode){
         $scope.drawingMode = drawingMode || $scope.drawingMode;
@@ -90,8 +102,8 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
 
   $scope.submitMessage = function(message){ // HERE?
         $scope.messages.push({name: 'message'});
-	  $scope.socket.emit('newMessage', message);
-	 // //$scope.$apply();
+      $scope.socket.emit('newMessage', message);
+     // //$scope.$apply();
       };
 
       //like profile..**

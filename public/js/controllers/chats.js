@@ -11,7 +11,8 @@ chats.controller('ChatsController', ['$scope', "socket", 'sharedProperties',
         socket.on('init', function(data){
            console.log('init');
         });
-        socket.on('send:message', function(message){
+
+        socket.on('sendmessage', function(message){
 
             $scope.messages.push(message.username + ": " + message.text);
             
@@ -24,12 +25,12 @@ chats.controller('ChatsController', ['$scope', "socket", 'sharedProperties',
 
         $scope.sendMessage = function(){
             console.log('clicked send');
-            socket.emit('send:message', {username: $scope.stringValue, text: $scope.message
+            socket.emit('sendmessage', {username: $scope.stringValue, text: $scope.message
             });
             // $scope.messages.push({
             //     text: $scope.message
             // });
-	    console.log($scope.messages);
+        console.log($scope.messages);
 
             // clear message box
             $scope.message = '';
