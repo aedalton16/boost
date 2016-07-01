@@ -14,13 +14,15 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
     $scope.drawingMode = 'free';
 
     // this is when it hears a socket call
+   
+     socket.on('send:message', function(message){
+        console.log(message);
+    });
     socket.on('remote:change', function(message){
+        console.log(message);
         $scope.drawingMode = message || $scope.drawingMode;
         // $scope.canvas.discardActiveObject();
         $scope.canvas.changeDrawingMode($scope.drawingMode);
-        console.log(message);
-    });
-     socket.on('send:message', function(message){
         console.log(message);
     });
     // $scope.messages = {};

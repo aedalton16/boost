@@ -132,7 +132,7 @@
        <md-item-content md-ink-ripple layout="row" layout-align="start center" >
             <div class="inset">
               <md-item ng-repeat="item in kit">
-              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode('{{icon.mode}}'"> <i class="{{item.icon}}"> </i></md-button>
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
               </md-item> 
             </div>
           </md-item-content>
@@ -141,7 +141,7 @@
          <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">
               <md-item ng-repeat="item in layer">
-              <md-button aria-label="Twitter" class="md-fab md-raised md-mini"> <i class="{{item.icon}}"> </i></md-button>
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="changeLayerPosition(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
               </md-item> 
             </div>
           </md-item-content>
@@ -150,7 +150,7 @@
          <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">
               <md-item ng-repeat="item in shapes">
-              <md-button aria-label="Twitter" class="md-fab md-raised md-mini"> <i class="{{item.icon}}"> </i></md-button>
+              <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="remoteChangeMode(item.mode)"> <i class="{{item.icon}}"> </i></md-button>
               </md-item> 
             </div>
           </md-item-content>
@@ -159,7 +159,7 @@
         <md-divider></md-divider>
         <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">
-              <md-item ng-repeat="item in adjust">
+              <md-item ng-repeat="item in adjust" ng-click="updateStrokeWidth(item.mode)">
               <md-button aria-label="Twitter" class="md-fab md-raised md-mini"> <i class="{{item.icon}}"> </i></md-button>
               </md-item> 
             </div>
