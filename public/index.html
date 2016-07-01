@@ -101,8 +101,6 @@
 
 </head>
   <body layout="row"  ng-cloak ng-controller="profileCtrl" md-theme="{{theme}}" md-theme-watch="true">
-
-
     <div ng-controller="SidenavCtrl">
       <!-- style="bottom: 50% -->
         <md-button class="md-fab md-fab-bottom-left" aria-label="Add" ng-click="changeTheme()" > 
@@ -181,10 +179,9 @@
   </div>
     <div layout="column" class="relative" layout-fill role="main">
     
-
       <md-toolbar ng-show="!showSearch" style="min-height:30px">
         
-        <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
+        <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="data.selectedIndex">
           <md-tab id="tab1" aria-controls="tab1-content" ui-sref="welcome">
             About/Home
           </md-tab>
@@ -193,6 +190,7 @@
           </md-tab>
         </md-tabs>
       </md-toolbar>
+
       <md-toolbar class="md-hue-1" ng-show="showSearch">
         <div class="md-toolbar-tools">
           <md-button ng-click="showSearch = !showSearch" aria-label="Back">
@@ -214,7 +212,7 @@
         </div>
        
       </md-toolbar>
-      <md-content flex > <!--md-scroll-y-->
+      <md-content flex > <!--md-scroll-y **-->
         <ui-view layout="column" layout-fill layout-padding>
           <div class="inset" hide-sm></div> 
           <!-- inset -->
