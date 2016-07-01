@@ -1,15 +1,21 @@
-angular.module('app').controller('SidenavCtrl', ['$scope', '$state','$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'sharedProperties', 'socket',
+angular.module('app').controller('SidenavCtrl', ['$scope', '$state','$rootScope', '$log', '$location', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'socket',
   function($scope, $state, $rootScope, $log, $location, 
-  	$mdBottomSheet, $mdSidenav, $mdDialog, $timeout, sharedProperties, socket){
+  	$mdBottomSheet, $mdSidenav, $mdDialog, $timeout, socket){
   
     $scope.socket = io.connect(); // HI HELLO HERE DUPCON
-
-    // $scope.stringValue = sharedProperties.getString();
+    // $scope.currentUser = '';
+    
     $rootScope.$on("$locationChangeStart", function(event, next, current){
         if(!isCanvasSupported()){
             $log.info("routing to unsupported");
             $location.url('/unsupported');
         }
+    });
+
+    // *** mm dependency
+    $scope.socket.on('user:login', function(message){
+        $scope.currentUser = message.currentUser || $rootScope.currentUser; 
+        console.log('user heard');
     });
     // $scope.state = $state;
     // console.log($state.includes('draw'));
@@ -26,7 +32,6 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$state','$rootScope'
 
       $scope.availableDirections = ['up', 'down', 'left', 'right'];
       $scope.selectedDirection = 'up';
-
    
 	$scope.toggleSidenav = function(menuId) {
 		$mdSidenav(menuId).toggle();
@@ -207,22 +212,22 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$state','$rootScope'
   };
 
 $scope.remoteChangeMode = function(message){ //scope.socket
-  socket.emit('remote:change', message);
-  // console.log('socket emit fired');
+  $scope.socket.emit('remote:change', message);
+  console.log('socket emit fired');
 };
 
 $scope.remoteLayer= function(message){ //scope.socket
-  socket.emit('remote:layer', message);
-  // console.log('socket emit fired');
+  $scope.socket.emit('remote:layer', message);
+  console.log('socket emit fired');
 };
 // accomp in one? maybe send json {message: --, command: --} **TODO
 $scope.remoteAdjust= function(message){ //scope.socket
-  socket.emit('remote:adjust', message);
+  $scope.socket.emit('remote:adjust', message);
   // console.log('socket emit fired');
 };
 
 $scope.remoteChangeColor= function(message){ //scope.socket
-  socket.emit('remote:adjust', message);
+  $scope.socket.emit('remote:adjust', message);
   // console.log('socket emit fired');
 };
 // need in a partial and or a service  

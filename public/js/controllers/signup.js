@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('users')
-  .controller('SignupCtrl', function ($scope, Auth, sharedProperties, $location) {
+  .controller('SignupCtrl', function ($scope, Auth, sharedProperties, $location, socket) {
     $scope.register = function(form) {
       Auth.createUser({
           email: $scope.user.email,
@@ -14,6 +14,7 @@ angular.module('users')
           if (!err) {
             
             sharedProperties.setCurrentUser($scope.user.username);
+            socket.emit('user:login', {'currentUser': $scope.user.email});
             $location.path('#/draw');
           } else {
             angular.forEach(err.errors, function(error, field) {

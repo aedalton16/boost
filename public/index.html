@@ -106,17 +106,15 @@
         <md-button class="md-fab md-fab-bottom-left" aria-label="Add" ng-click="changeTheme()" > 
         <i class="fa fa-cogs fa-2x"> </i>
       </md-button>
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-cloak>
-      <md-toolbar class="md-tall md-hue-2">
-
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-scroll-x="false" ng-cloak>
+      <md-toolbar class="md-tall md-hue-2" >
+      <!-- <img id="sidenav-logo" src="../../img/rocket.png"/> -->
         <span flex></span>
-        <div layout="column" class="md-toolbar-tools-bottom inset">
-          <!-- <user-avatar></user-avatar> -->
-          <!-- <i class="fa fa-rocket fa-3x"> </i> -->
-          <img style="width: 45px; height: 45px" src="../../img/rocket.png"></i>
-          <a href="#/login"> Login! </a>
-          <div>Booster: Demo</div>
-          <div>boost@demo.com</div>
+        <div layout="column" class="md-toolbar-tools-bottom inset" >
+        
+           <h4 ng-show="currentUser" ui-sref="profile">Booster: {{currentUser}}</h4>
+          <button class="btn btn-danger" ui-sref="login" ng-show="!currentUser"> Login! </button>
+        
         </div>
       </md-toolbar>
       <md-list ng-cloak>

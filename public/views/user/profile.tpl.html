@@ -4,8 +4,8 @@
     <md-button  class="md-primary md-raised" ng-click=changeTheme()>
       Booster: Demo
     </md-button>
-    <div class="thing">
-      Current theme is {{theme}}.
+    <div class="thing" ng-show:"currentUser">
+        Hi {{currentUser.username}}! You're currently on board as {{currentUser.email}}
     </div>
     <div>
       <md-button class="md-primary md-raised">

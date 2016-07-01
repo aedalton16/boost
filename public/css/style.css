@@ -12,6 +12,19 @@
  * 7.0 Chat
 */
 
+#sidenav-logo {
+    /*background: url('../img/rocket.png');*/
+    height: 60px;
+    width: 60px;
+}
+
+#sidenav-logo{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+ 
+}
 #about-title{
   font-size: 50px;
   font-weight: bold;
@@ -990,7 +1003,8 @@ form button {
 /*Img Citation: */
 
   background: url("/img/stars.png") repeat top center;
-  z-index:0;
+  /*z-index:0;*/
+  /*makes links unclickable?*/
 }
 
 /*-------*/

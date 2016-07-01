@@ -81,6 +81,13 @@ exports.deleteById = function(req, res){
 function listener(socket_io){ // these fire, a lot.... 
     //login stuff here too?**
 
+     socket_io.on('user:login', function (data) { // and dis is just zee one? 
+    // we tell the client to execute 'new message'
+         console.log('remote change :' + data);
+        sockets.emit('user:login', data); // i tink dis is all of dem? 
+
+     });
+
     socket_io.on('changing', function(message){
         console.log('drawingController fired changing');
         sockets.emit('changing', message);
@@ -117,6 +124,14 @@ function listener(socket_io){ // these fire, a lot....
     // we tell the client to execute 'new message'
          console.log('remote change :' + data);
         sockets.emit('remote:layer', data); // i tink dis is all of dem? 
+
+     });
+
+          // **wiring
+    socket_io.on('remote:color', function (data) { // and dis is just zee one? 
+    // we tell the client to execute 'new message'
+         console.log('remote change :' + data);
+        sockets.emit('remote:color', data); // i tink dis is all of dem? 
 
      });
 

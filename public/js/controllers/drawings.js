@@ -15,9 +15,9 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
 
     // this is when it hears a socket call
    
-     socket.on('send:message', function(message){
-        console.log(message);
-    });
+    //  socket.on('send:message', function(message){
+    //     console.log(message);
+    // });
     socket.on('remote:change', function(message){
         console.log(message);
         $scope.drawingMode = message || $scope.drawingMode;
@@ -27,7 +27,7 @@ drawings.controller('DrawingsController', ['$scope', '$route', '$stateParams', '
     });
 
     socket.on('remote:layer', function(message){
-        $scope.canvas.updateLayerPosition(action);
+        $scope.canvas.updateLayerPosition(message);
         return false;
     });
 

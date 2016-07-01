@@ -26,6 +26,11 @@ app.config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'views/user/login.tpl.html',
             controller: 'LoginCtrl'
         })
+        .state('logout', {
+            url: '/logout',
+            templateUrl: 'views/user/login.tpl.html',
+            controller: 'LoginCtrl'
+        })
         .state('about',{
             url: '/about',
             templateUrl: 'views/about/about.tpl.html',
