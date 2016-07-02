@@ -1,5 +1,5 @@
 var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAria','ngRoute', 
-'ngResource','ngAnimate', 'ngMaterial','ngCookies', 'ngSanitize','material.svgAssetsCache', 'http-auth-interceptor', 
+'ngResource','ngAnimate', 'ngMaterial','ngCookies', 'ngSanitize', 'http-auth-interceptor', 
 'welcome','about', 'users', 'drawings', 'chats']); // HERE INSTANTIATE
 
 // setup our routes
