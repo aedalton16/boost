@@ -25,6 +25,7 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.0",
     "crypto": "0.0.3",
+    "easyrtc": "^1.0.15",
     "ejs": "^2.3.4",
     "express": "4.x",
     "express-session": "^1.12.1",
@@ -39,7 +40,7 @@
     "passport": "^0.3.2",
     "passport-google-oauth2": "^0.1.6",
     "passport-local": "^1.0.0",
-    "rtc": "^3.4.0",
+    "peer": "^0.2.8",
     "serve-favicon": "^2.3.0",
     "should": "^7.1.1",
     "socket.io": "*"

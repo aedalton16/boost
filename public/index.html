@@ -5,8 +5,8 @@
     <title>BOOST!Tutors</title>
     <meta content="IE=EDGE" http-equiv="X-UA-Compatible">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://cdn.peerjs.com/0.3/peer.js"></script>
 
     <script src="libs/angular-resource/angular-resource.js"></script>
     <script src="libs/angular-cookies/angular-cookies.js"></script> <!-- *-->
@@ -20,9 +20,9 @@
 <!-- issue with 1.5.5 -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js">
     </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
     </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js">
     </script>
@@ -37,7 +37,7 @@
     <script src="libs/jquery/dist/jquery.js"></script>
     <script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"   integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="   crossorigin="anonymous"></script>
     <script src="libs/fabric/dist/fabric.js"></script>
-
+  
     <!-- TODO: run GRUNT to build/min -->
     <script src="js/tools/LineTool.js"></script>
     <script src="js/tools/RectangleTool.js"></script>
@@ -86,32 +86,90 @@
     <script src="js/services/sessions.js"></script>
     <script src="http://ngmaterial.assets.s3.amazonaws.com/svg-assets-cache.js"></script>
 
-  <script src="https://simplewebrtc.com/latest-v2.js"></script>   
-   <style>
-            #remoteVideos video {
-                height: 150px;
-            }
-            #localVideo {
-                height: 150px;
-            }
-        </style> 
-
-
     <script> 
-    var webrtc = new SimpleWebRTC({
-  // the id/element dom element that will hold "our" video
-  localVideoEl: 'localVideo',
-  // the id/element dom element that will hold remote videos
-  remoteVideosEl: 'remotesVideos',
-  // immediately ask for camera access
-  autoRequestMedia: true
-});
+    // Compatibility shim
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    // PeerJS object
 
-    // we have to wait until it's ready
-webrtc.on('readyToCall', function () {
-  // you can name it anything
-  webrtc.joinRoom('your awesome room name');
-});
+
+    // var peer = new Peer({ key: 'lwjd5qra8257b9', debug: 3});
+
+   var peer = new Peer({
+    host: location.hostname,
+    port: location.port || (location.protocol === 'https:' ? 443 : 80), 
+    path: '/peerjs',
+    debug: 3
+    
+  });
+   
+   // port: location.port || (location.protocol === 'https:' ? 443 : 80),
+   //  path: '/peerjs'
+
+    peer.on('open', function(){
+      $('#my-id').text(peer.id);
+    });
+
+    //peer server
+
+    // Receiving a call
+    peer.on('call', function(call){
+      // Answer the call automatically (instead of prompting user) for demo purposes
+      call.answer(window.localStream);
+      step3(call);
+    });
+    peer.on('error', function(err){
+      alert(err.message);
+      // Return to step 2 if error occurs
+      step2();
+    });
+    // Click handlers setup
+    $(function(){
+      $('#make-call').click(function(){
+        // Initiate a call!
+        var call = peer.call($('#callto-id').val(), window.localStream);
+        step3(call);
+      });
+      $('#end-call').click(function(){
+        window.existingCall.close();
+        step2();
+      });
+      // Retry if getUserMedia fails
+      $('#step1-retry').click(function(){
+        $('#step1-error').hide();
+        step1();
+      });
+      // Get things started
+      step1();
+    });
+    function step1 () {
+      // Get audio/video stream
+      navigator.getUserMedia({audio: true, video: true}, function(stream){
+        // Set your video displays
+        $('#my-video').prop('src', URL.createObjectURL(stream));
+        window.localStream = stream;
+        step2();
+      }, function(){ $('#step1-error').show(); });
+    }
+    function step2 () {
+      $('#step1, #step3').hide();
+      $('#step2').show();
+    }
+    function step3 (call) {
+      // Hang up on an existing call if present
+      if (window.existingCall) {
+        window.existingCall.close();
+      }
+      // Wait for stream on the call, then set peer video display
+      call.on('stream', function(stream){
+        $('#their-video').prop('src', URL.createObjectURL(stream));
+      });
+      // UI stuff
+      window.existingCall = call;
+      $('#their-id').text(call.peer);
+      call.on('close', step2);
+      $('#step1, #step2').hide();
+      $('#step3').show();
+    }
   </script>
 
     

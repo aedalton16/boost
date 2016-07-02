@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app)
-    var passport = require('passport');
+var passport = require('passport');
 var path = require('path');
 var flash    = require('connect-flash');
 
-// var ExpressPeerServer = require('peer').ExpressPeerServer;
+var ExpressPeerServer = require('peer').ExpressPeerServer;
 var port = process.env.PORT || 3000;
 /*
  * web socket config
@@ -93,7 +93,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/public/views');
 
 
-// app.use('/peerjs', ExpressPeerServer(server, {debug:true}));
+app.use('/peerjs', ExpressPeerServer(server, {debug:true}));
 server.listen(port);
 
 exports = module.exports = app;
