@@ -5,6 +5,7 @@
     <title>BOOST!Tutors</title>
     <meta content="IE=EDGE" http-equiv="X-UA-Compatible">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/0.3.14/peer.min.js"></script>
 
@@ -34,7 +35,6 @@
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
      <link rel="stylesheet" href="https://s.mlcdn.co/animate.css">
 
-    <script src="libs/jquery/dist/jquery.js"></script>
     <script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"   integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="   crossorigin="anonymous"></script>
     <script src="libs/fabric/dist/fabric.js"></script>
   
@@ -84,94 +84,6 @@
     <script src="js/services/User.js"></script> 
     <script src="js/services/currentUser.js"></script> 
     <script src="js/services/sessions.js"></script>
-
-    <script> 
-    // Compatibility shim
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    // PeerJS object
-
-
-    // var peer = new Peer({ key: 'lwjd5qra8257b9', debug: 3});
-
-   var peer = new Peer({
-    host: location.hostname,
-    port: location.port || (location.protocol === 'https:' ? 443 : 80), 
-    path: '/peerjs',
-    debug: 3
-    
-  });
-   
-   // port: location.port || (location.protocol === 'https:' ? 443 : 80),
-   //  path: '/peerjs'
-
-    peer.on('open', function(){
-      $('#my-id').text(peer.id);
-    });
-
-    //peer server
-
-    // Receiving a call
-    peer.on('call', function(call){
-      // Answer the call automatically (instead of prompting user) for demo purposes
-      call.answer(window.localStream);
-      step3(call);
-    });
-    peer.on('error', function(err){
-      alert(err.message);
-      // Return to step 2 if error occurs
-      step2();
-    });
-    // Click handlers setup
-    $(function(){
-      $('#make-call').click(function(){
-        // Initiate a call!
-        var call = peer.call($('#callto-id').val(), window.localStream);
-        step3(call);
-      });
-      $('#end-call').click(function(){
-        window.existingCall.close();
-        step2();
-      });
-      // Retry if getUserMedia fails
-      $('#step1-retry').click(function(){
-        $('#step1-error').hide();
-        step1();
-      });
-      // Get things started
-      step1();
-    });
-    function step1 () {
-      // Get audio/video stream
-      navigator.getUserMedia({audio: true, video: true}, function(stream){
-        // Set your video displays
-        $('#my-video').prop('src', URL.createObjectURL(stream));
-        window.localStream = stream;
-        step2();
-      }, function(){ $('#step1-error').show(); });
-    }
-    function step2 () {
-      $('#step1, #step3').hide();
-      $('#step2').show();
-    }
-    function step3 (call) {
-      // Hang up on an existing call if present
-      if (window.existingCall) {
-        window.existingCall.close();
-      }
-      // Wait for stream on the call, then set peer video display
-      call.on('stream', function(stream){
-        $('#their-video').prop('src', URL.createObjectURL(stream));
-      });
-      // UI stuff
-      window.existingCall = call;
-      $('#their-id').text(call.peer);
-      call.on('close', step2);
-      $('#step1, #step2').hide();
-      $('#step3').show();
-    }
-  </script>
-
-
     
     <!-- run and minify -->
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
@@ -192,65 +104,28 @@
   <body layout="row"  ng-cloak ng-controller="profileCtrl" md-theme="{{theme}}" md-theme-watch="true">
     <div ng-controller="SidenavCtrl">
 
-        <div class="pure-g">
-
-      <!-- Video area -->
-      <div class="pure-u-2-3" id="video-container">
-        <video id="their-video" autoplay></video>
-        <video id="my-video" muted="true" autoplay></video>
-      </div>
-
-      <!-- Steps -->
-      <div class="pure-u-1-3">
-        <h2>BOOST! Video Chat</h2>
-
-        <!-- Get local audio/video stream -->
-        <div id="step1">
-          <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
-          <div id="step1-error">
-            <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
-            <a href="#/video" class="pure-button pure-button-error" id="step1-retry">Try again</a>
-          </div>
-        </div>
-
-        <!-- Make calls to others -->
-        <div id="step2">
-          <p>Your id: <span id="my-id"></span></p>
-          <p>Share this id with another BOOST! user so they can call you.</p>
-          <h3>Make a call</h3>
-          <div class="pure-form">
-            <input type="text" placeholder="Call user id..." id="callto-id">
-            <a href="#" class="pure-button pure-button-success" id="make-call">Call</a>
-          </div>
-        </div>
-
-        <!-- Call in progress -->
-        <div id="step3">
-          <p>Currently in call with <span id="their-id">...</span></p>
-          <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
-        </div>
-      </div>
-  </div>
+        
       <!-- style="bottom: 50% -->
         <md-button class="md-fab md-fab-bottom-left" aria-label="Add" ng-hide="$state.current.name === 'drawing'" ng-click="changeTheme()" > 
         <i class="fa fa-cogs fa-2x"> </i>
       </md-button>
+
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-scroll-x="false" ng-cloak>
       <md-toolbar class="md-tall md-hue-2" >
+
       <!-- <img id="sidenav-logo" src="../../img/rocket.png"/> -->
         <span flex></span>
         <div layout="column" class="md-toolbar-tools-bottom inset" >
         
            <h4 ng-show="currentUser" ui-sref="profile">Booster: {{currentUser}}</h4>
-         
-
-        
            <button class="btn btn-danger" ui-sref="login" ng-show="!currentUser"> Login! </button>
-
         </div>
       </md-toolbar>
       <md-list ng-cloak>
+      
+  
       <md-item ng-repeat="item in menu">
+
         <a>
           <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">

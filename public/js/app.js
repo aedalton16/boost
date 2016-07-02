@@ -20,7 +20,13 @@ app.config(['$stateProvider', '$urlRouterProvider',
         })
         .state('drawing', {
             url: '/drawings/:drawingId',
-            templateUrl: 'views/drawings/drawing.tpl.html'
+            // templateUrl: 'views/drawings/drawing.tpl.html'
+            views: {
+              '': {templateUrl: 'views/drawings/main.tpl.html'},
+              'canvas@drawing': {templateUrl: 'views/drawings/drawing.tpl.html'},
+              'vidChat@drawing': {templateUrl: 'views/drawings/chat.tpl.html'}
+            }
+
         })
         .state('login', {
             url: '/login',
@@ -44,9 +50,9 @@ app.config(['$stateProvider', '$urlRouterProvider',
             // controller: 'SignupCtrl'
             controller: 'SignupCtrl'
         })
-        .state('video', {
-            url: '/video',
-            templateUrl: 'views/drawings/chat.tpl.html',
+        .state('chat', {
+            url: '/chat',
+            templateUrl: 'views/chat/chat.tpl.html',
 
         })
         .state('profile', { // like this??

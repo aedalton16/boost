@@ -1,11 +1,17 @@
-  <div ng-controller="ChatsController" ng-init="init()">
-    <ul class="list-group" ng-repeat="m in messages">
-        <li class="list-group-item">{{m}}</li>
-    </ul>
-
-  <form> 
-    <input type="text" class="form-control" ng-model="message" placeholder="Message Here">
-    <input type="button" class="btn btn-success" ng-click="sendMessage()" value="send" style="float:right"/>
-</form> 
-
-</div> 
+<h1> Multi-Chat coming soon! Please pardon this messy chat feature :) </h1>
+<div ng-controller="ChatsController" ng-init="init()">
+    <div class="col-md-3">
+        <div class="chat-area">
+            <div class="chat">
+                <span class="chat-head"> Chat! </span>
+                <ul ng-repeat="m in messages" id="messages">
+                    <li>{{m}}</li>
+                </ul>
+                <form>
+                <input type="text" class="form-control" ng-model="message" placeholder="Message Here" autocomplete="off" />
+                <input type="submit" class="btn btn-success" ng-click="sendMessage()" value="send" style="float:right"/>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>

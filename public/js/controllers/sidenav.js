@@ -36,6 +36,11 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$state','$rootScope'
 	$scope.toggleSidenav = function(menuId) {
 		$mdSidenav(menuId).toggle();
 	};
+
+  
+  // need to be moved / reduced 
+
+
     $scope.menu = [
     {
       link : '#/auth/users/:userId',
@@ -48,7 +53,7 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$state','$rootScope'
       icon: 'group'
     },
     { //fill
-      link : '#/video',
+      link : '#/chat',
       title: 'Messages',
       icon: 'message'
     }
