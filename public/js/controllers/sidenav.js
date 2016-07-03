@@ -42,21 +42,21 @@ angular.module('app').controller('SidenavCtrl', ['$scope', '$state','$rootScope'
 
 
     $scope.menu = [
-    {
-      link : '#/auth/users/:userId',
-      title: 'Dashboard',
-      icon: 'dashboard'
-    },
+    // {
+    //   link : '#/auth/users/:userId',
+    //   title: 'Dashboard',
+    //   icon: 'dashboard'
+    // },
     {
       link : '#/draw',
       title: 'Classrooms',
       icon: 'group'
     },
-    { //fill
-      link : '#/chat',
-      title: 'Messages',
-      icon: 'message'
-    }
+    // { //fill
+    //   link : '#/chat',
+    //   title: 'Messages',
+    //   icon: 'message'
+    // }
   ];
   $scope.admin = [
     {
